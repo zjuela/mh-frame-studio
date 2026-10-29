@@ -1,4 +1,4 @@
-// Portfolio samples shown on the home and "Our Work" pages.
+// Portfolio samples shown on the home and "Galleries" pages.
 // Pairs are built by `node scripts/make-demo-pairs.mjs`. Swap them for real,
 // consented client work as it comes in.
 
