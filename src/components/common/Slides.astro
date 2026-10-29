@@ -1,0 +1,152 @@
+---
+// Slide mode controller for pages rendered with `<PageLayout slides>`.
+// The snapping itself is pure CSS (see `html.slides` in tailwind.css); this
+// script scales a slide's content down when it would not fit the screen,
+// turns each mouse-wheel or trackpad gesture into exactly one slide step
+// (CSS snapping alone springs back on small wheel movements) and draws the
+// dot navigation on the right.
+---
+
+<aw-slides aria-hidden="true"></aw-slides>
+
+<style is:global>
+  aw-slides {
+    display: none;
+  }
+  .slide-dots {
+    position: fixed;
+    right: 1.25rem;
+    top: 50%;
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 0.625rem 0.5rem;
+    border-radius: 9999px;
+    background: color-mix(in srgb, var(--aw-color-bg-page) 75%, transparent);
+    backdrop-filter: blur(6px);
+    transform: translateY(-50%);
+  }
+  .slide-dots button {
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 9999px;
+    background: rgb(148 163 184 / 0.6);
+    transition:
+      transform 0.2s,
+      background-color 0.2s;
+    cursor: pointer;
+  }
+  .slide-dots button[aria-current='true'] {
+    background: var(--aw-color-primary);
+    transform: scale(1.4);
+  }
+</style>
+
+<script>
+  const MEDIA = '(min-width: 48rem) and (min-height: 35rem)';
+  const MIN_SCALE = 0.6;
+  // Wheel events closer together than this belong to one gesture (trackpad
+  // inertia keeps firing for a second or more) and move one slide at most.
+  const GESTURE_GAP = 200;
+
+  class AwSlides extends HTMLElement {
+    private slides: HTMLElement[] = [];
+    private dots?: HTMLElement;
+    private observer?: IntersectionObserver;
+    private media = window.matchMedia(MEDIA);
+    private onResize = () => this.fit();
+    private lastWheel = 0;
+    private gestureMoved = false;
+    private onWheel = (event: WheelEvent) => this.wheel(event);
+
+    connectedCallback() {
+      this.slides = [...document.querySelectorAll<HTMLElement>('main > section, main > .slide')];
+      this.buildDots();
+      this.fit();
+      window.addEventListener('resize', this.onResize);
+      window.addEventListener('wheel', this.onWheel, { passive: false });
+      document.fonts?.ready.then(this.onResize);
+    }
+
+    disconnectedCallback() {
+      window.removeEventListener('resize', this.onResize);
+      window.removeEventListener('wheel', this.onWheel);
+      this.observer?.disconnect();
+      this.dots?.remove();
+    }
+
+    // Shrink every slide whose content is taller than the slide itself.
+    fit() {
+      const on = this.media.matches;
+      if (this.dots) this.dots.hidden = !on;
+      for (const slide of this.slides) {
+        const parts = [...slide.children].filter(
+          (el): el is HTMLElement => el instanceof HTMLElement && !el.hasAttribute('aria-hidden')
+        );
+        parts.forEach((el) => (el.style.zoom = ''));
+        if (!on) continue;
+        const needed = parts.reduce((sum, el) => sum + el.offsetHeight, 0);
+        const scale = Math.max(MIN_SCALE, Math.min(1, slide.clientHeight / needed));
+        if (scale < 1) parts.forEach((el) => (el.style.zoom = scale.toFixed(3)));
+      }
+    }
+
+    wheel(event: WheelEvent) {
+      if (!this.media.matches || event.ctrlKey || Math.abs(event.deltaY) < Math.abs(event.deltaX)) return;
+      event.preventDefault();
+      const now = performance.now();
+      if (now - this.lastWheel > GESTURE_GAP) this.gestureMoved = false;
+      this.lastWheel = now;
+      if (this.gestureMoved || Math.abs(event.deltaY) < 4) return;
+      this.gestureMoved = true;
+      this.step(event.deltaY > 0 ? 1 : -1);
+    }
+
+    // Moves to the next or previous slide; past the last slide comes the footer.
+    step(direction: 1 | -1) {
+      const offset = parseFloat(getComputedStyle(document.documentElement).scrollPaddingTop) || 0;
+      const tops = this.slides.map((slide) => slide.getBoundingClientRect().top - offset);
+      const bottom = document.documentElement.scrollHeight - window.innerHeight;
+      const atEnd = window.scrollY >= bottom - 2 && tops[tops.length - 1] < -2;
+      let current = atEnd ? this.slides.length : 0;
+      if (!atEnd) tops.forEach((top, i) => Math.abs(top) < Math.abs(tops[current]) && (current = i));
+      const target = current + direction;
+      const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
+      if (target >= this.slides.length) window.scrollTo({ top: bottom, behavior });
+      else if (target >= 0) this.slides[target].scrollIntoView({ behavior });
+    }
+
+    buildDots() {
+      const nav = document.createElement('nav');
+      nav.className = 'slide-dots';
+      nav.setAttribute('aria-label', 'Sections');
+      const buttons = this.slides.map((slide, i) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        const heading = slide.querySelector('h1, h2')?.textContent?.trim();
+        button.setAttribute('aria-label', heading || `Section ${i + 1}`);
+        button.title = heading || '';
+        button.addEventListener('click', () => slide.scrollIntoView({ behavior: 'smooth' }));
+        nav.append(button);
+        return button;
+      });
+      document.body.append(nav);
+      this.dots = nav;
+
+      this.observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            const index = this.slides.indexOf(entry.target as HTMLElement);
+            buttons.forEach((b, i) => b.setAttribute('aria-current', String(i === index)));
+          }
+        },
+        { threshold: 0.6 }
+      );
+      this.slides.forEach((slide) => this.observer!.observe(slide));
+    }
+  }
+
+  if (!customElements.get('aw-slides')) customElements.define('aw-slides', AwSlides);
+</script>

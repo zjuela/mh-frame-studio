@@ -13,6 +13,7 @@ import Metadata from '~/components/common/Metadata.astro';
 import SiteVerification from '~/components/common/SiteVerification.astro';
 import Analytics from '~/components/common/Analytics.astro';
 import Intersect from '~/components/common/Intersect.astro';
+import Slides from '~/components/common/Slides.astro';
 
 // Comment the line below to disable View Transitions
 import { ClientRouter } from 'astro:transitions';
@@ -21,14 +22,16 @@ import type { MetaData as MetaDataType } from '~/types';
 
 export interface Props {
   metadata?: MetaDataType;
+  /** Full-screen sections that snap one at a time on tablets and desktops. */
+  slides?: boolean;
 }
 
-const { metadata = {} } = Astro.props;
+const { metadata = {}, slides = false } = Astro.props;
 const { language, textDirection } = I18N;
 ---
 
 <!doctype html>
-<html lang={language} dir={textDirection} class="2xl:text-[20px]">
+<html lang={language} dir={textDirection} class:list={['2xl:text-[20px]', { slides }]}>
   <head>
     <CommonMeta />
     <Favicons />
@@ -52,5 +55,6 @@ const { language, textDirection } = I18N;
     <slot />
 
     <Intersect />
+    {slides && <Slides />}
   </body>
 </html>

@@ -11,12 +11,14 @@ import type { MetaData } from '~/types';
 
 export interface Props {
   metadata?: MetaData;
+  /** Slide mode: see Layout. The announcement bar is left out so the hero fills the first screen. */
+  slides?: boolean;
 }
 
-const { metadata } = Astro.props;
+const { metadata, slides = false } = Astro.props;
 ---
 
-<Layout metadata={metadata}>
+<Layout metadata={metadata} slides={slides}>
   <slot name="head" slot="head" />
   {
     /*
@@ -28,7 +30,7 @@ const { metadata } = Astro.props;
   */
   }
   {
-    Astro.slots.has('announcement') ? (
+    slides ? null : Astro.slots.has('announcement') ? (
       <slot name="announcement" />
     ) : (
       <Announcement

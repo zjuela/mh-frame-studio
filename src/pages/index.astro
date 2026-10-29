@@ -4,10 +4,9 @@ import Layout from '~/layouts/PageLayout.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import Features from '~/components/widgets/Features.astro';
 import Features2 from '~/components/widgets/Features2.astro';
-import BeforeAfterGallery from '~/components/widgets/BeforeAfterGallery.astro';
+import ServiceSlide from '~/components/widgets/ServiceSlide.astro';
 import Reels from '~/components/widgets/Reels.astro';
 import Steps from '~/components/widgets/Steps.astro';
-import Content from '~/components/widgets/Content.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import StickyCTA from '~/components/widgets/StickyCTA.astro';
@@ -38,7 +37,7 @@ const structuredData = [
 ];
 ---
 
-<Layout metadata={metadata}>
+<Layout metadata={metadata} slides>
   <StructuredData slot="head" schema={structuredData} />
 
   <Hero2
@@ -60,146 +59,115 @@ const structuredData = [
     </Fragment>
   </Hero2>
 
-  <Features
-    id="trust"
-    columns={4}
-    classes={{ container: 'py-8 md:py-10 lg:py-12' }}
-    items={[
-      {
-        title: 'Compliance-ready',
-        description: 'We fix the photo, never the clinical result.',
-        icon: 'tabler:shield-check',
-      },
-      { title: '24–48h turnaround', description: 'Same-day rush available.', icon: 'tabler:clock-hour-4' },
-      { title: 'White-label for agencies', description: 'No branding of ours, ever.', icon: 'tabler:tag-off' },
-      {
-        title: 'Patient privacy',
-        description: 'Encrypted transfer, files deleted after delivery.',
-        icon: 'tabler:lock',
-      },
-    ]}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-primary/5 dark:bg-transparent"></div>
-    </Fragment>
-  </Features>
+  <div class="slide">
+    <Features
+      id="trust"
+      columns={4}
+      classes={{ container: 'py-8 md:py-10 lg:py-12' }}
+      items={[
+        {
+          title: 'Compliance-ready',
+          description: 'We fix the photo, never the clinical result.',
+          icon: 'tabler:shield-check',
+        },
+        { title: '24–48h turnaround', description: 'Same-day rush available.', icon: 'tabler:clock-hour-4' },
+        { title: 'White-label for agencies', description: 'No branding of ours, ever.', icon: 'tabler:tag-off' },
+        {
+          title: 'Patient privacy',
+          description: 'Encrypted transfer, files deleted after delivery.',
+          icon: 'tabler:lock',
+        },
+      ]}
+    >
+      <Fragment slot="bg">
+        <div class="absolute inset-0 bg-primary/5 dark:bg-transparent"></div>
+      </Fragment>
+    </Features>
 
-  <Features2
-    id="who"
-    tagline="Who we help"
-    title="Built for two kinds of clients"
-    columns={2}
+    <Features2
+      id="who"
+      tagline="Who we help"
+      title="Built for two kinds of clients"
+      columns={2}
+      items={[
+        {
+          title: 'Dental practices',
+          description:
+            'Your team has great before/afters and patient moments on their phones — but no time to edit and post them. Send them to us and get ready-to-post content back, without hiring or learning editing software.',
+          icon: 'tabler:dental',
+          href: getPermalink('/services'),
+        },
+        {
+          title: 'Dental marketing agencies',
+          description:
+            'Add editing capacity without hiring. We edit Reels, testimonials, before/afters and Meta ad creatives for all your dental clients — white-label, with brand presets per clinic and overnight turnaround.',
+          icon: 'tabler:briefcase',
+          href: getPermalink('/agencies'),
+        },
+      ]}
+    />
+  </div>
+
+  <ServiceSlide
+    id="before-after"
+    tagline="Core service 1"
+    title="Compliance-ready before/afters"
+    subtitle="Matched, honest pairs your practice can post with confidence. Drag the slider to compare."
     items={[
-      {
-        title: 'Dental practices',
-        description:
-          'Your team has great before/afters and patient moments on their phones — but no time to edit and post them. Send them to us and get ready-to-post content back, without hiring or learning editing software.',
-        icon: 'tabler:dental',
-        href: getPermalink('/services'),
-      },
-      {
-        title: 'Dental marketing agencies',
-        description:
-          'Add editing capacity without hiring. We edit Reels, testimonials, before/afters and Meta ad creatives for all your dental clients — white-label, with brand presets per clinic and overnight turnaround.',
-        icon: 'tabler:briefcase',
-        href: getPermalink('/agencies'),
-      },
+      { title: 'Matched pairs', description: 'Same light, colour, angle and crop on both shots.' },
+      { title: 'Never altered', description: 'Tooth shape, shade and gum line are never touched.' },
+      { title: 'Labels included', description: 'Procedure name and a "results may vary" line.' },
+      { title: 'Ad-friendly versions', description: 'For platforms that restrict side-by-sides.' },
     ]}
+    callToAction={{ text: 'More about before/afters', href: `${getPermalink('/services')}#before-after` }}
+  >
+    <BeforeAfter slot="media" before={pairs.consult.before} after={pairs.consult.after} alt={pairs.consult.alt} />
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
+    </Fragment>
+  </ServiceSlide>
+
+  <ServiceSlide
+    id="reels"
+    isReversed
+    tagline="Core service 2"
+    title="Reels from phone footage"
+    subtitle="Raw clips turned into 15–60 second Reels, TikToks and Shorts that people watch to the end."
+    items={[
+      { title: 'Hook-first editing', description: 'Tight cuts that earn attention in 2 seconds.' },
+      { title: 'Captions on every video', description: 'Most people watch on mute.' },
+      { title: 'Transformation Reels', description: 'Before/after reveals and treatment journeys.' },
+      { title: 'Your brand, every time', description: 'Logo, colours and fonts saved as presets.' },
+    ]}
+    image={{ src: '~/assets/images/demo/dentist-mask.jpg', alt: 'Dentist filming a Reel' }}
+    callToAction={{ text: 'More about Reels', href: `${getPermalink('/services')}#reels` }}
   />
 
-  <Features2
-    id="services"
-    tagline="What we do"
-    title="The three things that bring patients in"
-    subtitle="We focus on the content dental marketers rank highest for turning followers into bookings."
-    columns={3}
+  <ServiceSlide
+    id="testimonials"
+    tagline="Core service 3"
+    title="Patient testimonials"
+    subtitle="Phone-filmed interviews cleaned up and cut into stories that build trust before the first visit."
     items={[
-      {
-        title: 'Compliance-ready before/afters',
-        description:
-          'Matched lighting, angle and crop on both shots. Procedure label and "results may vary" text included. No clinical alterations.',
-        icon: 'tabler:photo-check',
-        href: `${getPermalink('/services')}#before-after`,
-      },
-      {
-        title: 'Reels from phone footage',
-        description:
-          'Raw clips turned into 15–60s Reels, TikToks and Shorts with a strong hook, captions, music and your branding.',
-        icon: 'tabler:device-mobile',
-        href: `${getPermalink('/services')}#reels`,
-      },
-      {
-        title: 'Patient testimonials',
-        description:
-          'Phone-filmed interviews cleaned up and cut into a full story plus 2–3 short clips for social and ads.',
-        icon: 'tabler:message-circle-heart',
-        href: `${getPermalink('/services')}#testimonials`,
-      },
+      { title: 'Phone footage is fine', description: 'Authentic beats polished.' },
+      { title: 'Audio cleanup', description: 'Noise and echo removed, every word clear.' },
+      { title: 'One interview, many assets', description: 'A full story plus 2–3 short clips.' },
+      { title: 'Captions and name titles', description: 'In your brand style.' },
     ]}
+    image={{ src: '~/assets/images/demo/treatment.jpg', alt: 'Patient in a dental chair' }}
+    callToAction={{ text: 'More about testimonials', href: `${getPermalink('/services')}#testimonials` }}
   >
     <Fragment slot="bg">
       <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
     </Fragment>
-  </Features2>
-
-  <BeforeAfterGallery
-    id="work"
-    tagline="Photo samples"
-    title="Drag to see the difference"
-    subtitle="Typical phone photos as they arrive, and as we deliver them."
-    items={[pairs.consult, pairs.clinic]}
-  />
+  </ServiceSlide>
 
   <Reels
     id="video"
     tagline="Video samples"
     title="Reels, testimonials and ads"
-    subtitle="Vertical edits with scroll-stopping hooks and burned-in captions — most people watch on mute."
+    subtitle="Vertical edits with scroll-stopping hooks and burned-in captions."
     items={reels}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Reels>
-
-  <Content
-    id="compliance"
-    tagline="Compliance-ready"
-    title="Before/afters you can post with confidence"
-    items={[
-      {
-        title: 'Honest edits only',
-        description:
-          'We correct light, colour, angle and framing so both photos match. Tooth shape, shade and gum line are never touched.',
-        icon: 'tabler:check',
-      },
-      {
-        title: 'Labels included',
-        description:
-          'Each set can carry the procedure name and a "results may vary" line, as many state rules expect. Always check your own state board\'s rules.',
-        icon: 'tabler:check',
-      },
-      {
-        title: 'Consent checklist with every order',
-        description: 'A simple reminder to confirm written patient authorization before anything is published.',
-        icon: 'tabler:check',
-      },
-      {
-        title: 'Ad-friendly versions',
-        description: 'Single-image and video versions for ad platforms that restrict side-by-side comparisons.',
-        icon: 'tabler:check',
-      },
-    ]}
-    image={{ src: '~/assets/images/pairs/smile-after.jpg', alt: 'Corrected smile photo', aspect: '4/3' }}
-  />
-
-  <CallToAction
-    tagline="Free download"
-    title="Phone Filming & Before/After Photo Guide"
-    subtitle="One guide your team can follow: how to shoot matching before/afters, film a Reel, and record a patient testimonial on any phone."
-    actions={[
-      { variant: 'primary', text: 'Get the free guide', href: getPermalink('/guide'), icon: 'tabler:file-download' },
-    ]}
   />
 
   <Steps
@@ -228,8 +196,12 @@ const structuredData = [
         icon: 'tabler:rocket',
       },
     ]}
-    image={{ src: '~/assets/images/pairs/consult-after.jpg', alt: 'Dentist explaining a scan to a patient' }}
-  />
+    image={{ src: '~/assets/images/pairs/clinic-after.jpg', alt: 'Bright dental treatment room' }}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Steps>
 
   <FAQs
     id="faq"
@@ -269,8 +241,11 @@ const structuredData = [
 
   <CallToAction
     title="See what we can do with your footage"
-    subtitle="Send 3 photos or one clip. We'll edit it free and send it back within 48 hours."
-    actions={[{ variant: 'primary', text: 'Start free trial', href: trial, icon: 'tabler:gift' }]}
+    subtitle="Send 3 photos or one clip. We'll edit it free and send it back within 48 hours. Not filming yet? Start with our free phone filming guide."
+    actions={[
+      { variant: 'primary', text: 'Start free trial', href: trial, icon: 'tabler:gift' },
+      { text: 'Get the free guide', href: getPermalink('/guide'), icon: 'tabler:file-download' },
+    ]}
   />
 
   <StickyCTA label="3 free edits — no strings" text="Free trial" href={trial} />

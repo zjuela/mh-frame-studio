@@ -1,0 +1,97 @@
+---
+import { Icon } from 'astro-icon/components';
+import Button from '~/components/ui/Button.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Image from '~/components/common/Image.astro';
+import type { CallToAction, ContentImage, Widget } from '~/types';
+
+// One service per screen: headline, short copy and checklist on one side, a
+// picture (or anything passed in the `media` slot) on the other. Compact by
+// design so it fits a single slide on slide-style pages.
+
+export interface Props extends Widget {
+  tagline?: string;
+  title: string;
+  subtitle?: string;
+  items?: Array<{ title: string; description?: string }>;
+  image?: ContentImage;
+  isReversed?: boolean;
+  callToAction?: CallToAction;
+}
+
+const {
+  id,
+  tagline,
+  title,
+  subtitle,
+  items = [],
+  image,
+  isReversed = false,
+  callToAction,
+  isDark = false,
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+---
+
+<WidgetWrapper id={id} isDark={isDark} bg={bg}>
+  <div class:list={['md:flex md:items-center md:gap-12 lg:gap-16', { 'md:flex-row-reverse': isReversed }]}>
+    <div class="md:basis-1/2">
+      {
+        tagline && (
+          <p class="text-base font-bold uppercase tracking-wide text-secondary dark:text-blue-200">{tagline}</p>
+        )
+      }
+      <h2
+        class="mt-2 font-heading text-4xl font-bold leading-tighter tracking-tighter text-heading text-balance lg:text-5xl"
+        set:html={title}
+      />
+      {subtitle && <p class="mt-4 text-lg text-muted text-pretty lg:text-xl" set:html={subtitle} />}
+      {
+        items.length > 0 && (
+          <ul class="mt-8 grid gap-x-8 gap-y-5 sm:grid-cols-2">
+            {items.map(({ title: itemTitle, description }) => (
+              <li class="flex gap-3">
+                <Icon
+                  name="tabler:check"
+                  class="mt-0.5 h-6 w-6 shrink-0 rounded-full bg-primary p-1 text-white"
+                  aria-hidden="true"
+                />
+                <div>
+                  <h3 class="font-semibold text-heading">{itemTitle}</h3>
+                  {description && <p class="mt-1 text-sm text-muted md:text-base" set:html={description} />}
+                </div>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+      {
+        callToAction && (
+          <div class="mt-8 text-primary dark:text-blue-300">
+            <Button variant="link" {...callToAction} />
+          </div>
+        )
+      }
+    </div>
+    <div class="mt-10 md:mt-0 md:basis-1/2">
+      {
+        Astro.slots.has('media') ? (
+          <slot name="media" />
+        ) : (
+          image && (
+            <Image
+              class="mx-auto aspect-[4/3] w-full rounded-lg bg-gray-500 object-cover shadow-lg"
+              width={640}
+              height={480}
+              widths={[400, 640, 960]}
+              sizes="(max-width: 767px) 100vw, 640px"
+              layout="constrained"
+              format="webp"
+              {...image}
+            />
+          )
+        )
+      }
+    </div>
+  </div>
+</WidgetWrapper>

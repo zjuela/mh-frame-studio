@@ -2,7 +2,7 @@
 import Layout from '~/layouts/PageLayout.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import Features2 from '~/components/widgets/Features2.astro';
-import Content from '~/components/widgets/Content.astro';
+import ServiceSlide from '~/components/widgets/ServiceSlide.astro';
 import Steps2 from '~/components/widgets/Steps2.astro';
 import Reels from '~/components/widgets/Reels.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
@@ -20,7 +20,7 @@ const call = `${getPermalink('/contact')}#agency`;
 const trial = `${getPermalink('/contact')}#trial`;
 ---
 
-<Layout metadata={metadata}>
+<Layout metadata={metadata} slides>
   <Hero2
     tagline="For dental marketing agencies"
     title="Add a dental editing team without hiring one"
@@ -61,11 +61,12 @@ const trial = `${getPermalink('/contact')}#trial`;
     ]}
   />
 
-  <Content
+  <ServiceSlide
     id="ad-creatives"
     isReversed
     tagline="Built for paid social"
     title="Ad creatives with hook variations"
+    subtitle="Talking-head and user-generated-style ads for Facebook and Instagram, built for testing."
     items={[
       {
         title: '3 hooks per ad',
@@ -84,12 +85,12 @@ const trial = `${getPermalink('/contact')}#trial`;
         description: 'Ad versions avoid side-by-side before/afters where ad platforms restrict them.',
       },
     ]}
-    image={{ src: '~/assets/images/demo/headshot-2.jpg', alt: 'Dentist talking to camera', aspect: '4/3' }}
+    image={{ src: '~/assets/images/demo/headshot-2.jpg', alt: 'Dentist talking to camera' }}
   >
     <Fragment slot="bg">
       <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
     </Fragment>
-  </Content>
+  </ServiceSlide>
 
   <Features2
     tagline="How we work with agencies"

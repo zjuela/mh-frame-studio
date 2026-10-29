@@ -1,7 +1,7 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
-import Content from '~/components/widgets/Content.astro';
+import ServiceSlide from '~/components/widgets/ServiceSlide.astro';
 import Features3 from '~/components/widgets/Features3.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import StickyCTA from '~/components/widgets/StickyCTA.astro';
@@ -16,7 +16,7 @@ const metadata = {
 const trial = `${getPermalink('/contact')}#trial`;
 ---
 
-<Layout metadata={metadata}>
+<Layout metadata={metadata} slides>
   <HeroText
     tagline="Services"
     title="Three services that bring patients in"
@@ -25,129 +25,104 @@ const trial = `${getPermalink('/contact')}#trial`;
     callToAction2={{ text: 'Free filming guide', href: getPermalink('/guide') }}
   />
 
-  <Content
+  <ServiceSlide
     id="before-after"
     tagline="Core service 1"
     title="Compliance-ready before/afters"
+    subtitle="Delivered as side-by-side, slider, carousel or Story formats, with your logo."
     items={[
       {
         title: 'Matched pairs',
-        description:
-          'Same colour, exposure, angle and crop on both shots, so the only visible difference is the treatment.',
+        description: 'Same colour, exposure, angle and crop, so the only difference is the treatment.',
       },
-      {
-        title: 'Never altered',
-        description: 'We fix photography only. Tooth shape, shade, gum line and clinical results are left untouched.',
-      },
-      {
-        title: 'Labelled and ready to post',
-        description:
-          'Procedure name, "results may vary" line and your logo — as side-by-side, slider, carousel or Story formats.',
-      },
-      {
-        title: 'Ad-friendly versions',
-        description: 'Single-image and video versions for ad platforms that restrict side-by-side comparisons.',
-      },
-      {
-        title: 'Consent checklist',
-        description:
-          'Every order includes a checklist to confirm written patient authorization. We never show client images without permission.',
-      },
+      { title: 'Never altered', description: 'We fix photography only. Clinical results are left untouched.' },
+      { title: 'Labelled and ready to post', description: 'Procedure name and a "results may vary" line.' },
+      { title: 'Ad-friendly versions', description: 'Single-image and video versions for ad platforms.' },
+      { title: 'Consent checklist', description: 'With every order, to confirm written patient authorization.' },
     ]}
-    image={{ src: '~/assets/images/pairs/smile-after.jpg', alt: 'Corrected smile photo', aspect: '4/3' }}
+    image={{ src: '~/assets/images/pairs/smile-after.jpg', alt: 'Corrected smile photo' }}
   />
 
-  <Content
+  <ServiceSlide
     id="reels"
     isReversed
     tagline="Core service 2"
     title="Reels, TikToks & Shorts from phone footage"
+    subtitle="15–60 second vertical videos built from the clips your team already has."
     items={[
       { title: 'Hook-first editing', description: 'Tight cuts that earn attention in the first 2 seconds.' },
       { title: 'Captions on every video', description: 'Burned-in, on-brand captions — most people watch on mute.' },
-      {
-        title: 'Transformation Reels',
-        description: 'Before/after reveals and treatment journeys built from your photos and clips.',
-      },
-      {
-        title: 'Your brand, every time',
-        description: 'Logo, colours, fonts and call-to-action saved as presets and applied to every video.',
-      },
+      { title: 'Transformation Reels', description: 'Before/after reveals and treatment journeys.' },
+      { title: 'Your brand, every time', description: 'Logo, colours, fonts and call-to-action saved as presets.' },
     ]}
-    image={{ src: '~/assets/images/demo/dentist-mask.jpg', alt: 'Dentist filming a Reel', aspect: '4/3' }}
+    image={{ src: '~/assets/images/demo/dentist-mask.jpg', alt: 'Dentist filming a Reel' }}
   >
     <Fragment slot="bg">
       <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
     </Fragment>
-  </Content>
+  </ServiceSlide>
 
-  <Content
+  <ServiceSlide
     id="testimonials"
     tagline="Core service 3"
     title="Patient testimonial videos"
+    subtitle="Real patients, filmed on a phone, edited into stories that build trust."
     items={[
-      {
-        title: 'Phone footage is fine',
-        description: 'Authentic, phone-filmed testimonials are what patients trust. We make them clean and watchable.',
-      },
-      {
-        title: 'Audio cleanup',
-        description: 'Background noise, echo and level problems fixed so every word is clear.',
-      },
+      { title: 'Phone footage is fine', description: 'Authentic, phone-filmed testimonials are what patients trust.' },
+      { title: 'Audio cleanup', description: 'Background noise, echo and level problems fixed.' },
       {
         title: 'One interview, many assets',
-        description: 'A full 1–2 minute story plus 2–3 short clips for Reels, Stories and ads.',
+        description: 'A 1–2 minute story plus 2–3 short clips for Reels and ads.',
       },
-      {
-        title: 'Captions and name titles',
-        description: 'Burned-in captions and simple lower-thirds, in your brand style.',
-      },
+      { title: 'Captions and name titles', description: 'Burned-in captions and simple lower-thirds.' },
     ]}
-    image={{ src: '~/assets/images/demo/treatment.jpg', alt: 'Patient in a dental chair', aspect: '4/3' }}
+    image={{ src: '~/assets/images/demo/treatment.jpg', alt: 'Patient in a dental chair' }}
   />
 
-  <Features3
-    id="add-ons"
-    title="Add-ons"
-    subtitle="Popular extras that pair with the core services."
-    columns={2}
-    items={[
-      {
-        title: 'Meta ad creatives',
-        description:
-          'Talking-head and user-generated-style ads for Facebook and Instagram, delivered with 3 hook variations to test.',
-        icon: 'tabler:speakerphone',
-      },
-      {
-        title: 'Google profile photo pack',
-        description:
-          'A monthly batch of office, team and exterior photos corrected and sized for your Google Business Profile.',
-        icon: 'tabler:map-pin',
-      },
-    ]}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Features3>
+  <div class="slide">
+    <Features3
+      id="add-ons"
+      title="Add-ons"
+      subtitle="Popular extras that pair with the core services."
+      columns={2}
+      items={[
+        {
+          title: 'Meta ad creatives',
+          description:
+            'Talking-head and user-generated-style ads for Facebook and Instagram, delivered with 3 hook variations to test.',
+          icon: 'tabler:speakerphone',
+        },
+        {
+          title: 'Google profile photo pack',
+          description:
+            'A monthly batch of office, team and exterior photos corrected and sized for your Google Business Profile.',
+          icon: 'tabler:map-pin',
+        },
+      ]}
+    >
+      <Fragment slot="bg">
+        <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
+      </Fragment>
+    </Features3>
 
-  <Features3
-    title="Also available"
-    columns={3}
-    items={[
-      {
-        title: 'Clinical & intraoral cleanup',
-        description: 'Mirror shots flipped and straightened for case presentations.',
-        icon: 'tabler:dental',
-      },
-      { title: 'Team headshots', description: 'Natural retouching for your About page.', icon: 'tabler:user' },
-      {
-        title: 'Doctor intro & clinic tour',
-        description: 'Longer edits for your website and YouTube.',
-        icon: 'tabler:video',
-      },
-    ]}
-  />
+    <Features3
+      title="Also available"
+      columns={3}
+      items={[
+        {
+          title: 'Clinical & intraoral cleanup',
+          description: 'Mirror shots flipped and straightened for case presentations.',
+          icon: 'tabler:dental',
+        },
+        { title: 'Team headshots', description: 'Natural retouching for your About page.', icon: 'tabler:user' },
+        {
+          title: 'Doctor intro & clinic tour',
+          description: 'Longer edits for your website and YouTube.',
+          icon: 'tabler:video',
+        },
+      ]}
+    />
+  </div>
 
   <CallToAction
     title="Not sure where to start?"

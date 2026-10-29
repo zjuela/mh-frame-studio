@@ -21,7 +21,7 @@ export const footerData = {
         { text: 'Compliant before/afters', href: `${getPermalink('/services')}#before-after` },
         { text: 'Reels from phone footage', href: `${getPermalink('/services')}#reels` },
         { text: 'Patient testimonials', href: `${getPermalink('/services')}#testimonials` },
-        { text: 'Google profile photo pack', href: `${getPermalink('/services')}#google-profile` },
+        { text: 'Google profile photo pack', href: `${getPermalink('/services')}#add-ons` },
       ],
     },
     {
