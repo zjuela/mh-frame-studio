@@ -1,4 +1,4 @@
-# BrightFrame Studio website
+# M&H Frame Studio website
 
 Showcase site for a photo & video post-production service for dentists and dental marketing agencies.
 Built on the [AstroWind](https://github.com/onwidget/astrowind) template (Astro + Tailwind CSS).
@@ -7,21 +7,21 @@ Built on the [AstroWind](https://github.com/onwidget/astrowind) template (Astro 
 
 ```bash
 npm install
-npm run dev      # http://localhost:4321/brightframe-studio
+npm run dev      # http://localhost:4321/mh-frame-studio
 npm run build    # output in dist/
 npm run check    # types, lint, formatting
 ```
 
 ## Where to edit
 
-| What | File |
-| --- | --- |
-| Business name, site URL, base path, SEO | `src/config.yaml` |
-| Email, form endpoint, booking link | `src/business.ts` |
-| Menu and footer | `src/navigation.ts` |
-| Colours | `src/components/CustomStyles.astro` |
-| Before/after pairs and Reel cards | `src/data/samples.ts` |
-| Pages | `src/pages/` (`index`, `services`, `work`, `pricing`, `agencies`, `contact`) |
+| What                                    | File                                                                         |
+| --------------------------------------- | ---------------------------------------------------------------------------- |
+| Business name, site URL, base path, SEO | `src/config.yaml`                                                            |
+| Email, form endpoint, booking link      | `src/business.ts`                                                            |
+| Menu and footer                         | `src/navigation.ts`                                                          |
+| Colours                                 | `src/components/CustomStyles.astro`                                          |
+| Before/after pairs and Reel cards       | `src/data/samples.ts`                                                        |
+| Pages                                   | `src/pages/` (`index`, `services`, `work`, `pricing`, `agencies`, `contact`) |
 
 Before/after slider: `src/components/ui/BeforeAfter.astro`. Reels grid: `src/components/widgets/Reels.astro`.
 

@@ -1,7 +1,7 @@
 // Business details used across the site. Edit these in one place.
 
 export const BUSINESS = {
-  email: 'hello@brightframe.studio',
+  email: 'ma.hu.collection.llc@gmail.com',
   // Create a free form at https://formspree.io and paste its endpoint here.
   // Until then, submissions open the visitor's email app instead.
   formEndpoint: '',

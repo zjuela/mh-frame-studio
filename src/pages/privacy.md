@@ -27,4 +27,4 @@ _Last updated_: October 29, 2026
 
 ## Your rights
 
-You can ask us at any time to see, correct or delete the information we hold about you. Contact us at hello@brightframe.studio.
+You can ask us at any time to see, correct or delete the information we hold about you. Contact us at ma.hu.collection.llc@gmail.com.

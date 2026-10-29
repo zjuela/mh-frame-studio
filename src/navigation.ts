@@ -45,5 +45,5 @@ export const footerData = {
     { text: 'Privacy Policy', href: getPermalink('/privacy') },
   ],
   socialLinks: [{ ariaLabel: 'Email', icon: 'tabler:mail', href: `mailto:${BUSINESS.email}` }],
-  footNote: `© ${new Date().getFullYear()} BrightFrame Studio · Sample images are licensed stock photos edited for demonstration.`,
+  footNote: `© ${new Date().getFullYear()} M&amp;H Frame Studio · Sample images are licensed stock photos edited for demonstration.`,
 };

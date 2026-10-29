@@ -1,9 +1,9 @@
 site:
-  name: BrightFrame Studio
+  name: M&H Frame Studio
   # GitHub Pages project site. When you move to your own domain, set
   # `site` to 'https://yourdomain.com' and `base` to '/'.
   site: 'https://zjuela.github.io'
-  base: '/brightframe-studio'
+  base: '/mh-frame-studio'
   trailingSlash: false
 
   googleSiteVerificationId: null
@@ -11,14 +11,14 @@ site:
 # Default SEO metadata
 metadata:
   title:
-    default: BrightFrame Studio — Photo & Video Editing for Dental Practices
-    template: '%s — BrightFrame Studio'
+    default: M&H Frame Studio — Photo & Video Editing for Dental Practices
+    template: '%s — M&H Frame Studio'
   description: 'Before/after photo editing, clinical photo cleanup, Reels and testimonial video editing for dentists and dental marketing agencies. White-label available. 24–48h turnaround.'
   robots:
     index: true
     follow: true
   openGraph:
-    site_name: BrightFrame Studio
+    site_name: M&H Frame Studio
     images:
       - url: '~/assets/images/default.png'
         width: 1200
