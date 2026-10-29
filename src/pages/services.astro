@@ -10,88 +10,69 @@ import { getPermalink } from '~/utils/permalinks';
 const metadata = {
   title: 'Services',
   description:
-    'Before/after photo editing, clinical photo cleanup, headshot and office retouching, Reels, testimonial and smile reveal videos for dental practices.',
+    'Compliance-ready before/after editing, Reels from phone footage and patient testimonial videos for dental practices and dental marketing agencies.',
 };
+
+const trial = `${getPermalink('/contact')}#trial`;
 ---
 
 <Layout metadata={metadata}>
   <HeroText
     tagline="Services"
-    title="Photo & video post-production, built for dentistry"
-    subtitle="Every service follows your brand guide and our ethical editing policy: we correct photography, never clinical results."
-    callToAction={{
-      variant: 'primary',
-      text: 'Get 3 free edits',
-      href: `${getPermalink('/contact')}#trial`,
-      icon: 'tabler:gift',
-    }}
-    callToAction2={{ text: 'See pricing', href: getPermalink('/pricing') }}
+    title="Three services that bring patients in"
+    subtitle="We focus on what dental marketing runs on: before/afters, short videos and patient stories — edited from footage your team shoots on a phone."
+    callToAction={{ variant: 'primary', text: 'Get 3 free edits', href: trial, icon: 'tabler:gift' }}
+    callToAction2={{ text: 'Free filming guide', href: getPermalink('/guide') }}
   />
 
   <Content
-    id="photo"
-    tagline="Photo"
-    title="Before/after photo editing"
+    id="before-after"
+    tagline="Core service 1"
+    title="Compliance-ready before/afters"
     items={[
       {
         title: 'Matched pairs',
-        description: 'Same colour, exposure, angle and crop on both shots, so the only difference is the treatment.',
+        description:
+          'Same colour, exposure, angle and crop on both shots, so the only visible difference is the treatment.',
       },
       {
-        title: 'Ready-made layouts',
-        description: 'Side-by-side, stacked, slider-ready or carousel formats with your logo and watermark.',
+        title: 'Never altered',
+        description: 'We fix photography only. Tooth shape, shade, gum line and clinical results are left untouched.',
       },
       {
-        title: 'Every size you need',
-        description: 'Website, Instagram (1:1, 4:5), Stories (9:16) and Google Business Profile.',
+        title: 'Labelled and ready to post',
+        description:
+          'Procedure name, "results may vary" line and your logo — as side-by-side, slider, carousel or Story formats.',
+      },
+      {
+        title: 'Ad-friendly versions',
+        description: 'Single-image and video versions for ad platforms that restrict side-by-side comparisons.',
+      },
+      {
+        title: 'Consent checklist',
+        description:
+          'Every order includes a checklist to confirm written patient authorization. We never show client images without permission.',
       },
     ]}
     image={{ src: '~/assets/images/pairs/smile-after.jpg', alt: 'Corrected smile photo', aspect: '4/3' }}
   />
 
   <Content
+    id="reels"
     isReversed
-    title="Clinical & intraoral photo cleanup"
+    tagline="Core service 2"
+    title="Reels, TikToks & Shorts from phone footage"
     items={[
-      { title: 'Mirror shots fixed', description: 'Occlusal and buccal mirror images flipped and straightened.' },
-      { title: 'Clean framing', description: 'Retractors, lips and fingers cropped out; contrast background evened.' },
-      {
-        title: 'Consistent series',
-        description: 'A whole case set matched for case presentations, lectures and portfolios.',
-      },
-    ]}
-    image={{ src: '~/assets/images/demo/implant-model.jpg', alt: 'Dental implant model', aspect: '4/3' }}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  <Content
-    title="Headshots & office photos"
-    items={[
-      {
-        title: 'Team portraits',
-        description: 'True skin tones, clean backgrounds and a consistent look across the team.',
-      },
-      { title: 'Interiors', description: 'Bright, straight, welcoming treatment rooms and reception areas.' },
-      {
-        title: 'Light retouching',
-        description: 'Natural results — stray hairs and distractions removed, people still look like themselves.',
-      },
-    ]}
-    image={{ src: '~/assets/images/pairs/clinic-after.jpg', alt: 'Bright dental office', aspect: '4/3' }}
-  />
-
-  <Content
-    id="video"
-    isReversed
-    tagline="Video"
-    title="Reels, TikToks & YouTube Shorts"
-    items={[
-      { title: 'Hook-first editing', description: 'Tight cuts that get to the point in the first 2 seconds.' },
+      { title: 'Hook-first editing', description: 'Tight cuts that earn attention in the first 2 seconds.' },
       { title: 'Captions on every video', description: 'Burned-in, on-brand captions — most people watch on mute.' },
-      { title: 'Branded intro & outro', description: 'Your logo, colours and call-to-action on every video.' },
+      {
+        title: 'Transformation Reels',
+        description: 'Before/after reveals and treatment journeys built from your photos and clips.',
+      },
+      {
+        title: 'Your brand, every time',
+        description: 'Logo, colours, fonts and call-to-action saved as presets and applied to every video.',
+      },
     ]}
     image={{ src: '~/assets/images/demo/dentist-mask.jpg', alt: 'Dentist filming a Reel', aspect: '4/3' }}
   >
@@ -100,50 +81,79 @@ const metadata = {
     </Fragment>
   </Content>
 
+  <Content
+    id="testimonials"
+    tagline="Core service 3"
+    title="Patient testimonial videos"
+    items={[
+      {
+        title: 'Phone footage is fine',
+        description: 'Authentic, phone-filmed testimonials are what patients trust. We make them clean and watchable.',
+      },
+      {
+        title: 'Audio cleanup',
+        description: 'Background noise, echo and level problems fixed so every word is clear.',
+      },
+      {
+        title: 'One interview, many assets',
+        description: 'A full 1–2 minute story plus 2–3 short clips for Reels, Stories and ads.',
+      },
+      {
+        title: 'Captions and name titles',
+        description: 'Burned-in captions and simple lower-thirds, in your brand style.',
+      },
+    ]}
+    image={{ src: '~/assets/images/demo/treatment.jpg', alt: 'Patient in a dental chair', aspect: '4/3' }}
+  />
+
   <Features3
-    title="More video services"
+    id="add-ons"
+    title="Add-ons"
+    subtitle="Popular extras that pair with the core services."
+    columns={2}
+    items={[
+      {
+        title: 'Meta ad creatives',
+        description:
+          'Talking-head and user-generated-style ads for Facebook and Instagram, delivered with 3 hook variations to test.',
+        icon: 'tabler:speakerphone',
+      },
+      {
+        title: 'Google profile photo pack',
+        description:
+          'A monthly batch of office, team and exterior photos corrected and sized for your Google Business Profile.',
+        icon: 'tabler:map-pin',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features3>
+
+  <Features3
+    title="Also available"
     columns={3}
     items={[
       {
-        title: 'Patient testimonials',
-        description: 'Audio cleanup, the best moments, captions and name titles. A full cut plus 2–3 short clips.',
-        icon: 'tabler:message-circle-heart',
+        title: 'Clinical & intraoral cleanup',
+        description: 'Mirror shots flipped and straightened for case presentations.',
+        icon: 'tabler:dental',
       },
-      {
-        title: 'Smile reveal videos',
-        description: 'Before/after transitions, zoom reveals and patient-journey montages.',
-        icon: 'tabler:sparkles',
-      },
+      { title: 'Team headshots', description: 'Natural retouching for your About page.', icon: 'tabler:user' },
       {
         title: 'Doctor intro & clinic tour',
-        description: 'Longer edits for your homepage, YouTube channel and Google Business Profile.',
+        description: 'Longer edits for your website and YouTube.',
         icon: 'tabler:video',
-      },
-      {
-        title: 'Subtitles & translation',
-        description: 'Accurate subtitles, including Spanish and other languages your patients speak.',
-        icon: 'tabler:language',
-      },
-      {
-        title: 'Social carousels',
-        description: 'Multi-slide Instagram and Facebook posts built from your photos.',
-        icon: 'tabler:layout-grid',
-      },
-      {
-        title: 'Rush delivery',
-        description: 'Same-day turnaround for launches, events and campaigns.',
-        icon: 'tabler:bolt',
       },
     ]}
   />
 
   <CallToAction
     title="Not sure where to start?"
-    subtitle="Send us 3 photos or a short clip. We'll edit it free and suggest what would work best for your practice."
-    actions={[
-      { variant: 'primary', text: 'Start free trial', href: `${getPermalink('/contact')}#trial`, icon: 'tabler:gift' },
-    ]}
+    subtitle="Send us 3 photos or one short clip. We'll edit it free and suggest what would work best for your practice."
+    actions={[{ variant: 'primary', text: 'Start free trial', href: trial, icon: 'tabler:gift' }]}
   />
 
-  <StickyCTA label="3 free edits — no strings" text="Free trial" href={`${getPermalink('/contact')}#trial`} />
+  <StickyCTA label="3 free edits — no strings" text="Free trial" href={trial} />
 </Layout>

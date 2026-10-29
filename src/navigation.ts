@@ -5,8 +5,9 @@ export const headerData = {
   links: [
     { text: 'Services', href: getPermalink('/services') },
     { text: 'Our Work', href: getPermalink('/work') },
-    { text: 'Pricing', href: getPermalink('/pricing') },
     { text: 'For Agencies', href: getPermalink('/agencies') },
+    { text: 'Pricing', href: getPermalink('/pricing') },
+    { text: 'Free Guide', href: getPermalink('/guide') },
     { text: 'Contact', href: getPermalink('/contact') },
   ],
   actions: [{ text: 'Free Trial', href: `${getPermalink('/contact')}#trial`, variant: 'primary' as const }],
@@ -15,19 +16,20 @@ export const headerData = {
 export const footerData = {
   links: [
     {
-      title: 'Photo',
+      title: 'For practices',
       links: [
-        { text: 'Before/after editing', href: `${getPermalink('/services')}#photo` },
-        { text: 'Clinical photo cleanup', href: `${getPermalink('/services')}#photo` },
-        { text: 'Headshots & office photos', href: `${getPermalink('/services')}#photo` },
+        { text: 'Compliant before/afters', href: `${getPermalink('/services')}#before-after` },
+        { text: 'Reels from phone footage', href: `${getPermalink('/services')}#reels` },
+        { text: 'Patient testimonials', href: `${getPermalink('/services')}#testimonials` },
+        { text: 'Google profile photo pack', href: `${getPermalink('/services')}#google-profile` },
       ],
     },
     {
-      title: 'Video',
+      title: 'For agencies',
       links: [
-        { text: 'Reels & Shorts', href: `${getPermalink('/services')}#video` },
-        { text: 'Testimonial videos', href: `${getPermalink('/services')}#video` },
-        { text: 'Smile reveal videos', href: `${getPermalink('/services')}#video` },
+        { text: 'White-label editing', href: getPermalink('/agencies') },
+        { text: 'Meta ad creatives', href: `${getPermalink('/agencies')}#ad-creatives` },
+        { text: 'Free test project', href: `${getPermalink('/contact')}#trial` },
       ],
     },
     {
@@ -35,7 +37,7 @@ export const footerData = {
       links: [
         { text: 'Our work', href: getPermalink('/work') },
         { text: 'Pricing', href: getPermalink('/pricing') },
-        { text: 'For agencies', href: getPermalink('/agencies') },
+        { text: 'Free filming guide', href: getPermalink('/guide') },
         { text: 'Contact', href: getPermalink('/contact') },
       ],
     },

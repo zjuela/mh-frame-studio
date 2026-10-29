@@ -1,0 +1,158 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import { SITE } from 'astrowind:config';
+import { getPermalink } from '~/utils/permalinks';
+
+const metadata = {
+  title: 'Free Phone Filming & Before/After Photo Guide for Dental Practices',
+  description:
+    'A practical guide for dental teams: shoot matching before/after photos, film Reels and record patient testimonials on any phone.',
+};
+---
+
+<Layout metadata={metadata}>
+  <section class="mx-auto max-w-4xl px-4 py-12 sm:px-6 md:py-16 print:py-0">
+    <p class="text-base font-bold uppercase tracking-wide text-secondary">Free guide · {SITE?.name}</p>
+    <h1 class="mt-2 font-heading text-4xl font-bold leading-tighter tracking-tighter text-heading md:text-5xl">
+      Phone Filming & Before/After Photo Guide
+    </h1>
+    <p class="mt-4 text-xl text-muted">
+      For dental teams. Any recent phone is enough — consistency matters far more than equipment. Print it, pin it in
+      the operatory, share it with whoever takes the photos.
+    </p>
+    <div class="mt-6 flex flex-wrap gap-3 print:hidden">
+      <button type="button" class="btn-primary" onclick="window.print()">Print / Save as PDF</button>
+      <a class="btn-secondary" href={`${getPermalink('/contact')}#trial`}>Send us your first 3 photos free</a>
+    </div>
+
+    <div
+      class="prose prose-lg mt-10 max-w-none dark:prose-invert prose-headings:font-heading prose-headings:font-bold prose-headings:tracking-tighter prose-h2:mt-12 prose-h2:border-t prose-h2:border-gray-200 prose-h2:pt-8 prose-a:text-primary print:prose-base"
+    >
+      <h2>Before you shoot: patient consent</h2>
+      <ul>
+        <li>
+          Get <strong>written authorization</strong> from the patient before taking photos or video for marketing. Cover website,
+          social media and paid ads.
+        </li>
+        <li>Keep the signed form in the patient record. Without it, the image can't be used for marketing.</li>
+        <li>Check your state dental board's advertising rules for before/after photos and testimonials.</li>
+      </ul>
+      <p class="text-sm">This guide is practical advice, not legal advice.</p>
+
+      <h2>1. Before/after photos that actually match</h2>
+      <p>
+        A before/after only convinces if the <em>only</em> difference is the treatment. Same setup, every time:
+      </p>
+      <ol>
+        <li>
+          <strong>Same phone, same lens.</strong> Use the back camera at 2× zoom — never the selfie camera or 0.5×.
+        </li>
+        <li>
+          <strong>Same distance.</strong> Put a tape mark on the floor for the photographer and one for the patient's chair.
+        </li>
+        <li>
+          <strong>Same light.</strong> Turn off mixed overhead lights if you can. Use a ring light or soft window light, and
+          the same flash setting for before and after.
+        </li>
+        <li><strong>Same background.</strong> Plain wall or a grey/black contrast card for intraoral shots.</li>
+        <li><strong>Same pose.</strong> Head level, eyes to camera, natural smile. Take each view 2–3 times.</li>
+        <li><strong>No filters, no beauty mode, no portrait mode.</strong> Turn off any "enhance" setting.</li>
+      </ol>
+      <h3>The 5 standard views</h3>
+      <ol>
+        <li>Full smile, front</li>
+        <li>Full smile, left 45°</li>
+        <li>Full smile, right 45°</li>
+        <li>Retracted, front (teeth together)</li>
+        <li>Close-up of the treated area</li>
+      </ol>
+      <p>
+        Take the <strong>before</strong> at the start of the treatment visit and the <strong>after</strong> at the final visit
+        — same room, same settings. Write down the procedure name; it goes on the final image.
+      </p>
+
+      <h2>2. Filming Reels and short videos</h2>
+      <ol>
+        <li><strong>Vertical (9:16)</strong>, back camera, 1080p or 4K at 30 fps. Wipe the lens first.</li>
+        <li>
+          <strong>Sound matters more than picture.</strong> Film in a quiet room, phone within arm's length, or use a clip-on
+          mic (about $20).
+        </li>
+        <li><strong>Pause 2 seconds</strong> before and after speaking — it gives the editor clean cut points.</li>
+        <li><strong>Do 3 takes.</strong> We'll pick the best and combine them.</li>
+        <li>
+          <strong>Shoot B-roll</strong> (5–10 seconds each, no talking): front desk, treatment room, instruments being prepared,
+          team smiling, building exterior, a patient being welcomed.
+        </li>
+      </ol>
+      <h3>Easy Reel ideas</h3>
+      <ul>
+        <li>"3 things I wish patients knew about…" (whitening, aligners, gum health)</li>
+        <li>Myth vs fact</li>
+        <li>What happens at a first visit (walk the route with the phone)</li>
+        <li>Meet the team — 5 seconds per person</li>
+        <li>Patient question of the week, answered by the dentist</li>
+      </ul>
+
+      <h2>3. Recording a patient testimonial</h2>
+      <ol>
+        <li>Seat the patient facing a window, phone at eye level on a tripod or stack of books.</li>
+        <li>Frame from mid-chest up, a little space above the head. Film vertically.</li>
+        <li>The interviewer sits next to the phone, so the patient looks just off-camera, not into the lens.</li>
+        <li>
+          Ask the patient to <strong>repeat the question in their answer</strong> ("I came in because…") so clips make sense
+          on their own.
+        </li>
+        <li>Record 3–5 minutes. Don't stop if they stumble — we'll cut it.</li>
+      </ol>
+      <h3>Five questions that work</h3>
+      <ol>
+        <li>What made you come in?</li>
+        <li>How did you feel about your smile before?</li>
+        <li>What was the experience like here?</li>
+        <li>How do you feel now?</li>
+        <li>What would you tell someone who's nervous about coming in?</li>
+      </ol>
+      <p>
+        Never script or coach the answers. Testimonials must be genuine — and authentic, unpolished answers are what
+        viewers trust.
+      </p>
+
+      <h2>4. Sending files to your editor</h2>
+      <ul>
+        <li>
+          Send <strong>original files</strong> through Google Drive, Dropbox or a secure upload link. Never via WhatsApp,
+          text or email — they compress the quality away.
+        </li>
+        <li>Name folders by date and procedure or case number — <strong>not the patient's name</strong>.</li>
+        <li>Add a short note: procedure, what you want made, and where it will be posted.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="print:hidden">
+    <CallToAction
+      title="Shot your first set? Let us edit it free."
+      subtitle="Send 3 photos or one clip. We'll return them edited, labelled and ready to post within 48 hours."
+      actions={[
+        {
+          variant: 'primary',
+          text: 'Start free trial',
+          href: `${getPermalink('/contact')}#trial`,
+          icon: 'tabler:gift',
+        },
+      ]}
+    />
+  </div>
+</Layout>
+
+<style is:global>
+  @media print {
+    header,
+    footer,
+    aw-sticky-cta {
+      display: none !important;
+    }
+  }
+</style>

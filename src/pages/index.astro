@@ -23,6 +23,8 @@ const metadata = {
   ignoreTitleTemplate: true,
 };
 
+const trial = `${getPermalink('/contact')}#trial`;
+
 const structuredData = [
   {
     '@context': 'https://schema.org',
@@ -31,7 +33,7 @@ const structuredData = [
     url: SITE?.site,
     inLanguage: I18N?.language,
     description:
-      'Photo and video post-production for dentists and dental marketing agencies: before/after editing, clinical photo cleanup, Reels and testimonial videos.',
+      'Photo and video editing for dentists and dental marketing agencies: compliance-ready before/afters, Reels from phone footage, patient testimonials and Meta ad creatives.',
   },
 ];
 ---
@@ -40,18 +42,18 @@ const structuredData = [
   <StructuredData slot="head" schema={structuredData} />
 
   <Hero2
-    tagline="Photo & video editing for dental practices"
+    tagline="Editing for dentists & dental marketing agencies"
     actions={[
-      { variant: 'primary', text: 'Get 3 free edits', href: `${getPermalink('/contact')}#trial`, icon: 'tabler:gift' },
+      { variant: 'primary', text: 'Get 3 free edits', href: trial, icon: 'tabler:gift' },
       { text: 'See our work', href: getPermalink('/work') },
     ]}
   >
     <Fragment slot="title">
-      Before & afters that make patients <span class="text-accent">book</span>.
+      You film it on a phone. We make it <span class="text-accent">book patients</span>.
     </Fragment>
     <Fragment slot="subtitle">
-      We turn your raw clinic photos and phone videos into polished before/afters, Reels and testimonials — in 24–48
-      hours. For dentists, and white-label for dental marketing agencies.
+      Compliance-ready before/afters, Reels and patient testimonials — edited from the photos and clips already on your
+      team's phones, back in 24–48 hours.
     </Fragment>
     <Fragment slot="image">
       <BeforeAfter before={pairs.smile.before} after={pairs.smile.after} alt={pairs.smile.alt} start={45} eager />
@@ -63,13 +65,17 @@ const structuredData = [
     columns={4}
     classes={{ container: 'py-8 md:py-10 lg:py-12' }}
     items={[
-      { title: '24–48h turnaround', description: 'Rush same-day option available.', icon: 'tabler:clock-hour-4' },
-      { title: 'Revisions included', description: 'Two rounds on every order.', icon: 'tabler:refresh' },
-      { title: 'White-label ready', description: 'No branding of ours, ever.', icon: 'tabler:tag-off' },
       {
-        title: 'Privacy-first',
+        title: 'Compliance-ready',
+        description: 'We fix the photo, never the clinical result.',
+        icon: 'tabler:shield-check',
+      },
+      { title: '24–48h turnaround', description: 'Same-day rush available.', icon: 'tabler:clock-hour-4' },
+      { title: 'White-label for agencies', description: 'No branding of ours, ever.', icon: 'tabler:tag-off' },
+      {
+        title: 'Patient privacy',
         description: 'Encrypted transfer, files deleted after delivery.',
-        icon: 'tabler:shield-lock',
+        icon: 'tabler:lock',
       },
     ]}
   >
@@ -79,183 +85,193 @@ const structuredData = [
   </Features>
 
   <Features2
-    id="services"
-    tagline="Services"
-    title="Everything your practice needs to look its best online"
-    subtitle="Start with one service or bundle them in a monthly plan."
-    columns={3}
+    id="who"
+    tagline="Who we help"
+    title="Built for two kinds of clients"
+    columns={2}
     items={[
       {
-        title: 'Before/after photo editing',
+        title: 'Dental practices',
         description:
-          'Matched colour, exposure and framing on both shots, laid out side-by-side or as a slider, with your logo.',
-        icon: 'tabler:photo-edit',
-        href: `${getPermalink('/services')}#photo`,
-      },
-      {
-        title: 'Clinical photo cleanup',
-        description:
-          'Mirror shots flipped, rotation fixed, retractors and lips cropped out, one consistent background across a case series.',
+          'Your team has great before/afters and patient moments on their phones — but no time to edit and post them. Send them to us and get ready-to-post content back, without hiring or learning editing software.',
         icon: 'tabler:dental',
-        href: `${getPermalink('/services')}#photo`,
+        href: getPermalink('/services'),
       },
       {
-        title: 'Headshots & office photos',
-        description: 'Team portraits and treatment rooms retouched for your website, Google profile and directories.',
-        icon: 'tabler:building-hospital',
-        href: `${getPermalink('/services')}#photo`,
-      },
-      {
-        title: 'Reels, TikToks & Shorts',
+        title: 'Dental marketing agencies',
         description:
-          'Raw phone clips turned into 15–60s vertical videos with hooks, captions, music and your branding.',
-        icon: 'tabler:device-mobile',
-        href: `${getPermalink('/services')}#video`,
-      },
-      {
-        title: 'Patient testimonial videos',
-        description:
-          'Audio cleaned, best moments cut, captions and name titles added. A full version plus short clips.',
-        icon: 'tabler:message-circle-heart',
-        href: `${getPermalink('/services')}#video`,
-      },
-      {
-        title: 'Smile reveal videos',
-        description: 'Before/after transitions and patient-journey montages that show the transformation.',
-        icon: 'tabler:sparkles',
-        href: `${getPermalink('/services')}#video`,
+          'Add editing capacity without hiring. We edit Reels, testimonials, before/afters and Meta ad creatives for all your dental clients — white-label, with brand presets per clinic and overnight turnaround.',
+        icon: 'tabler:briefcase',
+        href: getPermalink('/agencies'),
       },
     ]}
   />
+
+  <Features2
+    id="services"
+    tagline="What we do"
+    title="The three things that bring patients in"
+    subtitle="We focus on the content dental marketers rank highest for turning followers into bookings."
+    columns={3}
+    items={[
+      {
+        title: 'Compliance-ready before/afters',
+        description:
+          'Matched lighting, angle and crop on both shots. Procedure label and "results may vary" text included. No clinical alterations.',
+        icon: 'tabler:photo-check',
+        href: `${getPermalink('/services')}#before-after`,
+      },
+      {
+        title: 'Reels from phone footage',
+        description:
+          'Raw clips turned into 15–60s Reels, TikToks and Shorts with a strong hook, captions, music and your branding.',
+        icon: 'tabler:device-mobile',
+        href: `${getPermalink('/services')}#reels`,
+      },
+      {
+        title: 'Patient testimonials',
+        description:
+          'Phone-filmed interviews cleaned up and cut into a full story plus 2–3 short clips for social and ads.',
+        icon: 'tabler:message-circle-heart',
+        href: `${getPermalink('/services')}#testimonials`,
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
 
   <BeforeAfterGallery
     id="work"
     tagline="Photo samples"
     title="Drag to see the difference"
-    subtitle="Typical clinic photos as they arrive, and as we deliver them."
-    items={[pairs.clinic, pairs.headshot]}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
-    </Fragment>
-  </BeforeAfterGallery>
+    subtitle="Typical phone photos as they arrive, and as we deliver them."
+    items={[pairs.consult, pairs.clinic]}
+  />
 
   <Reels
     id="video"
     tagline="Video samples"
-    title="Short videos built for the feed"
-    subtitle="Vertical edits with scroll-stopping hooks, burned-in captions and your brand — ready to post."
+    title="Reels, testimonials and ads"
+    subtitle="Vertical edits with scroll-stopping hooks and burned-in captions — most people watch on mute."
     items={reels}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Reels>
+
+  <Content
+    id="compliance"
+    tagline="Compliance-ready"
+    title="Before/afters you can post with confidence"
+    items={[
+      {
+        title: 'Honest edits only',
+        description:
+          'We correct light, colour, angle and framing so both photos match. Tooth shape, shade and gum line are never touched.',
+        icon: 'tabler:check',
+      },
+      {
+        title: 'Labels included',
+        description:
+          'Each set can carry the procedure name and a "results may vary" line, as many state rules expect. Always check your own state board\'s rules.',
+        icon: 'tabler:check',
+      },
+      {
+        title: 'Consent checklist with every order',
+        description: 'A simple reminder to confirm written patient authorization before anything is published.',
+        icon: 'tabler:check',
+      },
+      {
+        title: 'Ad-friendly versions',
+        description: 'Single-image and video versions for ad platforms that restrict side-by-side comparisons.',
+        icon: 'tabler:check',
+      },
+    ]}
+    image={{ src: '~/assets/images/pairs/smile-after.jpg', alt: 'Corrected smile photo', aspect: '4/3' }}
+  />
+
+  <CallToAction
+    tagline="Free download"
+    title="Phone Filming & Before/After Photo Guide"
+    subtitle="One guide your team can follow: how to shoot matching before/afters, film a Reel, and record a patient testimonial on any phone."
+    actions={[
+      { variant: 'primary', text: 'Get the free guide', href: getPermalink('/guide'), icon: 'tabler:file-download' },
+    ]}
   />
 
   <Steps
     id="process"
     tagline="How it works"
-    title="From upload to ready-to-post in four steps"
+    title="From phone to post in four steps"
     items={[
       {
+        title: 'Shoot on any phone',
+        description: 'Follow our free filming guide — no camera or studio needed.',
+        icon: 'tabler:device-mobile',
+      },
+      {
         title: 'Upload',
-        description: 'Send photos or clips through a secure link — Google Drive, Dropbox or our upload page.',
+        description: 'Share a Google Drive or Dropbox folder, or use the secure link we send you.',
         icon: 'tabler:upload',
       },
       {
         title: 'We edit',
-        description: 'Your dedicated editor follows your brand guide and saved preferences on every order.',
+        description: 'Your dedicated editor applies your brand and our compliance checklist. Two revisions included.',
         icon: 'tabler:adjustments',
       },
       {
-        title: 'You review',
-        description: 'Request changes in plain words. Two revision rounds are always included.',
-        icon: 'tabler:message-check',
-      },
-      {
-        title: 'Publish',
-        description: 'Get files sized for your website, Instagram, TikTok, YouTube and Google profile.',
+        title: 'Post',
+        description: 'Get files sized for Instagram, TikTok, YouTube, Facebook, your website and Google profile.',
         icon: 'tabler:rocket',
       },
     ]}
     image={{ src: '~/assets/images/pairs/consult-after.jpg', alt: 'Dentist explaining a scan to a patient' }}
   />
 
-  <Content
-    id="ethics"
-    isReversed
-    tagline="Our editing policy"
-    title="We fix the photo, never the result"
-    items={[
-      {
-        title: 'What we correct',
-        description: 'Light, colour, white balance, framing, alignment, background and distractions.',
-        icon: 'tabler:check',
-      },
-      {
-        title: 'What we never touch',
-        description:
-          'Tooth shape, shade, gum line or any clinical outcome. Your before/afters stay honest and compliant with dental advertising rules.',
-        icon: 'tabler:x',
-      },
-      {
-        title: 'Patient privacy',
-        description:
-          'Encrypted transfer, access limited to your editor, files deleted 30 days after delivery. We can sign a BAA or DPA.',
-        icon: 'tabler:lock',
-      },
-    ]}
-    image={{ src: '~/assets/images/pairs/clinic-2-after.jpg', alt: 'Bright dental treatment room', aspect: '4/3' }}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  <CallToAction
-    tagline="For marketing agencies"
-    title="Your dental clients' content, edited under your brand"
-    subtitle="White-label delivery, volume pricing and a dedicated editor who learns every clinic's style."
-    actions={[
-      { variant: 'primary', text: 'See the agency plan', href: getPermalink('/agencies'), icon: 'tabler:arrow-right' },
-    ]}
-  />
-
   <FAQs
     id="faq"
     tagline="FAQ"
-    title="Questions practices ask us"
+    title="Questions practices and agencies ask us"
     schema
     items={[
       {
-        title: 'How do I send you files?',
+        title: 'Do we need a professional camera?',
         description:
-          'Share a Google Drive or Dropbox folder, or upload through a private link we send you. Phone photos and videos are fine.',
+          'No. A recent phone is enough. Our free guide shows your team how to shoot consistent before/afters and usable video.',
+      },
+      {
+        title: 'Will you alter teeth to make results look better?',
+        description:
+          'Never. We correct photography only (light, colour, framing). Altering clinical results is misleading and breaks dental advertising rules.',
+      },
+      {
+        title: 'Who is responsible for patient consent?',
+        description:
+          'The practice. You need written patient authorization to use their images in marketing. We include a consent checklist with every order and never show client work without permission.',
       },
       {
         title: 'How fast is delivery?',
-        description: 'Photos in 24–48 hours, short videos in 48–72 hours. Rush delivery is available for an extra fee.',
+        description: 'Photos in 24–48 hours, Reels in 48–72 hours. Same-day rush is available.',
       },
       {
-        title: 'Do you need patient consent?',
-        description:
-          'You are responsible for patient consent to publish images. We only use your files to do the work, and never show them in our portfolio without your written permission.',
+        title: 'Do you work with agencies?',
+        description: 'Yes. We work fully white-label with brand presets per clinic. See the agency page for details.',
       },
       {
-        title: 'Will you alter the teeth to make results look better?',
-        description:
-          'No. We correct photography (light, colour, framing) only. Altering clinical results is misleading and can break dental advertising rules.',
-      },
-      {
-        title: 'Can I try before committing?',
-        description: 'Yes. Send us 3 photos and we will edit them free, so you can judge the quality first.',
+        title: 'Can we try before committing?',
+        description: 'Yes. Send 3 photos or one short clip and we will edit it free.',
       },
     ]}
   />
 
   <CallToAction
-    title="See what we can do with your photos"
-    subtitle="Send 3 photos. We'll edit them free and send them back within 48 hours."
-    actions={[
-      { variant: 'primary', text: 'Start free trial', href: `${getPermalink('/contact')}#trial`, icon: 'tabler:gift' },
-    ]}
+    title="See what we can do with your footage"
+    subtitle="Send 3 photos or one clip. We'll edit it free and send it back within 48 hours."
+    actions={[{ variant: 'primary', text: 'Start free trial', href: trial, icon: 'tabler:gift' }]}
   />
 
-  <StickyCTA label="3 free edits — no strings" text="Free trial" href={`${getPermalink('/contact')}#trial`} />
+  <StickyCTA label="3 free edits — no strings" text="Free trial" href={trial} />
 </Layout>

@@ -17,7 +17,7 @@ const metadata = {
   <HeroText
     tagline="Pricing"
     title="Simple plans. No contracts."
-    subtitle="Pick a monthly plan, or pay per item. Unused photo edits roll over for one month."
+    subtitle="Pick a monthly plan, or pay per item. No contracts, cancel any time."
   />
 
   <Prices
@@ -28,8 +28,8 @@ const metadata = {
         price: 149,
         period: 'per month',
         items: [
-          { description: '20 photo edits (before/after or clinical)' },
-          { description: '2 short vertical videos' },
+          { description: '10 compliance-ready before/after sets' },
+          { description: '2 Reels from your phone footage' },
           { description: '48h turnaround' },
           { description: '2 revision rounds' },
         ],
@@ -41,9 +41,9 @@ const metadata = {
         price: 399,
         period: 'per month',
         items: [
-          { description: '50 photo edits' },
-          { description: '8 short vertical videos' },
-          { description: '1 patient testimonial video' },
+          { description: '25 compliance-ready before/after sets' },
+          { description: '8 Reels from your phone footage' },
+          { description: '1 patient testimonial (full cut + clips)' },
           { description: '24h photo turnaround' },
           { description: 'Dedicated editor' },
         ],
@@ -58,8 +58,9 @@ const metadata = {
         price: 'Custom',
         period: 'volume pricing',
         items: [
-          { description: 'Volume pricing across all your clinics' },
-          { description: 'White-label delivery' },
+          { description: 'Wholesale pricing across all your clinics' },
+          { description: 'Meta ad creatives with hook variations' },
+          { description: 'White-label delivery, no setup fee' },
           { description: 'Dedicated editor & shared channel' },
           { description: 'Brand presets per clinic' },
         ],
@@ -75,17 +76,22 @@ const metadata = {
     columns={[{ title: 'From' }, { title: 'Turnaround' }]}
     rows={[
       {
-        group: 'Photo',
+        group: 'Core services',
         label: 'Before/after set',
-        description: 'Two matched photos + layout',
+        description: 'Two matched photos, labelled layout',
         values: ['$8', '24–48h'],
       },
-      { label: 'Clinical / intraoral photo', values: ['$4', '24–48h'] },
-      { label: 'Headshot retouch', values: ['$10', '24–48h'] },
-      { label: 'Office / interior photo', values: ['$6', '24–48h'] },
-      { group: 'Video', label: 'Reel / TikTok / Short', description: 'Up to 60 seconds', values: ['$45', '48–72h'] },
-      { label: 'Smile reveal video', values: ['$60', '48–72h'] },
+      { label: 'Reel / TikTok / Short', description: 'Up to 60 seconds', values: ['$45', '48–72h'] },
       { label: 'Patient testimonial', description: 'Full cut + 2 short clips', values: ['$120', '3–4 days'] },
+      {
+        group: 'Add-ons',
+        label: 'Meta ad creative',
+        description: 'One ad, 3 hook variations, 3 formats',
+        values: ['$69', '48–72h'],
+      },
+      { label: 'Google profile photo pack', description: '10 office, team or exterior photos', values: ['$49', '48h'] },
+      { group: 'Also available', label: 'Clinical / intraoral photo', values: ['$4', '24–48h'] },
+      { label: 'Team headshot', values: ['$10', '24–48h'] },
       { label: 'Doctor intro / clinic tour', description: 'Up to 3 minutes', values: ['$180', '3–5 days'] },
     ]}
   />
@@ -95,8 +101,8 @@ const metadata = {
     items={[
       { title: 'Is there a contract?', description: 'No. Plans are month-to-month and you can cancel any time.' },
       {
-        title: 'What counts as a photo edit?',
-        description: 'One delivered image. A before/after set counts as two edits.',
+        title: 'How do plan allowances work?',
+        description: 'Plans count before/after sets. Unused sets roll over for one month.',
       },
       {
         title: 'Do you offer rush delivery?',

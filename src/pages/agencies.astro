@@ -2,84 +2,138 @@
 import Layout from '~/layouts/PageLayout.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import Features2 from '~/components/widgets/Features2.astro';
+import Content from '~/components/widgets/Content.astro';
 import Steps2 from '~/components/widgets/Steps2.astro';
-import BeforeAfterGallery from '~/components/widgets/BeforeAfterGallery.astro';
+import Reels from '~/components/widgets/Reels.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
-import { pairs } from '~/data/samples';
+import { reels } from '~/data/samples';
 import { getPermalink } from '~/utils/permalinks';
 
 const metadata = {
   title: 'White-Label Editing for Dental Marketing Agencies',
   description:
-    'White-label photo and video editing for dental marketing agencies. Volume pricing, dedicated editor, per-clinic brand presets.',
+    'White-label video and photo editing for dental marketing agencies: Reels, testimonials, before/afters and Meta ad creatives with hook variations.',
 };
+
+const call = `${getPermalink('/contact')}#agency`;
+const trial = `${getPermalink('/contact')}#trial`;
 ---
 
 <Layout metadata={metadata}>
   <Hero2
     tagline="For dental marketing agencies"
-    title="Your editing team, without the hiring"
-    subtitle="We edit your dental clients' photos and videos under your brand. You keep the client relationship and the margin."
+    title="Add a dental editing team without hiring one"
+    subtitle="We edit Reels, testimonials, before/afters and Meta ads for all your dental clients — under your brand, with overnight turnaround. You keep the client and the margin."
     actions={[
-      {
-        variant: 'primary',
-        text: 'Book a 15-min call',
-        href: `${getPermalink('/contact')}#agency`,
-        icon: 'tabler:calendar',
-      },
-      { text: 'Free test project', href: `${getPermalink('/contact')}#trial` },
+      { variant: 'primary', text: 'Book a 15-min call', href: call, icon: 'tabler:calendar' },
+      { text: 'Free test project', href: trial },
     ]}
     image={{ src: '~/assets/images/pairs/consult-after.jpg', alt: 'Dentist with a patient' }}
   />
 
   <Features2
-    tagline="Why agencies work with us"
+    tagline="What you can hand off"
+    title="Everything your dental clients need edited"
+    columns={2}
+    items={[
+      {
+        title: 'Reels, TikToks & Shorts',
+        description: "Educational, behind-the-scenes and transformation Reels from your clients' phone footage.",
+        icon: 'tabler:device-mobile',
+      },
+      {
+        title: 'Patient testimonials',
+        description: 'Full story cut plus short clips for organic posts and ads. Audio cleaned, captions added.',
+        icon: 'tabler:message-circle-heart',
+      },
+      {
+        title: 'Compliance-ready before/afters',
+        description: 'Matched, unaltered pairs with procedure labels — less risk for you and your clients.',
+        icon: 'tabler:photo-check',
+      },
+      {
+        title: 'Meta ad creatives',
+        description: 'Talking-head and user-generated-style ads with hook variations, ready for testing.',
+        icon: 'tabler:speakerphone',
+        href: '#ad-creatives',
+      },
+    ]}
+  />
+
+  <Content
+    id="ad-creatives"
+    isReversed
+    tagline="Built for paid social"
+    title="Ad creatives with hook variations"
+    items={[
+      {
+        title: '3 hooks per ad',
+        description: 'Each ad comes in 3 opening variations so you can test what stops the scroll.',
+      },
+      {
+        title: 'Formats for every placement',
+        description: '9:16 for Reels and Stories, 4:5 and 1:1 for feeds — from the same edit.',
+      },
+      {
+        title: 'Iterate on results',
+        description: 'Send us watch-time and drop-off data; we re-cut winners and replace losers.',
+      },
+      {
+        title: 'Platform-aware',
+        description: 'Ad versions avoid side-by-side before/afters where ad platforms restrict them.',
+      },
+    ]}
+    image={{ src: '~/assets/images/demo/headshot-2.jpg', alt: 'Dentist talking to camera', aspect: '4/3' }}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <Features2
+    tagline="How we work with agencies"
     title="Built to scale with your client list"
     columns={3}
     items={[
       {
         title: '100% white-label',
-        description: 'No logos, watermarks or mentions of us. Deliver straight to your clients as your own work.',
+        description: 'No logos, watermarks or mentions of us. We never contact your clients.',
         icon: 'tabler:tag-off',
       },
       {
         title: 'Brand presets per clinic',
-        description: 'Fonts, colours, logos, caption styles and intros saved for each of your clinics.',
+        description: 'Fonts, colours, logos, caption styles and intros saved for each clinic.',
         icon: 'tabler:palette',
       },
       {
-        title: 'Dedicated editor',
-        description: 'The same editor on your account every month — no re-explaining, no quality swings.',
+        title: 'Same editor every month',
+        description: 'One editor who learns your clinics — no re-explaining, no quality swings.',
         icon: 'tabler:user-check',
       },
       {
-        title: 'Overnight turnaround',
-        description: 'Send work at the end of your day, have it back the next morning.',
+        title: 'Overnight & same-day',
+        description: 'Send work at the end of your day, have it back the next morning. Same-day rush available.',
         icon: 'tabler:moon',
       },
       {
-        title: 'Volume pricing',
-        description: 'Lower per-item prices as you add clinics. Predictable monthly cost for your proposals.',
-        icon: 'tabler:chart-line',
+        title: 'Live review calls',
+        description: 'Jump on a quick call to review edits together when a project needs it.',
+        icon: 'tabler:video',
       },
       {
-        title: 'Shared channel',
-        description: 'Slack, Teams, Trello or your project tool. We fit into your workflow.',
+        title: 'Your tools',
+        description: 'Slack, Teams, Trello, Frame.io or your project tool. We fit your workflow.',
         icon: 'tabler:brand-slack',
       },
     ]}
   />
 
-  <BeforeAfterGallery
-    tagline="Quality you can resell"
-    title="Consistent results across every clinic"
-    items={[pairs.smile, pairs.headshot]}
-  >
+  <Reels tagline="Samples" title="The kind of videos we deliver" items={reels}>
     <Fragment slot="bg">
       <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
     </Fragment>
-  </BeforeAfterGallery>
+  </Reels>
 
   <Steps2
     tagline="Getting started"
@@ -116,13 +170,14 @@ const metadata = {
         description: 'Yes. We are happy to sign your NDA and data processing agreements before any files are shared.',
       },
       {
+        title: 'How do you price agency work?',
+        description:
+          'Wholesale per-clinic or per-item pricing that leaves room for your markup, with volume discounts as you add clinics. No setup fee.',
+      },
+      {
         title: 'What volume can you handle?',
         description:
           'Tell us your monthly volume on the intro call and we will plan capacity and turnaround around it.',
-      },
-      {
-        title: 'Do you work with agencies outside the US?',
-        description: 'Yes. We work remotely with agencies worldwide and schedule turnaround around your time zone.',
       },
     ]}
   />
@@ -130,8 +185,6 @@ const metadata = {
   <CallToAction
     title="Let's run a free test project"
     subtitle="Send a real batch from one of your dental clients. Judge the work, then decide."
-    actions={[
-      { variant: 'primary', text: 'Book a call', href: `${getPermalink('/contact')}#agency`, icon: 'tabler:calendar' },
-    ]}
+    actions={[{ variant: 'primary', text: 'Book a call', href: call, icon: 'tabler:calendar' }]}
   />
 </Layout>
