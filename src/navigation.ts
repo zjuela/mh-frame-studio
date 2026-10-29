@@ -9,7 +9,7 @@ export const headerData = {
     { text: 'For Agencies', href: getPermalink('/agencies') },
     { text: 'Contact', href: getPermalink('/contact') },
   ],
-  actions: [{ text: 'Free Trial', href: getPermalink('/contact#trial'), variant: 'primary' as const }],
+  actions: [{ text: 'Free Trial', href: `${getPermalink('/contact')}#trial`, variant: 'primary' as const }],
 };
 
 export const footerData = {
@@ -17,17 +17,17 @@ export const footerData = {
     {
       title: 'Photo',
       links: [
-        { text: 'Before/after editing', href: getPermalink('/services#photo') },
-        { text: 'Clinical photo cleanup', href: getPermalink('/services#photo') },
-        { text: 'Headshots & office photos', href: getPermalink('/services#photo') },
+        { text: 'Before/after editing', href: `${getPermalink('/services')}#photo` },
+        { text: 'Clinical photo cleanup', href: `${getPermalink('/services')}#photo` },
+        { text: 'Headshots & office photos', href: `${getPermalink('/services')}#photo` },
       ],
     },
     {
       title: 'Video',
       links: [
-        { text: 'Reels & Shorts', href: getPermalink('/services#video') },
-        { text: 'Testimonial videos', href: getPermalink('/services#video') },
-        { text: 'Smile reveal videos', href: getPermalink('/services#video') },
+        { text: 'Reels & Shorts', href: `${getPermalink('/services')}#video` },
+        { text: 'Testimonial videos', href: `${getPermalink('/services')}#video` },
+        { text: 'Smile reveal videos', href: `${getPermalink('/services')}#video` },
       ],
     },
     {

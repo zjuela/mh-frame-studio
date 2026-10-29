@@ -22,7 +22,7 @@ const metadata = {
     callToAction={{
       variant: 'primary',
       text: 'Get 3 free edits',
-      href: getPermalink('/contact#trial'),
+      href: `${getPermalink('/contact')}#trial`,
       icon: 'tabler:gift',
     }}
     callToAction2={{ text: 'See pricing', href: getPermalink('/pricing') }}
@@ -141,9 +141,9 @@ const metadata = {
     title="Not sure where to start?"
     subtitle="Send us 3 photos or a short clip. We'll edit it free and suggest what would work best for your practice."
     actions={[
-      { variant: 'primary', text: 'Start free trial', href: getPermalink('/contact#trial'), icon: 'tabler:gift' },
+      { variant: 'primary', text: 'Start free trial', href: `${getPermalink('/contact')}#trial`, icon: 'tabler:gift' },
     ]}
   />
 
-  <StickyCTA label="3 free edits — no strings" text="Free trial" href={getPermalink('/contact#trial')} />
+  <StickyCTA label="3 free edits — no strings" text="Free trial" href={`${getPermalink('/contact')}#trial`} />
 </Layout>

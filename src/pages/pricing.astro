@@ -33,7 +33,7 @@ const metadata = {
           { description: '48h turnaround' },
           { description: '2 revision rounds' },
         ],
-        callToAction: { text: 'Start free trial', href: getPermalink('/contact#trial') },
+        callToAction: { text: 'Start free trial', href: `${getPermalink('/contact')}#trial` },
       },
       {
         title: 'Practice Growth',
@@ -47,7 +47,7 @@ const metadata = {
           { description: '24h photo turnaround' },
           { description: 'Dedicated editor' },
         ],
-        callToAction: { variant: 'primary', text: 'Start free trial', href: getPermalink('/contact#trial') },
+        callToAction: { variant: 'primary', text: 'Start free trial', href: `${getPermalink('/contact')}#trial` },
         hasRibbon: true,
         ribbonTitle: 'popular',
         highlight: true,
@@ -113,7 +113,7 @@ const metadata = {
     title="Try us before you pay"
     subtitle="3 free photo edits. No card needed."
     actions={[
-      { variant: 'primary', text: 'Start free trial', href: getPermalink('/contact#trial'), icon: 'tabler:gift' },
+      { variant: 'primary', text: 'Start free trial', href: `${getPermalink('/contact')}#trial`, icon: 'tabler:gift' },
     ]}
   />
 </Layout>

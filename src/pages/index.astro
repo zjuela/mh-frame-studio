@@ -42,7 +42,7 @@ const structuredData = [
   <Hero2
     tagline="Photo & video editing for dental practices"
     actions={[
-      { variant: 'primary', text: 'Get 3 free edits', href: getPermalink('/contact#trial'), icon: 'tabler:gift' },
+      { variant: 'primary', text: 'Get 3 free edits', href: `${getPermalink('/contact')}#trial`, icon: 'tabler:gift' },
       { text: 'See our work', href: getPermalink('/work') },
     ]}
   >
@@ -90,40 +90,40 @@ const structuredData = [
         description:
           'Matched colour, exposure and framing on both shots, laid out side-by-side or as a slider, with your logo.',
         icon: 'tabler:photo-edit',
-        href: getPermalink('/services#photo'),
+        href: `${getPermalink('/services')}#photo`,
       },
       {
         title: 'Clinical photo cleanup',
         description:
           'Mirror shots flipped, rotation fixed, retractors and lips cropped out, one consistent background across a case series.',
         icon: 'tabler:dental',
-        href: getPermalink('/services#photo'),
+        href: `${getPermalink('/services')}#photo`,
       },
       {
         title: 'Headshots & office photos',
         description: 'Team portraits and treatment rooms retouched for your website, Google profile and directories.',
         icon: 'tabler:building-hospital',
-        href: getPermalink('/services#photo'),
+        href: `${getPermalink('/services')}#photo`,
       },
       {
         title: 'Reels, TikToks & Shorts',
         description:
           'Raw phone clips turned into 15–60s vertical videos with hooks, captions, music and your branding.',
         icon: 'tabler:device-mobile',
-        href: getPermalink('/services#video'),
+        href: `${getPermalink('/services')}#video`,
       },
       {
         title: 'Patient testimonial videos',
         description:
           'Audio cleaned, best moments cut, captions and name titles added. A full version plus short clips.',
         icon: 'tabler:message-circle-heart',
-        href: getPermalink('/services#video'),
+        href: `${getPermalink('/services')}#video`,
       },
       {
         title: 'Smile reveal videos',
         description: 'Before/after transitions and patient-journey montages that show the transformation.',
         icon: 'tabler:sparkles',
-        href: getPermalink('/services#video'),
+        href: `${getPermalink('/services')}#video`,
       },
     ]}
   />
@@ -253,9 +253,9 @@ const structuredData = [
     title="See what we can do with your photos"
     subtitle="Send 3 photos. We'll edit them free and send them back within 48 hours."
     actions={[
-      { variant: 'primary', text: 'Start free trial', href: getPermalink('/contact#trial'), icon: 'tabler:gift' },
+      { variant: 'primary', text: 'Start free trial', href: `${getPermalink('/contact')}#trial`, icon: 'tabler:gift' },
     ]}
   />
 
-  <StickyCTA label="3 free edits — no strings" text="Free trial" href={getPermalink('/contact#trial')} />
+  <StickyCTA label="3 free edits — no strings" text="Free trial" href={`${getPermalink('/contact')}#trial`} />
 </Layout>

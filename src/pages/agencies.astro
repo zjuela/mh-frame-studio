@@ -25,10 +25,10 @@ const metadata = {
       {
         variant: 'primary',
         text: 'Book a 15-min call',
-        href: getPermalink('/contact#agency'),
+        href: `${getPermalink('/contact')}#agency`,
         icon: 'tabler:calendar',
       },
-      { text: 'Free test project', href: getPermalink('/contact#trial') },
+      { text: 'Free test project', href: `${getPermalink('/contact')}#trial` },
     ]}
     image={{ src: '~/assets/images/pairs/consult-after.jpg', alt: 'Dentist with a patient' }}
   />
@@ -131,7 +131,7 @@ const metadata = {
     title="Let's run a free test project"
     subtitle="Send a real batch from one of your dental clients. Judge the work, then decide."
     actions={[
-      { variant: 'primary', text: 'Book a call', href: getPermalink('/contact#agency'), icon: 'tabler:calendar' },
+      { variant: 'primary', text: 'Book a call', href: `${getPermalink('/contact')}#agency`, icon: 'tabler:calendar' },
     ]}
   />
 </Layout>

@@ -44,9 +44,9 @@ const metadata = {
     title="Want to see your own photos here?"
     subtitle="Send us 3 and we'll edit them free."
     actions={[
-      { variant: 'primary', text: 'Start free trial', href: getPermalink('/contact#trial'), icon: 'tabler:gift' },
+      { variant: 'primary', text: 'Start free trial', href: `${getPermalink('/contact')}#trial`, icon: 'tabler:gift' },
     ]}
   />
 
-  <StickyCTA label="3 free edits — no strings" text="Free trial" href={getPermalink('/contact#trial')} />
+  <StickyCTA label="3 free edits — no strings" text="Free trial" href={`${getPermalink('/contact')}#trial`} />
 </Layout>
