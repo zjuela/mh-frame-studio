@@ -4,11 +4,16 @@ import Image from '~/components/common/Image.astro';
 import Headline from '~/components/ui/Headline.astro';
 import SamplePlaceholder from '~/components/ui/SamplePlaceholder.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import { getAsset } from '~/utils/permalinks';
 import type { Widget } from '~/types';
 
 // Vertical (9:16) video showcase. Each card shows a poster styled like a
-// finished Reel. Add `href` (YouTube Short, Vimeo, Instagram…) once a real
-// sample is published and the card becomes a link.
+// finished Reel. A card becomes playable in two ways:
+// - `video`: an MP4 in `public/` (e.g. 'videos/grinding.mp4') that plays in
+//   the card when clicked.
+// - `href`: a published sample (YouTube Short, Vimeo, Instagram…) that opens
+//   in a new tab.
+// Without either, the card is a still preview and shows no play button.
 
 export interface Reel {
   poster: ImageMetadata;
@@ -17,6 +22,7 @@ export interface Reel {
   caption: string;
   label: string;
   duration?: string;
+  video?: string;
   href?: string;
 }
 
@@ -40,6 +46,11 @@ const {
   classes = {},
   bg = await Astro.slots.render('bg'),
 } = Astro.props;
+
+const cardClass =
+  'group relative block aspect-[9/16] w-[70vw] max-w-[280px] shrink-0 snap-center overflow-hidden rounded-2xl bg-slate-900 shadow-lg ring-1 ring-black/10 md:w-auto md:max-w-none';
+const playIconClass =
+  'mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-slate-900 shadow transition group-hover:scale-110';
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={classes?.container as string} bg={bg}>
@@ -49,11 +60,16 @@ const {
   >
     {
       items.map((reel) => {
-        const Tag = reel.href ? 'a' : 'div';
+        const Tag = reel.video ? 'aw-reel' : reel.href ? 'a' : 'div';
+        const playIcon = (
+          <svg viewBox="0 0 24 24" class="ml-0.5 h-6 w-6" fill="currentColor" aria-hidden="true">
+            <path d="M8 5v14l11-7z" />
+          </svg>
+        );
         return (
           <Tag
-            {...(reel.href ? { href: reel.href, target: '_blank', rel: 'noopener noreferrer' } : {})}
-            class="group relative block aspect-[9/16] w-[70vw] max-w-[280px] shrink-0 snap-center overflow-hidden rounded-2xl bg-slate-900 shadow-lg ring-1 ring-black/10 md:w-auto md:max-w-none"
+            {...(reel.href && !reel.video ? { href: reel.href, target: '_blank', rel: 'noopener noreferrer' } : {})}
+            class={cardClass}
           >
             <Image
               src={reel.poster}
@@ -64,28 +80,41 @@ const {
               format="webp"
               class="absolute inset-0 h-full w-full object-cover transition duration-500 group-hover:scale-105"
             />
-            <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/75" />
-
-            <span class="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-slate-800">
-              {reel.label}
-            </span>
-            {reel.duration && (
-              <span class="absolute right-3 top-3 rounded bg-black/60 px-1.5 py-0.5 text-[11px] font-medium text-white">
-                {reel.duration}
-              </span>
+            {reel.video && (
+              <video
+                class="absolute inset-0 h-full w-full bg-black object-cover"
+                src={getAsset(reel.video)}
+                preload="none"
+                playsinline
+                hidden
+              />
             )}
+            <div data-overlay class="absolute inset-0">
+              <div class="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-black/75" />
 
-            <p class="absolute inset-x-4 top-[38%] text-center text-lg font-extrabold leading-snug text-white [text-shadow:0_2px_8px_rgb(0_0_0/0.6)]">
-              <span class="box-decoration-clone rounded bg-accent px-1.5 py-0.5">{reel.hook}</span>
-            </p>
+              <span class="absolute left-3 top-3 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold uppercase tracking-wide text-slate-800">
+                {reel.label}
+              </span>
+              {reel.duration && (
+                <span class="absolute right-3 top-3 rounded bg-black/60 px-1.5 py-0.5 text-[11px] font-medium text-white">
+                  {reel.duration}
+                </span>
+              )}
 
-            <div class="absolute inset-x-0 bottom-0 p-4">
-              <div class="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-white/90 text-slate-900 shadow transition group-hover:scale-110">
-                <svg viewBox="0 0 24 24" class="ml-0.5 h-6 w-6" fill="currentColor" aria-hidden="true">
-                  <path d="M8 5v14l11-7z" />
-                </svg>
+              <p class="absolute inset-x-4 top-[38%] text-center text-lg font-extrabold leading-snug text-white [text-shadow:0_2px_8px_rgb(0_0_0/0.6)]">
+                <span class="box-decoration-clone rounded bg-accent px-1.5 py-0.5">{reel.hook}</span>
+              </p>
+
+              <div class="absolute inset-x-0 bottom-0 p-4">
+                {reel.video ? (
+                  <button type="button" aria-label={`Play: ${reel.hook}`} class={`${playIconClass} cursor-pointer`}>
+                    {playIcon}
+                  </button>
+                ) : reel.href ? (
+                  <div class={playIconClass}>{playIcon}</div>
+                ) : null}
+                <p class="text-sm font-medium text-white">{reel.caption}</p>
               </div>
-              <p class="text-sm font-medium text-white">{reel.caption}</p>
             </div>
           </Tag>
         );
@@ -102,3 +131,28 @@ const {
     }
   </div>
 </WidgetWrapper>
+
+<script>
+  // Plays the card's video in place; when it ends, the poster comes back.
+  class AwReel extends HTMLElement {
+    connectedCallback() {
+      const video = this.querySelector('video');
+      const overlay = this.querySelector<HTMLElement>('[data-overlay]');
+      const button = this.querySelector('button');
+      if (!video || !overlay || !button) return;
+      button.addEventListener('click', () => {
+        video.hidden = false;
+        video.controls = true;
+        overlay.hidden = true;
+        video.play();
+      });
+      video.addEventListener('ended', () => {
+        video.hidden = true;
+        video.controls = false;
+        overlay.hidden = false;
+      });
+    }
+  }
+
+  if (!customElements.get('aw-reel')) customElements.define('aw-reel', AwReel);
+</script>
