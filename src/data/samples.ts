@@ -64,8 +64,8 @@ export const pairs: Record<string, BeforeAfterItem> = {
   },
 };
 
-export const reels: Reel[] = [
-  {
+export const videos: Record<'reel' | 'testimonial' | 'ad' | 'short', Reel> = {
+  reel: {
     poster: dentistMask,
     alt: 'Dentist holding dental instruments',
     hook: '3 signs you grind your teeth at night',
@@ -73,7 +73,7 @@ export const reels: Reel[] = [
     label: 'Reel',
     duration: '0:32',
   },
-  {
+  testimonial: {
     poster: treatment,
     alt: 'Patient during a dental treatment',
     hook: '“I was so nervous — this changed everything”',
@@ -81,7 +81,7 @@ export const reels: Reel[] = [
     label: 'Testimonial',
     duration: '0:58',
   },
-  {
+  ad: {
     poster: headshot2,
     alt: 'Dentist talking to camera',
     hook: 'Hiding your smile in photos? Watch this.',
@@ -89,7 +89,7 @@ export const reels: Reel[] = [
     label: 'Ad · 3 hooks',
     duration: '0:25',
   },
-  {
+  short: {
     poster: consult,
     alt: 'Dentist showing a patient their scan',
     hook: 'What happens at your first visit?',
@@ -97,4 +97,6 @@ export const reels: Reel[] = [
     label: 'Short',
     duration: '0:45',
   },
-];
+};
+
+export const reels: Reel[] = [videos.reel, videos.testimonial, videos.ad, videos.short];

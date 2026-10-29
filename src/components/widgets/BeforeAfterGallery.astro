@@ -1,6 +1,7 @@
 ---
 import type { ImageMetadata } from 'astro';
 import BeforeAfter from '~/components/ui/BeforeAfter.astro';
+import SamplePlaceholder from '~/components/ui/SamplePlaceholder.astro';
 import Headline from '~/components/ui/Headline.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import type { Widget } from '~/types';
@@ -19,13 +20,26 @@ export interface Props extends Widget {
   subtitle?: string;
   tagline?: string;
   items: BeforeAfterItem[];
+  /** Slots for samples not ready yet, shown after the real ones. */
+  placeholders?: Array<{ title: string; description?: string }>;
   columns?: 1 | 2;
 }
 
-const { title, subtitle, tagline, items = [], columns = 2, id, isDark = false, classes = {} } = Astro.props;
+const {
+  title,
+  subtitle,
+  tagline,
+  items = [],
+  placeholders = [],
+  columns = 2,
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
 ---
 
-<WidgetWrapper id={id} isDark={isDark} containerClass={classes?.container as string}>
+<WidgetWrapper id={id} isDark={isDark} containerClass={classes?.container as string} bg={bg}>
   <Headline title={title} subtitle={subtitle} tagline={tagline} />
   <div class:list={['grid gap-10 md:gap-12', { 'md:grid-cols-2': columns === 2 }]}>
     {
@@ -44,6 +58,17 @@ const { title, subtitle, tagline, items = [], columns = 2, id, isDark = false, c
                 ))}
               </ul>
             ) : null}
+          </figcaption>
+        </figure>
+      ))
+    }
+    {
+      placeholders.map((item) => (
+        <figure>
+          <SamplePlaceholder />
+          <figcaption class="mt-4">
+            <h3 class="text-lg font-semibold text-heading">{item.title}</h3>
+            {item.description && <p class="mt-1 text-muted">{item.description}</p>}
           </figcaption>
         </figure>
       ))

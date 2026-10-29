@@ -5,48 +5,90 @@ import BeforeAfterGallery from '~/components/widgets/BeforeAfterGallery.astro';
 import Reels from '~/components/widgets/Reels.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import StickyCTA from '~/components/widgets/StickyCTA.astro';
-import { pairs, reels } from '~/data/samples';
+import { pairs, videos } from '~/data/samples';
 import { getPermalink } from '~/utils/permalinks';
 
 const metadata = {
   title: 'Our Work',
-  description: 'Before/after photo editing and short-form video samples for dental practices.',
+  description:
+    'Samples for each service: before/after photos, Reels, patient testimonials, Meta ad creatives and office photos for dental practices.',
 };
+
+const trial = `${getPermalink('/contact')}#trial`;
+const slateBg = '<div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>';
 ---
 
 <Layout metadata={metadata}>
   <HeroText
     tagline="Our work"
     title="See the difference editing makes"
-    subtitle="Drag each slider to compare the photo as it arrived with the version we delivered."
+    subtitle="Samples for each of our services, in the same order as our service list. More real client work is added as it's approved for sharing."
+  />
+
+  <BeforeAfterGallery
+    id="before-after"
+    tagline="Core service 1"
+    title="Compliance-ready before/afters"
+    subtitle="Matched, labelled pairs. Drag each slider to compare the photo as it arrived with the version we delivered."
+    items={[pairs.smile]}
+    placeholders={[
+      {
+        title: 'Veneers · side-by-side with label',
+        description: 'Procedure name and "results may vary" line, ready for the website gallery.',
+      },
+      {
+        title: 'Whitening · Instagram carousel',
+        description: 'Before, after and a closing slide with your branding.',
+      },
+      {
+        title: 'Aligners · Story format',
+        description: '9:16 before/after for Instagram and Facebook Stories.',
+      },
+    ]}
+  />
+
+  <Reels
+    id="reels"
+    tagline="Core service 2"
+    title="Reels, TikToks & Shorts"
+    subtitle="Vertical edits from phone footage, with hooks, captions and branding."
+    items={[videos.reel, videos.short]}
+    placeholders={['Transformation Reel · before/after reveal', 'Myth vs fact · educational Short']}
+    bg={slateBg}
+  />
+
+  <Reels
+    id="testimonials"
+    tagline="Core service 3"
+    title="Patient testimonials"
+    subtitle="One phone-filmed interview, cut into a full story plus short clips for social and ads."
+    items={[videos.testimonial]}
+    placeholders={['15-second clip · for Reels', 'Ad cut · with captions', 'Story · 3 short answers']}
+  />
+
+  <Reels
+    id="ad-creatives"
+    tagline="Add-on"
+    title="Meta ad creatives"
+    subtitle="Every ad comes with 3 opening hooks to test, in 9:16, 4:5 and 1:1."
+    items={[videos.ad]}
+    placeholders={['Same ad · hook 2', 'Same ad · hook 3', 'Feed version · 4:5']}
+    bg={slateBg}
   />
 
   <BeforeAfterGallery
     id="photos"
-    tagline="Photo"
-    title="Before & after"
-    items={[pairs.smile, pairs.consult, pairs.clinic, pairs.clinic2, pairs.headshot]}
+    tagline="Add-on & also available"
+    title="Google profile, office & team photos"
+    subtitle="Phone photos of your practice and team, corrected and sized for your Google Business Profile and website."
+    items={[pairs.clinic, pairs.clinic2, pairs.consult, pairs.headshot]}
   />
-
-  <Reels
-    id="videos"
-    tagline="Video"
-    title="Reels, testimonials & ads"
-    subtitle="Vertical edits from phone footage, with hooks, captions and branding, ready for Instagram, TikTok, YouTube Shorts and Meta ads."
-    items={reels}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Reels>
 
   <CallToAction
     title="Want to see your own photos here?"
     subtitle="Send us 3 and we'll edit them free."
-    actions={[
-      { variant: 'primary', text: 'Start free trial', href: `${getPermalink('/contact')}#trial`, icon: 'tabler:gift' },
-    ]}
+    actions={[{ variant: 'primary', text: 'Start free trial', href: trial, icon: 'tabler:gift' }]}
   />
 
-  <StickyCTA label="3 free edits — no strings" text="Free trial" href={`${getPermalink('/contact')}#trial`} />
+  <StickyCTA label="3 free edits — no strings" text="Free trial" href={trial} />
 </Layout>

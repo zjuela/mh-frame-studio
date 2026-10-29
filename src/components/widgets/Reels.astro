@@ -2,6 +2,7 @@
 import type { ImageMetadata } from 'astro';
 import Image from '~/components/common/Image.astro';
 import Headline from '~/components/ui/Headline.astro';
+import SamplePlaceholder from '~/components/ui/SamplePlaceholder.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import type { Widget } from '~/types';
 
@@ -24,12 +25,24 @@ export interface Props extends Widget {
   subtitle?: string;
   tagline?: string;
   items: Reel[];
+  /** Slots for videos not ready yet, shown after the real ones. */
+  placeholders?: string[];
 }
 
-const { title, subtitle, tagline, items = [], id, isDark = false, classes = {} } = Astro.props;
+const {
+  title,
+  subtitle,
+  tagline,
+  items = [],
+  placeholders = [],
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
 ---
 
-<WidgetWrapper id={id} isDark={isDark} containerClass={classes?.container as string}>
+<WidgetWrapper id={id} isDark={isDark} containerClass={classes?.container as string} bg={bg}>
   <Headline title={title} subtitle={subtitle} tagline={tagline} />
   <div
     class="-mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-4 md:mx-0 md:grid md:grid-cols-4 md:gap-6 md:overflow-visible md:px-0"
@@ -77,6 +90,15 @@ const { title, subtitle, tagline, items = [], id, isDark = false, classes = {} }
           </Tag>
         );
       })
+    }
+    {
+      placeholders.map((label) => (
+        <SamplePlaceholder
+          label={label}
+          aspect="9/16"
+          class="w-[70vw] max-w-[280px] shrink-0 snap-center md:w-auto md:max-w-none"
+        />
+      ))
     }
   </div>
 </WidgetWrapper>

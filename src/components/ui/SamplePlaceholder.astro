@@ -1,0 +1,32 @@
+---
+import { Icon } from 'astro-icon/components';
+
+// Dashed stand-in for a portfolio sample that isn't ready yet. Matches the
+// shape of the real card it replaces (4:3 photo pair or 9:16 video).
+
+export interface Props {
+  label?: string;
+  aspect?: '4/3' | '9/16';
+  icon?: string;
+  class?: string;
+}
+
+const {
+  label,
+  aspect = '4/3',
+  icon = aspect === '9/16' ? 'tabler:video' : 'tabler:photo',
+  class: className,
+} = Astro.props;
+---
+
+<div
+  class:list={[
+    'flex flex-col items-center justify-center gap-3 rounded-2xl border-2 border-dashed border-slate-300 bg-slate-100/60 p-6 text-center dark:border-slate-600 dark:bg-slate-800/40',
+    aspect === '9/16' ? 'aspect-[9/16]' : 'aspect-[4/3]',
+    className,
+  ]}
+>
+  <Icon name={icon} class="h-10 w-10 text-slate-400" aria-hidden="true" />
+  <p class="text-xs font-semibold uppercase tracking-wide text-slate-500 dark:text-slate-400">Sample coming soon</p>
+  {label && <p class="text-sm font-medium text-heading">{label}</p>}
+</div>
