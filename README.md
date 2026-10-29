@@ -32,8 +32,19 @@ Before/after slider: `src/components/ui/BeforeAfter.astro`. Reels grid: `src/com
 Replace them with real, **consented** client work as soon as you have it: drop a matching
 `name-before.jpg` / `name-after.jpg` pair (same size, 4:3) into `pairs/` and add it to `src/data/samples.ts`.
 
-For real Reels, upload to YouTube Shorts / Vimeo / Instagram and add the link as `href` on the Reel in `samples.ts`.
-Do not commit large video files to the repo.
+Reel cards play a video in place when the Reel in `samples.ts` has `video: 'videos/<file>.mp4'` (a file in
+`public/videos/`), or link out with `href` (YouTube Shorts, Vimeo, Instagram). Cards with neither are still previews.
+Keep committed videos short and small (1080×1920 H.264, ideally under 10 MB); host anything bigger elsewhere.
+
+Transformation Reel from one before/after pair (needs ffmpeg):
+
+```sh
+node scripts/make-transformation-reel.mjs --before before.jpg --after after.jpg \
+  --procedure "Clear aligners" --hook "12 months of aligners" --brand "@yourpractice" --name aligners-reel
+```
+
+It writes `public/videos/aligners-reel.mp4` and a poster in `src/assets/images/reels/`. Add `--music track.mp3` for
+a soundtrack (use licensed music only).
 
 ## Deploy
 
