@@ -1,0 +1,137 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Steps2 from '~/components/widgets/Steps2.astro';
+import BeforeAfterGallery from '~/components/widgets/BeforeAfterGallery.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import { pairs } from '~/data/samples';
+import { getPermalink } from '~/utils/permalinks';
+
+const metadata = {
+  title: 'White-Label Editing for Dental Marketing Agencies',
+  description:
+    'White-label photo and video editing for dental marketing agencies. Volume pricing, dedicated editor, per-clinic brand presets.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero2
+    tagline="For dental marketing agencies"
+    title="Your editing team, without the hiring"
+    subtitle="We edit your dental clients' photos and videos under your brand. You keep the client relationship and the margin."
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Book a 15-min call',
+        href: getPermalink('/contact#agency'),
+        icon: 'tabler:calendar',
+      },
+      { text: 'Free test project', href: getPermalink('/contact#trial') },
+    ]}
+    image={{ src: '~/assets/images/pairs/consult-after.jpg', alt: 'Dentist with a patient' }}
+  />
+
+  <Features2
+    tagline="Why agencies work with us"
+    title="Built to scale with your client list"
+    columns={3}
+    items={[
+      {
+        title: '100% white-label',
+        description: 'No logos, watermarks or mentions of us. Deliver straight to your clients as your own work.',
+        icon: 'tabler:tag-off',
+      },
+      {
+        title: 'Brand presets per clinic',
+        description: 'Fonts, colours, logos, caption styles and intros saved for each of your clinics.',
+        icon: 'tabler:palette',
+      },
+      {
+        title: 'Dedicated editor',
+        description: 'The same editor on your account every month — no re-explaining, no quality swings.',
+        icon: 'tabler:user-check',
+      },
+      {
+        title: 'Overnight turnaround',
+        description: 'Send work at the end of your day, have it back the next morning.',
+        icon: 'tabler:moon',
+      },
+      {
+        title: 'Volume pricing',
+        description: 'Lower per-item prices as you add clinics. Predictable monthly cost for your proposals.',
+        icon: 'tabler:chart-line',
+      },
+      {
+        title: 'Shared channel',
+        description: 'Slack, Teams, Trello or your project tool. We fit into your workflow.',
+        icon: 'tabler:brand-slack',
+      },
+    ]}
+  />
+
+  <BeforeAfterGallery
+    tagline="Quality you can resell"
+    title="Consistent results across every clinic"
+    items={[pairs.smile, pairs.headshot]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
+    </Fragment>
+  </BeforeAfterGallery>
+
+  <Steps2
+    tagline="Getting started"
+    title="Onboarding takes one call"
+    items={[
+      {
+        title: 'Intro call',
+        description: '15 minutes on your clinics, volumes and deliverables.',
+        icon: 'tabler:phone',
+      },
+      {
+        title: 'Free test project',
+        description: 'We edit a real batch from one of your clients, free.',
+        icon: 'tabler:flask',
+      },
+      {
+        title: 'Brand presets',
+        description: 'We set up a style guide for each clinic you send.',
+        icon: 'tabler:palette',
+      },
+      { title: 'Go live', description: 'Send work any time; we deliver under your brand.', icon: 'tabler:rocket' },
+    ]}
+  />
+
+  <FAQs
+    title="Agency FAQ"
+    items={[
+      {
+        title: 'Will our clients ever know about you?',
+        description: 'No. We never contact your clients and never put our name on deliverables.',
+      },
+      {
+        title: 'Can you sign an NDA, BAA or DPA?',
+        description: 'Yes. We are happy to sign your NDA and data processing agreements before any files are shared.',
+      },
+      {
+        title: 'What volume can you handle?',
+        description:
+          'Tell us your monthly volume on the intro call and we will plan capacity and turnaround around it.',
+      },
+      {
+        title: 'Do you work with agencies outside the US?',
+        description: 'Yes. We work remotely with agencies worldwide and schedule turnaround around your time zone.',
+      },
+    ]}
+  />
+
+  <CallToAction
+    title="Let's run a free test project"
+    subtitle="Send a real batch from one of your dental clients. Judge the work, then decide."
+    actions={[
+      { variant: 'primary', text: 'Book a call', href: getPermalink('/contact#agency'), icon: 'tabler:calendar' },
+    ]}
+  />
+</Layout>

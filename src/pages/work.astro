@@ -1,0 +1,52 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import BeforeAfterGallery from '~/components/widgets/BeforeAfterGallery.astro';
+import Reels from '~/components/widgets/Reels.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import StickyCTA from '~/components/widgets/StickyCTA.astro';
+import { pairs, reels } from '~/data/samples';
+import { getPermalink } from '~/utils/permalinks';
+
+const metadata = {
+  title: 'Our Work',
+  description: 'Before/after photo editing and short-form video samples for dental practices.',
+};
+---
+
+<Layout metadata={metadata}>
+  <HeroText
+    tagline="Our work"
+    title="See the difference editing makes"
+    subtitle="Drag each slider to compare the photo as it arrived with the version we delivered."
+  />
+
+  <BeforeAfterGallery
+    id="photos"
+    tagline="Photo"
+    title="Before & after"
+    items={[pairs.smile, pairs.clinic, pairs.headshot, pairs.consult, pairs.clinic2]}
+  />
+
+  <Reels
+    id="videos"
+    tagline="Video"
+    title="Reels, testimonials & intros"
+    subtitle="Vertical edits with hooks, captions and branding, ready for Instagram, TikTok and YouTube Shorts."
+    items={reels}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Reels>
+
+  <CallToAction
+    title="Want to see your own photos here?"
+    subtitle="Send us 3 and we'll edit them free."
+    actions={[
+      { variant: 'primary', text: 'Start free trial', href: getPermalink('/contact#trial'), icon: 'tabler:gift' },
+    ]}
+  />
+
+  <StickyCTA label="3 free edits — no strings" text="Free trial" href={getPermalink('/contact#trial')} />
+</Layout>

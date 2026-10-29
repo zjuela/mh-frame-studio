@@ -1,0 +1,49 @@
+---
+// Font family is provided by Astro's native Fonts API (see `fonts` in
+// astro.config.ts and <Font /> in Layout.astro), exposed as `--font-inter`.
+// To switch typefaces, change the `fonts` entry and repoint `--aw-font-*` below.
+---
+
+<style is:inline>
+  :root {
+    --aw-font-sans: var(--font-inter);
+    --aw-font-serif: var(--font-inter);
+    --aw-font-heading: var(--font-inter);
+
+    /* Deep teal + navy: calm and clinical. Coral accent for highlights. */
+    --aw-color-primary: rgb(13 116 128);
+    --aw-color-secondary: rgb(15 52 96);
+    --aw-color-accent: rgb(232 93 74);
+
+    --aw-color-text-heading: rgb(12 30 52);
+    --aw-color-text-default: rgb(30 41 59);
+    --aw-color-text-muted: rgb(30 41 59 / 70%);
+    --aw-color-bg-page: rgb(255 255 255);
+
+    --aw-color-bg-page-dark: rgb(10 22 38);
+
+    ::selection {
+      background-color: rgb(204 236 239);
+    }
+  }
+
+  .dark {
+    --aw-font-sans: var(--font-inter);
+    --aw-font-serif: var(--font-inter);
+    --aw-font-heading: var(--font-inter);
+
+    --aw-color-primary: rgb(20 150 162);
+    --aw-color-secondary: rgb(94 194 204);
+    --aw-color-accent: rgb(248 140 120);
+
+    --aw-color-text-heading: rgb(247 248 248);
+    --aw-color-text-default: rgb(226 232 240);
+    --aw-color-text-muted: rgb(226 232 240 / 70%);
+    --aw-color-bg-page: rgb(10 22 38);
+
+    ::selection {
+      background-color: black;
+      color: snow;
+    }
+  }
+</style>

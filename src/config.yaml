@@ -1,0 +1,72 @@
+site:
+  name: BrightFrame Studio
+  # GitHub Pages project site. When you move to your own domain, set
+  # `site` to 'https://yourdomain.com' and `base` to '/'.
+  site: 'https://zjuela.github.io'
+  base: '/brightframe-studio'
+  trailingSlash: false
+
+  googleSiteVerificationId: null
+
+# Default SEO metadata
+metadata:
+  title:
+    default: BrightFrame Studio — Photo & Video Editing for Dental Practices
+    template: '%s — BrightFrame Studio'
+  description: 'Before/after photo editing, clinical photo cleanup, Reels and testimonial video editing for dentists and dental marketing agencies. White-label available. 24–48h turnaround.'
+  robots:
+    index: true
+    follow: true
+  openGraph:
+    site_name: BrightFrame Studio
+    images:
+      - url: '~/assets/images/default.png'
+        width: 1200
+        height: 628
+    type: website
+  twitter:
+    cardType: summary_large_image
+
+i18n:
+  language: en
+  textDirection: ltr
+
+apps:
+  blog:
+    isEnabled: false
+    postsPerPage: 8
+
+    post:
+      isEnabled: false
+      permalink: '/%slug%'
+      robots:
+        index: true
+
+    list:
+      isEnabled: false
+      pathname: 'blog'
+      robots:
+        index: true
+
+    category:
+      isEnabled: false
+      pathname: 'category'
+      robots:
+        index: true
+
+    tag:
+      isEnabled: false
+      pathname: 'tag'
+      robots:
+        index: false
+
+    isRelatedPostsEnabled: false
+    relatedPostsCount: 4
+
+analytics:
+  vendors:
+    googleAnalytics:
+      id: null # or "G-XXXXXXXXXX"
+
+ui:
+  theme: 'light' # Values: "system" | "light" | "dark" | "light:only" | "dark:only"

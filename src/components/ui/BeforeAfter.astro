@@ -1,0 +1,83 @@
+---
+import type { ImageMetadata } from 'astro';
+import Image from '~/components/common/Image.astro';
+
+// Drag (or tap / use arrow keys) to compare two images of the same size.
+// A visually hidden range input drives it, so it works with touch, mouse,
+// keyboard and screen readers without extra code.
+
+export interface Props {
+  before: ImageMetadata;
+  after: ImageMetadata;
+  alt: string;
+  start?: number;
+  eager?: boolean;
+  class?: string;
+}
+
+const { before, after, alt, start = 50, eager = false, class: className = '' } = Astro.props;
+
+const imageProps = {
+  widths: [480, 800, 1200, 1600],
+  sizes: '(max-width: 767px) 100vw, (max-width: 1279px) 50vw, 640px',
+  layout: 'none' as const,
+  format: 'webp' as const,
+  loading: eager ? ('eager' as const) : ('lazy' as const),
+  class: 'absolute inset-0 h-full w-full object-cover select-none pointer-events-none',
+  draggable: 'false' as const,
+};
+---
+
+<aw-before-after
+  class:list={[
+    'group relative block aspect-[4/3] w-full overflow-hidden rounded-xl bg-slate-200 shadow-lg ring-1 ring-black/5',
+    className,
+  ]}
+  style={`--pos: ${start}%`}
+>
+  <Image src={after} alt={`${alt} — after editing`} {...imageProps} />
+  <div class="absolute inset-0" style="clip-path: inset(0 calc(100% - var(--pos)) 0 0)">
+    <Image src={before} alt={`${alt} — before editing`} {...imageProps} />
+  </div>
+
+  <span
+    class="pointer-events-none absolute left-3 top-3 rounded-full bg-black/60 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white"
+    >Before</span
+  >
+  <span
+    class="pointer-events-none absolute right-3 top-3 rounded-full bg-primary/90 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white"
+    >After</span
+  >
+
+  <div class="pointer-events-none absolute inset-y-0 w-0.5 -translate-x-1/2 bg-white shadow" style="left: var(--pos)">
+    <div
+      class="absolute left-1/2 top-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-slate-700 shadow-lg ring-1 ring-black/10 transition group-focus-within:ring-4 group-focus-within:ring-primary/50"
+    >
+      <svg viewBox="0 0 24 24" class="h-6 w-6" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <path d="M9 6l-6 6 6 6M15 6l6 6-6 6"></path>
+      </svg>
+    </div>
+  </div>
+
+  <input
+    type="range"
+    min="0"
+    max="100"
+    value={start}
+    aria-label={`Compare before and after: ${alt}`}
+    class="absolute inset-0 h-full w-full cursor-ew-resize opacity-0"
+  />
+</aw-before-after>
+
+<script>
+  class AwBeforeAfter extends HTMLElement {
+    connectedCallback() {
+      const input = this.querySelector('input');
+      if (!input) return;
+      const update = () => this.style.setProperty('--pos', `${input.value}%`);
+      input.addEventListener('input', update);
+      update();
+    }
+  }
+  if (!customElements.get('aw-before-after')) customElements.define('aw-before-after', AwBeforeAfter);
+</script>

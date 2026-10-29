@@ -1,0 +1,82 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import ContactUs from '~/components/widgets/Contact.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import { BUSINESS } from '~/business';
+
+const metadata = {
+  title: 'Contact & Free Trial',
+  description: 'Request 3 free photo edits or book a call about white-label editing for your agency.',
+};
+
+// Without a form backend, fall back to opening the visitor's email app.
+const formProps = BUSINESS.formEndpoint
+  ? { action: BUSINESS.formEndpoint, method: 'post' as const }
+  : {
+      action: `mailto:${BUSINESS.email}?subject=Free%20trial%20request`,
+      method: 'post' as const,
+      enctype: 'text/plain',
+    };
+---
+
+<Layout metadata={metadata}>
+  <HeroText
+    tagline="Free trial"
+    title="Get 3 photos edited free"
+    subtitle="Tell us a little about your practice or agency. We'll reply within one business day with a secure upload link."
+  />
+
+  <ContactUs
+    id="trial"
+    classes={{ container: 'pt-0 md:pt-0 lg:pt-0' }}
+    {...formProps}
+    inputs={[
+      { type: 'text', name: 'name', label: 'Your name', autocomplete: 'name', required: true },
+      { type: 'email', name: 'email', label: 'Work email', autocomplete: 'email', required: true },
+      {
+        type: 'text',
+        name: 'company',
+        label: 'Practice or agency name',
+        autocomplete: 'organization',
+        placeholder: 'e.g. Smile Dental Studio',
+      },
+    ]}
+    textarea={{
+      label: 'What would you like edited?',
+      placeholder: 'e.g. before/after photos for our website, or 4 Reels a month for 10 clinics',
+    }}
+    disclaimer={{
+      label: 'I confirm I have permission to share any patient images I send, and agree to the privacy policy.',
+    }}
+    button="Request my free edits"
+    description="Please don't attach patient photos here — we'll send you a secure upload link."
+  />
+
+  <Features2
+    id="agency"
+    title="Other ways to reach us"
+    columns={3}
+    items={[
+      {
+        title: 'Email',
+        description: BUSINESS.email,
+        icon: 'tabler:mail',
+        href: `mailto:${BUSINESS.email}`,
+      },
+      {
+        title: 'Agencies',
+        description: BUSINESS.bookingUrl
+          ? 'Book a 15-minute intro call about white-label editing.'
+          : 'Email us with "Agency" in the subject to set up a 15-minute intro call.',
+        icon: 'tabler:calendar',
+        href: BUSINESS.bookingUrl || `mailto:${BUSINESS.email}?subject=Agency%20intro%20call`,
+      },
+      {
+        title: 'Response time',
+        description: 'Within one business day, Monday to Friday.',
+        icon: 'tabler:clock',
+      },
+    ]}
+  />
+</Layout>
