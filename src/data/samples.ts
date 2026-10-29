@@ -17,6 +17,7 @@ import dentistMask from '~/assets/images/demo/dentist-mask.jpg';
 import consult from '~/assets/images/demo/consult.jpg';
 import treatment from '~/assets/images/demo/treatment.jpg';
 import headshot2 from '~/assets/images/demo/headshot-2.jpg';
+import mythFactPoster from '~/assets/images/reels/myth-fact-poster.jpg';
 
 import type { BeforeAfterItem } from '~/components/widgets/BeforeAfterGallery.astro';
 import type { Reel } from '~/components/widgets/Reels.astro';
@@ -64,7 +65,7 @@ export const pairs: Record<string, BeforeAfterItem> = {
   },
 };
 
-export const videos: Record<'reel' | 'testimonial' | 'ad' | 'short', Reel> = {
+export const videos: Record<'reel' | 'testimonial' | 'ad' | 'short' | 'mythFact', Reel> = {
   reel: {
     poster: dentistMask,
     alt: 'Dentist holding dental instruments',
@@ -96,6 +97,16 @@ export const videos: Record<'reel' | 'testimonial' | 'ad' | 'short', Reel> = {
     caption: 'Clinic walkthrough Short · cuts, music, on-screen text',
     label: 'Short',
     duration: '0:45',
+  },
+  // Built by `node scripts/make-myth-fact-reel.mjs scripts/reels/myth-fact.json`.
+  mythFact: {
+    poster: mythFactPoster,
+    alt: 'Smiling dentist in scrubs',
+    hook: 'Myth or fact? 3 dental myths',
+    caption: 'Educational Short · myth/fact cards, counter, branded end card',
+    label: 'Short',
+    duration: '0:23',
+    video: 'videos/myth-fact.mp4',
   },
 };
 

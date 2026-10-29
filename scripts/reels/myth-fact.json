@@ -1,0 +1,25 @@
+{
+  "name": "myth-fact",
+  "hook": "3 dental myths you probably believe",
+  "hookImage": "src/assets/images/demo/headshot.jpg",
+  "brand": "@yourpractice",
+  "cta": "Questions? Ask us at your next checkup",
+  "myths": [
+    {
+      "myth": "If my gums bleed, I should stop flossing.",
+      "fact": "Bleeding gums are often a sign of gum inflammation. Keep flossing gently and let your dentist know.",
+      "image": "src/assets/images/demo/smile.jpg",
+      "crop": "centre"
+    },
+    {
+      "myth": "Sugar-free soda can't hurt my teeth.",
+      "fact": "Soda is acidic. Even without sugar, it can wear away enamel over time.",
+      "image": "src/assets/images/demo/implant-model.jpg"
+    },
+    {
+      "myth": "No pain means no problem.",
+      "fact": "Cavities and gum disease often cause no pain early on. Regular checkups catch them sooner.",
+      "image": "src/assets/images/demo/consult.jpg"
+    }
+  ]
+}

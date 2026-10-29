@@ -46,6 +46,10 @@ node scripts/make-transformation-reel.mjs --before before.jpg --after after.jpg 
 It writes `public/videos/aligners-reel.mp4` and a poster in `src/assets/images/reels/`. Add `--music track.mp3` for
 a soundtrack (use licensed music only).
 
+Myth vs Fact educational Reel: edit the hook, myths, facts and photos in `scripts/reels/myth-fact.json`
+(copy it for new topics), then run `node scripts/make-myth-fact-reel.mjs scripts/reels/myth-fact.json`.
+Both generators share `scripts/lib/reel-kit.mjs`.
+
 ## Deploy
 
 Pushing to `main` deploys to GitHub Pages via `.github/workflows/deploy.yml`
