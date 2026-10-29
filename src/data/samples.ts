@@ -24,6 +24,7 @@ import adHook1 from '~/assets/images/ads/aligner-consult-hook-1.jpg';
 import adHook2 from '~/assets/images/ads/aligner-consult-hook-2.jpg';
 import adHook3 from '~/assets/images/ads/aligner-consult-hook-3.jpg';
 import adFeed from '~/assets/images/ads/aligner-consult-feed.jpg';
+import transformationPoster from '~/assets/images/reels/transformation-reel-poster.jpg';
 import mythFactPoster from '~/assets/images/reels/myth-fact-poster.jpg';
 
 import type { BeforeAfterItem, LabelledItem } from '~/components/widgets/BeforeAfterGallery.astro';
@@ -98,7 +99,7 @@ export const posts: Record<'veneers' | 'whitening' | 'alignment', LabelledItem> 
 };
 
 export const videos: Record<
-  'reel' | 'testimonial' | 'ad' | 'adHook2' | 'adHook3' | 'adFeed' | 'short' | 'mythFact',
+  'reel' | 'transformation' | 'testimonial' | 'ad' | 'adHook2' | 'adHook3' | 'adFeed' | 'short' | 'mythFact',
   Reel
 > = {
   reel: {
@@ -160,6 +161,17 @@ export const videos: Record<
     caption: 'Clinic walkthrough Short · cuts, music, on-screen text',
     label: 'Short',
     duration: '0:45',
+  },
+  // Built by `node scripts/make-transformation-reel.mjs` from the whitening pair in scripts/before-after/.
+  transformation: {
+    poster: transformationPoster,
+    alt: 'Teeth whitening before and after, stacked',
+    hook: 'Teeth whitening: wait for the after',
+    caption: 'Transformation Reel · slider reveal, labels, "results may vary" line',
+    label: 'Reel',
+    duration: '0:15',
+    video: 'videos/transformation-reel.mp4',
+    textInPoster: true,
   },
   // Built by `node scripts/make-myth-fact-reel.mjs scripts/reels/myth-fact.json`.
   mythFact: {
