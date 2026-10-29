@@ -5,7 +5,7 @@ import BeforeAfterGallery from '~/components/widgets/BeforeAfterGallery.astro';
 import Reels from '~/components/widgets/Reels.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import StickyCTA from '~/components/widgets/StickyCTA.astro';
-import { pairs, videos } from '~/data/samples';
+import { pairs, posts, videos } from '~/data/samples';
 import { getPermalink } from '~/utils/permalinks';
 
 const metadata = {
@@ -29,22 +29,8 @@ const slateBg = '<div class="absolute inset-0 bg-slate-50 dark:bg-transparent"><
     id="before-after"
     tagline="Core service 1"
     title="Compliance-ready before/afters"
-    subtitle="Matched, labelled pairs. Drag each slider to compare the photo as it arrived with the version we delivered."
-    items={[pairs.smile]}
-    placeholders={[
-      {
-        title: 'Veneers · side-by-side with label',
-        description: 'Procedure name and "results may vary" line, ready for the website gallery.',
-      },
-      {
-        title: 'Whitening · Instagram carousel',
-        description: 'Before, after and a closing slide with your branding.',
-      },
-      {
-        title: 'Aligners · Story format',
-        description: '9:16 before/after for Instagram and Facebook Stories.',
-      },
-    ]}
+    subtitle="Matched, labelled pairs for your website, feed and Stories. Click a post to see it full size, or drag the slider on the photo correction."
+    items={[posts.veneers, posts.whitening, posts.alignment, pairs.smile]}
   />
 
   <Reels

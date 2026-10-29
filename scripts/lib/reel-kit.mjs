@@ -33,7 +33,7 @@ export const overlay = (svg) =>
 /** Rounded label like the BEFORE / AFTER tags on the site. */
 export const pill = (x, y, text, fill, size = 34) => {
   const h = size * 1.9;
-  return `<rect x="${x}" y="${y}" width="${text.length * size * 0.65 + size * 1.6}" height="${h}" rx="${h / 2}" fill="${fill}"/>
+  return `<rect x="${x}" y="${y}" width="${text.length * (size * 0.7 + 2) + size * 1.6}" height="${h}" rx="${h / 2}" fill="${fill}"/>
    <text x="${x + size * 0.8}" y="${y + h * 0.69}" font-family="${FONT}" font-size="${size}" font-weight="800" letter-spacing="2" fill="#fff">${esc(text)}</text>`;
 };
 

@@ -13,13 +13,17 @@ import headshotAfter from '~/assets/images/pairs/headshot-after.jpg';
 import consultBefore from '~/assets/images/pairs/consult-before.jpg';
 import consultAfter from '~/assets/images/pairs/consult-after.jpg';
 
+import veneersPost from '~/assets/images/before-after/veneers.jpg';
+import whiteningPost from '~/assets/images/before-after/whitening.jpg';
+import alignmentPost from '~/assets/images/before-after/alignment.jpg';
+
 import dentistMask from '~/assets/images/demo/dentist-mask.jpg';
 import consult from '~/assets/images/demo/consult.jpg';
 import treatment from '~/assets/images/demo/treatment.jpg';
 import headshot2 from '~/assets/images/demo/headshot-2.jpg';
 import mythFactPoster from '~/assets/images/reels/myth-fact-poster.jpg';
 
-import type { BeforeAfterItem } from '~/components/widgets/BeforeAfterGallery.astro';
+import type { BeforeAfterItem, LabelledItem } from '~/components/widgets/BeforeAfterGallery.astro';
 import type { Reel } from '~/components/widgets/Reels.astro';
 
 export const pairs: Record<string, BeforeAfterItem> = {
@@ -62,6 +66,31 @@ export const pairs: Record<string, BeforeAfterItem> = {
     title: 'Treatment room photo',
     description: 'Yellow tungsten light and a crooked frame corrected to neutral, daylight-true colour.',
     fixes: ['White balance', 'Straighten', 'Clarity'],
+  },
+};
+
+// Labelled before/afters built by `node scripts/make-before-after.mjs`.
+export const posts: Record<'veneers' | 'whitening' | 'alignment', LabelledItem> = {
+  veneers: {
+    image: veneersPost,
+    alt: 'Porcelain veneers before and after, side by side with labels',
+    title: 'Veneers · website gallery',
+    description: 'Side-by-side pair with matched crops, procedure name and a "results may vary" line.',
+    fixes: ['Matched crop', 'Labels', 'Disclaimer'],
+  },
+  whitening: {
+    image: whiteningPost,
+    alt: 'Teeth whitening before and after, stacked in a 4:5 post',
+    title: 'Whitening · Instagram post (4:5)',
+    description: 'Before above after, sized for the feed, with your handle on every post.',
+    fixes: ['4:5 feed size', 'Labels', 'Branding'],
+  },
+  alignment: {
+    image: alignmentPost,
+    alt: 'Teeth alignment before and after in a 9:16 Story',
+    title: 'Alignment · Story (9:16)',
+    description: 'Story-sized pair with text kept clear of the Instagram and Facebook controls.',
+    fixes: ['9:16 Story', 'Safe zones', 'Labels'],
   },
 };
 

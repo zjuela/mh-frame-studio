@@ -1,25 +1,35 @@
 ---
 import type { ImageMetadata } from 'astro';
+import Image from '~/components/common/Image.astro';
 import BeforeAfter from '~/components/ui/BeforeAfter.astro';
 import SamplePlaceholder from '~/components/ui/SamplePlaceholder.astro';
 import Headline from '~/components/ui/Headline.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import type { Widget } from '~/types';
 
-export interface BeforeAfterItem {
-  before: ImageMetadata;
-  after: ImageMetadata;
+interface Caption {
   alt: string;
   title: string;
   description?: string;
   fixes?: string[];
 }
 
+/** A pair shown with a drag slider. */
+export interface BeforeAfterItem extends Caption {
+  before: ImageMetadata;
+  after: ImageMetadata;
+}
+
+/** A finished, labelled before/after image, shown as delivered. */
+export interface LabelledItem extends Caption {
+  image: ImageMetadata;
+}
+
 export interface Props extends Widget {
   title?: string;
   subtitle?: string;
   tagline?: string;
-  items: BeforeAfterItem[];
+  items: Array<BeforeAfterItem | LabelledItem>;
   /** Slots for samples not ready yet, shown after the real ones. */
   placeholders?: Array<{ title: string; description?: string }>;
   columns?: 1 | 2;
@@ -45,7 +55,26 @@ const {
     {
       items.map((item) => (
         <figure>
-          <BeforeAfter before={item.before} after={item.after} alt={item.alt} />
+          {'image' in item ? (
+            <a
+              href={item.image.src}
+              target="_blank"
+              rel="noopener"
+              class="flex aspect-[4/3] items-center justify-center overflow-hidden rounded-xl bg-slate-100 p-4 shadow-lg ring-1 ring-black/5 dark:bg-slate-800"
+            >
+              <Image
+                src={item.image}
+                alt={item.alt}
+                widths={[480, 800, 1200]}
+                sizes="(max-width: 767px) 100vw, 640px"
+                layout="none"
+                format="webp"
+                class="max-h-full w-auto max-w-full rounded-md object-contain shadow"
+              />
+            </a>
+          ) : (
+            <BeforeAfter before={item.before} after={item.after} alt={item.alt} />
+          )}
           <figcaption class="mt-4">
             <h3 class="text-lg font-semibold text-heading">{item.title}</h3>
             {item.description && <p class="mt-1 text-muted">{item.description}</p>}
@@ -75,7 +104,6 @@ const {
     }
   </div>
   <p class="mt-10 text-center text-sm text-muted">
-    Drag the handle to compare. Demo samples use licensed stock photos; we correct photography only, never clinical
-    results.
+    Demo samples use licensed stock photos. We crop, label and correct photography only, never clinical results.
   </p>
 </WidgetWrapper>
