@@ -24,6 +24,8 @@ export interface Reel {
   duration?: string;
   video?: string;
   href?: string;
+  /** The poster already shows the hook (e.g. an ad mock-up), so the card doesn't repeat it. */
+  textInPoster?: boolean;
 }
 
 export interface Props extends Widget {
@@ -101,9 +103,11 @@ const playIconClass =
                 </span>
               )}
 
-              <p class="absolute inset-x-4 top-[38%] text-center text-lg font-extrabold leading-snug text-white [text-shadow:0_2px_8px_rgb(0_0_0/0.6)]">
-                <span class="box-decoration-clone rounded bg-accent px-1.5 py-0.5">{reel.hook}</span>
-              </p>
+              {!reel.textInPoster && (
+                <p class="absolute inset-x-4 top-[38%] text-center text-lg font-extrabold leading-snug text-white [text-shadow:0_2px_8px_rgb(0_0_0/0.6)]">
+                  <span class="box-decoration-clone rounded bg-accent px-1.5 py-0.5">{reel.hook}</span>
+                </p>
+              )}
 
               <div class="absolute inset-x-0 bottom-0 p-4">
                 {reel.video ? (

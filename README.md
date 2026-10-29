@@ -55,6 +55,10 @@ meet, which one is the before, crop, and a `side` or `stack` layout), then run
 `node scripts/make-before-after.mjs scripts/before-after/posts.json`. Images go to `src/assets/images/before-after/`.
 Photos are only cropped and labelled, never colour-corrected.
 
+Meta ad mock-ups: edit the hooks, feed copy and photos in `scripts/ads/aligner-consult.json` (copy it for new ads),
+then run `node scripts/make-ad-mockups.mjs scripts/ads/aligner-consult.json`. It writes the first frame of each hook
+and a feed-post mock-up to `src/assets/images/ads/`.
+
 ## Deploy
 
 Pushing to `main` deploys to GitHub Pages via `.github/workflows/deploy.yml`

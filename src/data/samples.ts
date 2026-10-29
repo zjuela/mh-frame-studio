@@ -20,7 +20,10 @@ import alignmentPost from '~/assets/images/before-after/alignment.jpg';
 import dentistMask from '~/assets/images/demo/dentist-mask.jpg';
 import consult from '~/assets/images/demo/consult.jpg';
 import treatment from '~/assets/images/demo/treatment.jpg';
-import headshot2 from '~/assets/images/demo/headshot-2.jpg';
+import adHook1 from '~/assets/images/ads/aligner-consult-hook-1.jpg';
+import adHook2 from '~/assets/images/ads/aligner-consult-hook-2.jpg';
+import adHook3 from '~/assets/images/ads/aligner-consult-hook-3.jpg';
+import adFeed from '~/assets/images/ads/aligner-consult-feed.jpg';
 import mythFactPoster from '~/assets/images/reels/myth-fact-poster.jpg';
 
 import type { BeforeAfterItem, LabelledItem } from '~/components/widgets/BeforeAfterGallery.astro';
@@ -94,7 +97,10 @@ export const posts: Record<'veneers' | 'whitening' | 'alignment', LabelledItem> 
   },
 };
 
-export const videos: Record<'reel' | 'testimonial' | 'ad' | 'short' | 'mythFact', Reel> = {
+export const videos: Record<
+  'reel' | 'testimonial' | 'ad' | 'adHook2' | 'adHook3' | 'adFeed' | 'short' | 'mythFact',
+  Reel
+> = {
   reel: {
     poster: dentistMask,
     alt: 'Dentist holding dental instruments',
@@ -111,13 +117,41 @@ export const videos: Record<'reel' | 'testimonial' | 'ad' | 'short' | 'mythFact'
     label: 'Testimonial',
     duration: '0:58',
   },
+  // Ad mock-ups built by `node scripts/make-ad-mockups.mjs scripts/ads/aligner-consult.json`.
   ad: {
-    poster: headshot2,
-    alt: 'Dentist talking to camera',
-    hook: 'Hiding your smile in photos? Watch this.',
-    caption: 'Meta ad · talking-head edit, delivered with 3 hook variations',
-    label: 'Ad · 3 hooks',
+    poster: adHook1,
+    alt: 'Dentist on camera with the hook "Straighter teeth without metal braces?"',
+    hook: 'Straighter teeth without metal braces?',
+    caption: 'Meta ad · hook 1: talking head with title and captions',
+    label: 'Ad · hook 1',
     duration: '0:25',
+    textInPoster: true,
+  },
+  adHook2: {
+    poster: adHook2,
+    alt: 'Dentist answering a viewer comment: "Do clear aligners hurt?"',
+    hook: 'Do clear aligners hurt?',
+    caption: 'Same ad · hook 2: replying to a viewer’s comment',
+    label: 'Ad · hook 2',
+    duration: '0:25',
+    textInPoster: true,
+  },
+  adHook3: {
+    poster: adHook3,
+    alt: 'Dentist showing a patient a scan, with the title "What a free aligner consult looks like"',
+    hook: 'What a free aligner consult looks like',
+    caption: 'Same ad · hook 3: opens on consult footage',
+    label: 'Ad · hook 3',
+    duration: '0:25',
+    textInPoster: true,
+  },
+  adFeed: {
+    poster: adFeed,
+    alt: 'The ad as a 4:5 image in a Facebook feed post with a Book now button',
+    hook: 'Free clear aligner consult',
+    caption: 'Feed version · 4:5 with headline, offer and disclaimer',
+    label: 'Feed · 4:5',
+    textInPoster: true,
   },
   short: {
     poster: consult,
