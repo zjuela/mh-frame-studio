@@ -50,6 +50,11 @@ Myth vs Fact educational Reel: edit the hook, myths, facts and photos in `script
 (copy it for new topics), then run `node scripts/make-myth-fact-reel.mjs scripts/reels/myth-fact.json`.
 Both generators share `scripts/lib/reel-kit.mjs`.
 
+Labelled before/after images: add a post to `scripts/before-after/posts.json` (source photo, where the two shots
+meet, which one is the before, crop, and a `side` or `stack` layout), then run
+`node scripts/make-before-after.mjs scripts/before-after/posts.json`. Images go to `src/assets/images/before-after/`.
+Photos are only cropped and labelled, never colour-corrected.
+
 ## Deploy
 
 Pushing to `main` deploys to GitHub Pages via `.github/workflows/deploy.yml`
