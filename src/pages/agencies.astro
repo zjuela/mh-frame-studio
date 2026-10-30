@@ -50,6 +50,7 @@ const agencyPlans = tiers.map(({ clinics, discount }, i) => {
 ---
 
 <Layout metadata={metadata} slides>
+  {/* Slides alternate white and off-white, so each switch shows a change of background. */}
   <Hero2
     tagline="For dental marketing agencies"
     title="Add a dental editing team without hiring one"
@@ -91,7 +92,11 @@ const agencyPlans = tiers.map(({ clinics, discount }, i) => {
         href: '#ad-creatives',
       },
     ]}
-  />
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-stone-100 dark:bg-white/[0.04]"></div>
+    </Fragment>
+  </Features2>
 
   <ServiceSlide
     id="ad-creatives"
@@ -119,11 +124,7 @@ const agencyPlans = tiers.map(({ clinics, discount }, i) => {
     ]}
     image={{ src: '~/assets/images/demo/headshot-2.jpg', alt: 'Dentist talking to camera' }}
     callToAction={{ text: 'See ad samples', href: `${samples}#ad-creatives` }}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
-    </Fragment>
-  </ServiceSlide>
+  />
 
   <Features2
     tagline="How we work with agencies"
@@ -161,7 +162,11 @@ const agencyPlans = tiers.map(({ clinics, discount }, i) => {
         icon: 'tabler:brand-slack',
       },
     ]}
-  />
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-stone-100 dark:bg-white/[0.04]"></div>
+    </Fragment>
+  </Features2>
 
   <Steps2
     tagline="Getting started"
@@ -192,7 +197,11 @@ const agencyPlans = tiers.map(({ clinics, discount }, i) => {
     title="Wholesale credits, pooled across clients"
     subtitle="Every clinic adds credits to one shared balance. Spend them on any service in our credit chart, for any client. No setup fee, month to month, cancel anytime."
     prices={agencyPlans}
-  />
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-stone-100 dark:bg-white/[0.04]"></div>
+    </Fragment>
+  </Prices>
 
   <FAQs
     title="Agency FAQ"
@@ -230,5 +239,9 @@ const agencyPlans = tiers.map(({ clinics, discount }, i) => {
       { variant: 'primary', text: 'Book a call', href: call, icon: 'tabler:calendar' },
       { text: 'See samples', href: samples },
     ]}
-  />
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-stone-100 dark:bg-white/[0.04]"></div>
+    </Fragment>
+  </CallToAction>
 </Layout>
