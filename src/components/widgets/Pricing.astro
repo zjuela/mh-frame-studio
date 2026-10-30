@@ -32,8 +32,24 @@ const periodFor = (period: Price['period'], billing: 'monthly' | 'yearly') =>
   typeof period === 'object' && period !== null ? period[billing] : period;
 ---
 
-<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
-  <Headline title={title} subtitle={subtitle} tagline={tagline} classes={classes?.headline as Record<string, string>} />
+<!-- Tighter spacing than other widgets, so a section of plans fits on one laptop screen. -->
+<WidgetWrapper
+  id={id}
+  isDark={isDark}
+  containerClass={`max-w-7xl mx-auto lg:pt-6 lg:pb-12 ${classes?.container ?? ''}`}
+  bg={bg}
+>
+  <Headline
+    title={title}
+    subtitle={subtitle}
+    tagline={tagline}
+    classes={{
+      container: 'max-w-3xl md:mb-5',
+      title: 'md:text-4xl',
+      subtitle: 'mt-2 text-base md:text-lg',
+      ...(classes?.headline as Record<string, string>),
+    }}
+  />
 
   <aw-pricing data-billing="monthly">
     {
@@ -90,7 +106,7 @@ const periodFor = (period: Price['period'], billing: 'monthly' | 'yearly') =>
                   {price !== undefined && period && (
                     <div
                       class:list={[
-                        'rounded-lg backdrop-blur border bg-white dark:bg-slate-900 shadow px-6 py-8 flex w-full max-w-sm flex-col justify-between text-center',
+                        'rounded-lg backdrop-blur border bg-white dark:bg-slate-900 shadow px-6 py-5 flex w-full max-w-sm flex-col justify-between text-center',
                         highlight ? 'border-primary ring-1 ring-primary' : 'border-gray-200 dark:border-gray-700',
                       ]}
                     >
@@ -103,47 +119,47 @@ const periodFor = (period: Price['period'], billing: 'monthly' | 'yearly') =>
                       )}
                       <div class="px-2 py-0">
                         {title && (
-                          <PlanHeading class="text-center text-xl font-semibold uppercase leading-6 tracking-wider mb-2">
+                          <PlanHeading class="text-center text-lg font-semibold uppercase leading-6 tracking-wider mb-1">
                             {title}
                           </PlanHeading>
                         )}
-                        {subtitle && <p class="font-light sm:text-lg text-gray-600 dark:text-slate-400">{subtitle}</p>}
-                        <div class="my-8">
+                        {subtitle && <p class="font-light text-gray-600 dark:text-slate-400">{subtitle}</p>}
+                        <div class="my-4">
                           {(isDual(price) ? (['monthly', 'yearly'] as const) : (['monthly'] as const)).map(
                             (billing) => (
                               <div class:list={['aw-price', `aw-price-${billing}`]} data-billing={billing}>
-                                <div class="flex items-center justify-center text-center mb-1">
+                                <div class="flex items-baseline justify-center text-center">
                                   {typeof (isDual(price) ? price[billing] : price) === 'number' && (
-                                    <span class="text-5xl">{currency}</span>
+                                    <span class="text-3xl font-bold">{currency}</span>
                                   )}
-                                  <span class="text-6xl font-extrabold">{isDual(price) ? price[billing] : price}</span>
+                                  <span class="text-5xl font-extrabold">{isDual(price) ? price[billing] : price}</span>
+                                  <span class="ml-1.5 text-base lowercase text-gray-600 dark:text-slate-400">
+                                    {periodFor(period, billing)}
+                                  </span>
                                 </div>
-                                <span class="text-base leading-6 lowercase text-gray-600 dark:text-slate-400">
-                                  {periodFor(period, billing)}
-                                </span>
                               </div>
                             )
                           )}
-                          {credits && <p class="mt-3 text-lg font-semibold text-heading">{credits}</p>}
-                          {saving && (
-                            <p class="mt-3 inline-block rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary dark:bg-primary/20 dark:text-secondary">
-                              {saving}
-                            </p>
-                          )}
-                          {note && <p class="mt-2 text-sm text-muted">{note}</p>}
+                          {credits && <p class="mt-1 text-lg font-semibold text-heading">{credits}</p>}
+                          <div class="mt-2 flex flex-wrap items-center justify-center gap-x-2 gap-y-1">
+                            {saving && (
+                              <p class="inline-block rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary dark:bg-primary/20 dark:text-secondary">
+                                {saving}
+                              </p>
+                            )}
+                            {note && <p class="text-sm text-muted">{note}</p>}
+                          </div>
                         </div>
                         {itemsTitle && (
-                          <p class="mt-8 text-left text-sm font-semibold uppercase tracking-wide text-muted">
-                            {itemsTitle}
-                          </p>
+                          <p class="text-left text-sm font-semibold uppercase tracking-wide text-muted">{itemsTitle}</p>
                         )}
                         {items && (
-                          <ul class:list={['space-y-2 text-left', itemsTitle ? 'mt-3 mb-8 md:mb-10' : 'my-8 md:my-10']}>
+                          <ul class:list={['space-y-1 text-left', itemsTitle ? 'mt-2 mb-5' : 'my-5']}>
                             {items.map(
                               ({ description, icon }) =>
                                 description && (
-                                  <li class="mb-1.5 flex items-start space-x-3 leading-7">
-                                    <div class="rounded-full bg-primary mt-1">
+                                  <li class="flex items-start space-x-3 leading-6">
+                                    <div class="rounded-full bg-primary mt-0.5">
                                       <Icon
                                         name={icon ? icon : 'tabler:check'}
                                         class="w-5 h-5 font-bold p-1 text-white"
