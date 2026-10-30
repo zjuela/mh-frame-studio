@@ -1,6 +1,7 @@
 ---
-// Font family is provided by Astro's native Fonts API (see `fonts` in
-// astro.config.ts and <Font /> in Layout.astro), exposed as `--font-inter`.
+// Font families are provided by Astro's native Fonts API (see `fonts` in
+// astro.config.ts and <Font /> in Layout.astro), exposed as `--font-inter`
+// (body) and `--font-manrope` (headings).
 // To switch typefaces, change the `fonts` entry and repoint `--aw-font-*` below.
 ---
 
@@ -8,7 +9,7 @@
   :root {
     --aw-font-sans: var(--font-inter);
     --aw-font-serif: var(--font-inter);
-    --aw-font-heading: var(--font-inter);
+    --aw-font-heading: var(--font-manrope);
 
     /* Deep teal + navy: calm and clinical. Coral accent for highlights. */
     --aw-color-primary: rgb(13 116 128);
@@ -30,7 +31,7 @@
   .dark {
     --aw-font-sans: var(--font-inter);
     --aw-font-serif: var(--font-inter);
-    --aw-font-heading: var(--font-inter);
+    --aw-font-heading: var(--font-manrope);
 
     --aw-color-primary: rgb(20 150 162);
     --aw-color-secondary: rgb(94 194 204);

@@ -21,6 +21,8 @@ const {
 } = Astro.props;
 
 const columnsClass = getColumnsClass(columns);
+// Item titles are h3 under the section title, or h2 when the section has none.
+const ItemHeading = title ? 'h3' : 'h2';
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-5xl ${classes?.container ?? ''}`} bg={bg}>
@@ -41,7 +43,7 @@ const columnsClass = getColumnsClass(columns);
                 </div>
               )}
               <div class="mt-0.5">
-                {itemTitle && <h3 class="text-xl md:text-[1.3rem] font-bold">{itemTitle}</h3>}
+                {itemTitle && <ItemHeading class="text-xl md:text-[1.3rem] font-bold">{itemTitle}</ItemHeading>}
                 {description && <p class:list={[{ 'mt-3': itemTitle }, 'text-muted']} set:html={description} />}
                 {callToAction && (
                   <div class:list={[{ 'mt-3': itemTitle || description }]}>

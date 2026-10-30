@@ -44,7 +44,8 @@
 </style>
 
 <script>
-  const MEDIA = '(min-width: 48rem) and (min-height: 35rem)';
+  // Matches the CSS in tailwind.css: no slide mode for reduced motion.
+  const MEDIA = '(min-width: 48rem) and (min-height: 35rem) and (prefers-reduced-motion: no-preference)';
   const MIN_SCALE = 0.6;
   // Wheel events closer together than this belong to one gesture (trackpad
   // inertia keeps firing for a second or more) and move one slide at most.
@@ -56,6 +57,7 @@
     private observer?: IntersectionObserver;
     private media = window.matchMedia(MEDIA);
     private onResize = () => this.fit();
+    private onMediaChange = () => this.fit();
     private lastWheel = 0;
     private gestureMoved = false;
     private onWheel = (event: WheelEvent) => this.wheel(event);
@@ -65,12 +67,14 @@
       this.buildDots();
       this.fit();
       window.addEventListener('resize', this.onResize);
+      this.media.addEventListener('change', this.onMediaChange);
       window.addEventListener('wheel', this.onWheel, { passive: false });
       document.fonts?.ready.then(this.onResize);
     }
 
     disconnectedCallback() {
       window.removeEventListener('resize', this.onResize);
+      this.media.removeEventListener('change', this.onMediaChange);
       window.removeEventListener('wheel', this.onWheel);
       this.observer?.disconnect();
       this.dots?.remove();
@@ -112,9 +116,8 @@
       let current = atEnd ? this.slides.length : 0;
       if (!atEnd) tops.forEach((top, i) => Math.abs(top) < Math.abs(tops[current]) && (current = i));
       const target = current + direction;
-      const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
-      if (target >= this.slides.length) window.scrollTo({ top: bottom, behavior });
-      else if (target >= 0) this.slides[target].scrollIntoView({ behavior });
+      if (target >= this.slides.length) window.scrollTo({ top: bottom, behavior: 'smooth' });
+      else if (target >= 0) this.slides[target].scrollIntoView({ behavior: 'smooth' });
     }
 
     buildDots() {

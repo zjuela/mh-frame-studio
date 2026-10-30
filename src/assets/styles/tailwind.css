@@ -156,12 +156,13 @@
   section of <main> fills the screen below the sticky header, and scrolling
   snaps from one section to the next. `.slide` groups several sections into
   one screen. Content that is too tall is scaled down by <Slides />.
-  Phones and short windows keep normal scrolling.
+  Phones, short windows and visitors who ask for reduced motion keep normal
+  scrolling.
 */
 html.slides {
   --slide-top: 70px;
 }
-@media (width >= 48rem) and (height >= 35rem) {
+@media (width >= 48rem) and (height >= 35rem) and (prefers-reduced-motion: no-preference) {
   html.slides {
     scroll-snap-type: y mandatory;
     scroll-padding-top: var(--slide-top);
@@ -188,7 +189,7 @@ html.slides {
   }
 }
 /* Keep content clear of the dot navigation where the content reaches the screen edge. */
-@media (width >= 48rem) and (width < 90rem) and (height >= 35rem) {
+@media (width >= 48rem) and (width < 90rem) and (height >= 35rem) and (prefers-reduced-motion: no-preference) {
   html.slides main > :is(section, .slide) {
     padding-right: 2.5rem;
   }

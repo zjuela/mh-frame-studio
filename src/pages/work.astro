@@ -5,6 +5,7 @@ import BeforeAfterGallery from '~/components/widgets/BeforeAfterGallery.astro';
 import Reels from '~/components/widgets/Reels.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import StickyCTA from '~/components/widgets/StickyCTA.astro';
+import SectionNav from '~/components/ui/SectionNav.astro';
 import { pairs, posts, videos } from '~/data/samples';
 import { getPermalink } from '~/utils/permalinks';
 
@@ -25,11 +26,22 @@ const slateBg = '<div class="absolute inset-0 bg-slate-50 dark:bg-transparent"><
     subtitle="Samples for each of our services, in the same order as our service list. More real client work is added as it's approved for sharing."
   />
 
+  <SectionNav
+    label="Gallery sections"
+    items={[
+      { text: 'Before/afters', href: '#before-after' },
+      { text: 'Reels', href: '#reels' },
+      { text: 'Testimonials', href: '#testimonials' },
+      { text: 'Meta ads', href: '#ad-creatives' },
+      { text: 'Office & team photos', href: '#photos' },
+    ]}
+  />
+
   <BeforeAfterGallery
     id="before-after"
     tagline="Core service 1"
     title="Compliance-ready before/afters"
-    subtitle="Matched, labelled pairs for your website, feed and Stories. Click a post to see it full size, or drag the slider on the photo correction."
+    subtitle="Matched, labelled pairs for your website, feed and Stories. Tap a post to view it full size, or drag the slider on the photo correction."
     items={[posts.veneers, posts.whitening, posts.alignment, pairs.smile]}
   />
 

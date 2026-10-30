@@ -184,5 +184,3 @@ export const videos: Record<
     video: 'videos/myth-fact.mp4',
   },
 };
-
-export const reels: Reel[] = [videos.reel, videos.testimonial, videos.ad, videos.short];

@@ -57,11 +57,14 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '', a
             name="disclaimer"
             type="checkbox"
             required
-            class="cursor-pointer mt-1 py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
+            class="cursor-pointer mt-1.5 h-5 w-5 rounded border-gray-300 accent-primary dark:border-gray-700"
           />
         </div>
         <div class="ml-3">
-          <label for="disclaimer" class="cursor-pointer select-none text-sm text-gray-600 dark:text-gray-400">
+          <label
+            for="disclaimer"
+            class="block cursor-pointer select-none py-1 text-sm text-gray-600 dark:text-gray-400"
+          >
             {disclaimer.label}
           </label>
         </div>

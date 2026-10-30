@@ -36,13 +36,13 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
         <div class="mb-2">
           <a class="inline-block font-bold text-xl" href={getHomePermalink()}>{SITE?.name}</a>
         </div>
-        <div class="text-sm text-muted flex gap-1">
+        <div class="text-sm text-muted flex items-center gap-1">
           {
             secondaryLinks.map(({ text, href }, index) => (
               <>
                 {index !== 0 ? ' · ' : ''}
                 <a
-                  class="text-muted hover:text-gray-700 dark:text-gray-400 hover:underline transition duration-150 ease-in-out"
+                  class="inline-flex min-h-11 items-center text-muted hover:text-gray-700 dark:text-gray-400 hover:underline transition duration-150 ease-in-out md:min-h-0"
                   href={href}
                   set:html={text}
                 />
@@ -58,9 +58,9 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
             {links && Array.isArray(links) && links.length > 0 && (
               <ul class="text-sm">
                 {links.map(({ text, href, ariaLabel }) => (
-                  <li class="mb-2">
+                  <li class="md:mb-2">
                     <a
-                      class="text-muted hover:text-gray-700 hover:underline dark:text-gray-400 transition duration-150 ease-in-out"
+                      class="inline-flex min-h-11 items-center text-muted hover:text-gray-700 hover:underline dark:text-gray-400 transition duration-150 ease-in-out md:min-h-0"
                       href={href}
                       aria-label={ariaLabel}
                     >

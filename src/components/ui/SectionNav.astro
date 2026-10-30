@@ -1,0 +1,70 @@
+---
+// A row of chips that jump to the sections of a long page. It sticks below
+// the header while scrolling and highlights the section in view. On phones
+// the row scrolls sideways.
+
+export interface Props {
+  items: Array<{ text: string; href: `#${string}` }>;
+  label?: string;
+}
+
+const { items, label = 'On this page' } = Astro.props;
+---
+
+<aw-section-nav
+  class="sticky top-[70px] z-30 block border-y border-gray-200 bg-white/90 backdrop-blur dark:border-slate-800 dark:bg-slate-900/90"
+>
+  <nav aria-label={label} class="mx-auto max-w-7xl">
+    <ul class="flex gap-2 overflow-x-auto px-4 py-2.5 md:justify-center">
+      {
+        items.map(({ text, href }) => (
+          <li class="shrink-0">
+            <a
+              href={href}
+              class="inline-flex min-h-11 items-center rounded-full border border-gray-200 px-4 text-sm font-medium text-default transition-colors duration-200 hover:border-primary hover:text-primary focus-visible:outline-2 focus-visible:outline-primary aria-[current=true]:border-primary aria-[current=true]:bg-primary aria-[current=true]:text-white dark:border-slate-700"
+            >
+              {text}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </nav>
+</aw-section-nav>
+
+<style is:global>
+  /* Land section headings below the header and this bar. */
+  main section[id] {
+    scroll-margin-top: 140px;
+  }
+</style>
+
+<script>
+  class AwSectionNav extends HTMLElement {
+    private observer?: IntersectionObserver;
+
+    connectedCallback() {
+      const links = [...this.querySelectorAll<HTMLAnchorElement>('a[href^="#"]')];
+      const sections = links
+        .map((link) => document.getElementById(link.hash.slice(1)))
+        .filter((el): el is HTMLElement => !!el);
+      // The section crossing a line just below the bar is the current one.
+      this.observer = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            links.forEach((link) => link.setAttribute('aria-current', String(link.hash === `#${entry.target.id}`)));
+          }
+        },
+        { rootMargin: '-150px 0px -60% 0px' }
+      );
+      sections.forEach((section) => this.observer!.observe(section));
+    }
+
+    disconnectedCallback() {
+      this.observer?.disconnect();
+    }
+  }
+
+  if (!customElements.get('aw-section-nav')) customElements.define('aw-section-nav', AwSectionNav);
+</script>

@@ -3,8 +3,10 @@ import Button from '~/components/ui/Button.astro';
 import type { StickyCTA as Props } from '~/types';
 
 // A bar fixed to the bottom of the viewport that slides in once the
-// visitor has scrolled past `showAfter` pixels. Mobile-only by default,
-// where the hero button is long gone by the time the reader decides.
+// visitor has scrolled past `showAfter` pixels. It tucks away while they
+// scroll down to read and comes back as soon as they scroll up.
+// Mobile-only by default, where the hero button is long gone by the time
+// the reader decides.
 
 const { text, href, label, target, icon = 'tabler:arrow-right', showAfter = 600, mobileOnly = true, id } = Astro.props;
 ---
@@ -31,8 +33,14 @@ const { text, href, label, target, icon = 'tabler:arrow-right', showAfter = 600,
     connectedCallback() {
       const threshold = Number(this.dataset.showAfter ?? 600);
       let ticking = false;
+      let lastY = window.scrollY;
       const update = () => {
-        this.classList.toggle('translate-y-full', window.scrollY < threshold);
+        const y = window.scrollY;
+        // Ignore tiny movements so the bar doesn't flicker.
+        if (Math.abs(y - lastY) > 8 || y < threshold) {
+          this.classList.toggle('translate-y-full', y < threshold || y > lastY);
+          lastY = y;
+        }
         ticking = false;
       };
       this.hidden = false;

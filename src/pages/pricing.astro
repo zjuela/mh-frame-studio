@@ -5,7 +5,10 @@ import Prices from '~/components/widgets/Pricing.astro';
 import Comparison from '~/components/widgets/Comparison.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import Button from '~/components/ui/Button.astro';
 import { getPermalink } from '~/utils/permalinks';
+
+const trial = `${getPermalink('/contact')}#trial`;
 
 const metadata = {
   title: 'Pricing',
@@ -17,57 +20,75 @@ const metadata = {
   <HeroText
     tagline="Pricing"
     title="Simple plans. No contracts."
-    subtitle="Pick a monthly plan, or pay per item. No contracts, cancel any time."
+    subtitle="Pick a monthly plan, or pay per item. One new patient is often worth $3,000 or more to a practice; our Starter plan costs less than that in a year."
   />
 
   <Prices
     prices={[
       {
-        title: 'Clinic Starter',
+        title: 'Starter',
         subtitle: 'For practices getting consistent online',
-        price: 149,
+        price: 199,
         period: 'per month',
         items: [
-          { description: '10 compliance-ready before/after sets' },
-          { description: '2 Reels from your phone footage' },
+          { description: '20 photo edits (10 before/after sets)' },
+          { description: '4 Reels from your phone footage' },
           { description: '48h turnaround' },
           { description: '2 revision rounds' },
         ],
-        callToAction: { text: 'Start free trial', href: `${getPermalink('/contact')}#trial` },
+        callToAction: { text: 'Start free trial', href: trial },
       },
       {
-        title: 'Practice Growth',
+        title: 'Growth',
         subtitle: 'For practices posting every week',
-        price: 399,
+        price: 499,
         period: 'per month',
         items: [
-          { description: '25 compliance-ready before/after sets' },
+          { description: '30 photo edits (15 before/after sets)' },
           { description: '8 Reels from your phone footage' },
           { description: '1 patient testimonial (full cut + clips)' },
           { description: '24h photo turnaround' },
           { description: 'Dedicated editor' },
         ],
-        callToAction: { variant: 'primary', text: 'Start free trial', href: `${getPermalink('/contact')}#trial` },
+        callToAction: { variant: 'primary', text: 'Start free trial', href: trial },
         hasRibbon: true,
         ribbonTitle: 'popular',
         highlight: true,
       },
       {
-        title: 'Agency',
-        subtitle: 'White-label for marketing agencies',
-        price: 'Custom',
-        period: 'volume pricing',
+        title: 'Pro',
+        subtitle: 'For multi-chair and cosmetic practices',
+        price: 899,
+        period: 'per month',
         items: [
-          { description: 'Wholesale pricing across all your clinics' },
-          { description: 'Meta ad creatives with hook variations' },
-          { description: 'White-label delivery, no setup fee' },
-          { description: 'Dedicated editor & shared channel' },
-          { description: 'Brand presets per clinic' },
+          { description: '60 photo edits (30 before/after sets)' },
+          { description: '16 Reels from your phone footage' },
+          { description: '2 patient testimonials (full cut + clips)' },
+          { description: '24h photos, priority video' },
+          { description: 'Dedicated editor' },
         ],
-        callToAction: { text: 'See agency plan', href: getPermalink('/agencies') },
+        callToAction: { text: 'Start free trial', href: trial },
       },
     ]}
   />
+
+  <section class="px-4 pb-12 md:pb-16" aria-labelledby="agency-pricing">
+    <div
+      class="mx-auto flex max-w-5xl flex-col gap-6 rounded-2xl border border-primary/20 bg-primary/5 p-6 md:flex-row md:items-center md:justify-between md:p-8 dark:bg-primary/10"
+    >
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-wide text-primary dark:text-secondary">For agencies</p>
+        <h2 id="agency-pricing" class="mt-1 font-heading text-2xl font-bold text-heading md:text-3xl">
+          From $349 per clinic / month
+        </h2>
+        <p class="mt-2 max-w-2xl text-muted">
+          Wholesale, white-label pricing: 8 Reels and 20 photo edits per clinic, no setup fee. 10% off at 5+ clinics,
+          15% off at 10+. Free test project.
+        </p>
+      </div>
+      <Button text="See agency plan" href={getPermalink('/agencies')} icon="tabler:arrow-right" class="shrink-0" />
+    </div>
+  </section>
 
   <Comparison
     title="Pay per item"
@@ -79,20 +100,22 @@ const metadata = {
         group: 'Core services',
         label: 'Before/after set',
         description: 'Two matched photos, labelled layout',
-        values: ['$8', '24–48h'],
+        values: ['$12', '24–48h'],
       },
-      { label: 'Reel / TikTok / Short', description: 'Up to 60 seconds', values: ['$45', '48–72h'] },
-      { label: 'Patient testimonial', description: 'Full cut + 2 short clips', values: ['$120', '3–4 days'] },
+      { label: 'Reel / TikTok / Short', description: 'Up to 60 seconds', values: ['$59', '48–72h'] },
+      { label: 'Transformation Reel', description: 'Before/after reveal video', values: ['$69', '48–72h'] },
+      { label: 'Patient testimonial', description: 'Full cut + 2 short clips', values: ['$179', '3–4 days'] },
       {
         group: 'Add-ons',
         label: 'Meta ad creative',
         description: 'One ad, 3 hook variations, 3 formats',
         values: ['$69', '48–72h'],
       },
-      { label: 'Google profile photo pack', description: '10 office, team or exterior photos', values: ['$49', '48h'] },
+      { label: 'Google profile photo pack', description: '10 office, team or exterior photos', values: ['$59', '48h'] },
       { group: 'Also available', label: 'Clinical / intraoral photo', values: ['$4', '24–48h'] },
-      { label: 'Team headshot', values: ['$10', '24–48h'] },
-      { label: 'Doctor intro / clinic tour', description: 'Up to 3 minutes', values: ['$180', '3–5 days'] },
+      { label: 'Team headshot', values: ['$12', '24–48h'] },
+      { label: 'Doctor intro / clinic tour', description: 'Up to 3 minutes', values: ['$249', '3–5 days'] },
+      { label: 'Same-day rush', description: 'Any item', values: ['+50%', 'Same day'] },
     ]}
   />
 
@@ -102,11 +125,15 @@ const metadata = {
       { title: 'Is there a contract?', description: 'No. Plans are month-to-month and you can cancel any time.' },
       {
         title: 'How do plan allowances work?',
-        description: 'Plans count before/after sets. Unused sets roll over for one month.',
+        description: 'Plans count photo edits; a before/after set uses 2. Unused edits roll over for one month.',
       },
       {
         title: 'Do you offer rush delivery?',
         description: 'Yes — same-day delivery is available for +50% on any item.',
+      },
+      {
+        title: 'Is there a discount for paying ahead?',
+        description: 'Yes. Pay quarterly and get 10% off any plan.',
       },
       {
         title: 'How do I pay?',
@@ -118,8 +145,6 @@ const metadata = {
   <CallToAction
     title="Try us before you pay"
     subtitle="3 free photo edits. No card needed."
-    actions={[
-      { variant: 'primary', text: 'Start free trial', href: `${getPermalink('/contact')}#trial`, icon: 'tabler:gift' },
-    ]}
+    actions={[{ variant: 'primary', text: 'Start free trial', href: trial, icon: 'tabler:gift' }]}
   />
 </Layout>

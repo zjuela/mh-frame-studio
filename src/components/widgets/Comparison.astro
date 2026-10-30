@@ -39,7 +39,12 @@ const hasActions = columns.some((c) => c.callToAction);
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-6xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
   <Headline title={title} subtitle={subtitle} tagline={tagline} classes={classes?.headline as Record<string, string>} />
 
-  <div class="overflow-x-auto rounded-lg border border-gray-200 dark:border-slate-700">
+  <div
+    class="overflow-x-auto rounded-lg border border-gray-200 focus-visible:outline-2 focus-visible:outline-primary dark:border-slate-700"
+    tabindex="0"
+    role="region"
+    aria-label={title || firstColumnLabel || 'Comparison table'}
+  >
     <table class="w-full min-w-[40rem] border-collapse text-left text-sm md:text-base">
       <thead>
         <tr class="border-b border-gray-200 dark:border-slate-700">
@@ -86,7 +91,7 @@ const hasActions = columns.some((c) => c.callToAction);
                 <tr class="border-b border-gray-200 last:border-0 dark:border-slate-700">
                   <th scope="row" class="sticky left-0 z-10 bg-page px-4 py-3 font-medium text-default">
                     {label}
-                    {description && <span class="block text-xs font-normal text-muted">{description}</span>}
+                    {description && <span class="block text-sm font-normal text-muted">{description}</span>}
                   </th>
                   {columns.map(({ highlight }, index) => {
                     const value = values[index];

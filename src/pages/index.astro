@@ -1,6 +1,7 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 
+import { Icon } from 'astro-icon/components';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import Features from '~/components/widgets/Features.astro';
 import Features2 from '~/components/widgets/Features2.astro';
@@ -11,9 +12,13 @@ import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import StickyCTA from '~/components/widgets/StickyCTA.astro';
 import BeforeAfter from '~/components/ui/BeforeAfter.astro';
+import LabelledPosts from '~/components/ui/LabelledPosts.astro';
+import SocialProof from '~/components/widgets/SocialProof.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
 import StructuredData from '~/components/common/StructuredData.astro';
 
-import { pairs, reels } from '~/data/samples';
+import { pairs, posts, videos } from '~/data/samples';
+import { figures, testimonials } from '~/data/proof';
 import { getPermalink } from '~/utils/permalinks';
 import { SITE, I18N } from 'astrowind:config';
 
@@ -53,6 +58,20 @@ const structuredData = [
     <Fragment slot="subtitle">
       Compliance-ready before/afters, Reels and patient testimonials — edited from the photos and clips already on your
       team's phones, back in 24–48 hours.
+    </Fragment>
+    <Fragment slot="content">
+      <ul
+        class="mt-5 flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm text-muted lg:justify-start dark:text-slate-400"
+      >
+        {
+          ['No card needed', '24–48h turnaround', 'Cancel anytime'].map((point) => (
+            <li class="flex items-center gap-1.5">
+              <Icon name="tabler:circle-check" class="h-4 w-4 text-primary" aria-hidden="true" />
+              {point}
+            </li>
+          ))
+        }
+      </ul>
     </Fragment>
     <Fragment slot="image">
       <BeforeAfter before={pairs.smile.before} after={pairs.smile.after} alt={pairs.smile.alt} start={45} eager />
@@ -112,7 +131,7 @@ const structuredData = [
     id="before-after"
     tagline="Core service 1"
     title="Compliance-ready before/afters"
-    subtitle="Matched, honest pairs your practice can post with confidence. Drag the slider to compare."
+    subtitle="Matched, labelled pairs your practice can post with confidence: sized for your website, feed and Stories."
     items={[
       { title: 'Matched pairs', description: 'Same light, colour, angle and crop on both shots.' },
       { title: 'Never altered', description: 'Tooth shape, shade and gum line are never touched.' },
@@ -121,7 +140,7 @@ const structuredData = [
     ]}
     callToAction={{ text: 'More about before/afters', href: `${getPermalink('/services')}#before-after` }}
   >
-    <BeforeAfter slot="media" before={pairs.consult.before} after={pairs.consult.after} alt={pairs.consult.alt} />
+    <LabelledPosts slot="media" posts={[posts.whitening, posts.veneers]} group="home-before-after" />
     <Fragment slot="bg">
       <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
     </Fragment>
@@ -166,8 +185,8 @@ const structuredData = [
     id="video"
     tagline="Video samples"
     title="Reels, testimonials and ads"
-    subtitle="Vertical edits with scroll-stopping hooks and burned-in captions."
-    items={reels}
+    subtitle="Vertical edits with scroll-stopping hooks and burned-in captions. Press play on the first two."
+    items={[videos.transformation, videos.mythFact, videos.ad, videos.testimonial]}
   />
 
   <Steps
@@ -202,6 +221,17 @@ const structuredData = [
       <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
     </Fragment>
   </Steps>
+
+  {
+    testimonials.length > 0 && (
+      <Testimonials
+        id="clients"
+        tagline="Clients"
+        title="What practices and agencies say"
+        testimonials={testimonials}
+      />
+    )
+  }
 
   <FAQs
     id="faq"
@@ -239,14 +269,17 @@ const structuredData = [
     ]}
   />
 
-  <CallToAction
-    title="See what we can do with your footage"
-    subtitle="Send 3 photos or one clip. We'll edit it free and send it back within 48 hours. Not filming yet? Start with our free phone filming guide."
-    actions={[
-      { variant: 'primary', text: 'Start free trial', href: trial, icon: 'tabler:gift' },
-      { text: 'Get the free guide', href: getPermalink('/guide'), icon: 'tabler:file-download' },
-    ]}
-  />
+  <div class="slide">
+    <SocialProof items={figures} classes={{ container: '!max-w-7xl' }} />
+    <CallToAction
+      title="See what we can do with your footage"
+      subtitle="Send 3 photos or one clip. We'll edit it free and send it back within 48 hours. Not filming yet? Start with our free phone filming guide."
+      actions={[
+        { variant: 'primary', text: 'Start free trial', href: trial, icon: 'tabler:gift' },
+        { text: 'Get the free guide', href: getPermalink('/guide'), icon: 'tabler:file-download' },
+      ]}
+    />
+  </div>
 
   <StickyCTA label="3 free edits — no strings" text="Free trial" href={trial} />
 </Layout>

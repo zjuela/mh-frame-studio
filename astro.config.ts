@@ -33,15 +33,25 @@ export default defineConfig({
     defaultStrategy: 'viewport',
   },
 
-  // Native Fonts API: self-hosts + subsets + preloads Inter and generates
-  // metric-adjusted fallbacks. Injected via <Font /> in Layout.astro and
-  // consumed through the `--font-inter` CSS variable in CustomStyles.astro.
+  // Native Fonts API: self-hosts + subsets + preloads Inter (body) and Manrope
+  // (headings) and generates metric-adjusted fallbacks. Injected via <Font />
+  // in Layout.astro and consumed through the `--font-inter` and
+  // `--font-manrope` CSS variables in CustomStyles.astro.
   fonts: [
     {
       provider: fontProviders.fontsource(),
       name: 'Inter',
       cssVariable: '--font-inter',
       weights: ['100 900'],
+      styles: ['normal'],
+      subsets: ['latin'],
+      fallbacks: ['sans-serif'],
+    },
+    {
+      provider: fontProviders.fontsource(),
+      name: 'Manrope',
+      cssVariable: '--font-manrope',
+      weights: ['600 800'],
       styles: ['normal'],
       subsets: ['latin'],
       fallbacks: ['sans-serif'],
