@@ -15,11 +15,14 @@ export interface Props {
 }
 
 const { posts, group = 'posts', class: className = '' } = Astro.props;
+// Longer carousels sit in a 3-across grid instead of one row of tiny slides.
+const grid = posts.length > 3;
 ---
 
 <div
   class:list={[
-    'flex aspect-[4/3] items-center justify-center gap-3 overflow-hidden rounded-xl bg-slate-100 p-4 shadow-lg ring-1 ring-black/5 dark:bg-slate-800',
+    'aspect-[4/3] gap-3 overflow-hidden rounded-xl bg-slate-100 p-4 shadow-lg ring-1 ring-black/5 dark:bg-slate-800',
+    grid ? 'grid grid-cols-3 grid-rows-2 place-items-center' : 'flex items-center justify-center',
     className,
   ]}
 >
@@ -29,13 +32,13 @@ const { posts, group = 'posts', class: className = '' } = Astro.props;
         href={image.src}
         data-lightbox={group}
         data-caption={alt}
-        class="flex h-full min-w-0 cursor-zoom-in items-center justify-center rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+        class="flex h-full min-h-0 min-w-0 cursor-zoom-in items-center justify-center rounded-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
       >
         <Image
           src={image}
           alt={alt}
           widths={[480, 800, 1200]}
-          sizes="(max-width: 767px) 100vw, 640px"
+          sizes={grid ? '(max-width: 767px) 33vw, 220px' : '(max-width: 767px) 100vw, 640px'}
           layout="none"
           format="webp"
           class="max-h-full w-auto max-w-full rounded-md object-contain shadow transition duration-200 hover:shadow-lg"

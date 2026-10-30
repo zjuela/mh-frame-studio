@@ -48,7 +48,12 @@ a soundtrack (use licensed music only).
 
 Myth vs Fact educational Reel: edit the hook, myths, facts and photos in `scripts/reels/myth-fact.json`
 (copy it for new topics), then run `node scripts/make-myth-fact-reel.mjs scripts/reels/myth-fact.json`.
-Both generators share `scripts/lib/reel-kit.mjs`.
+Testimonial filming guide for clients: edit the setup checklist and clips (shot, angle, tip, question to ask, and a
+few stills each with `push-in` / `pull-out`) in `scripts/reels/testimonial-guide.json`, then run
+`node scripts/make-testimonial-guide-reel.mjs scripts/reels/testimonial-guide.json`. The stills share the time left
+in `length` (60s). The JSON also keeps the image prompts; photos not generated yet show a placeholder.
+
+All three generators share `scripts/lib/reel-kit.mjs`.
 
 Labelled before/after images: add a post to `scripts/before-after/posts.json` (source photo, where the two shots
 meet, which one is the before, crop, and a `side` or `stack` layout), then run
@@ -60,7 +65,7 @@ then run `node scripts/make-ad-mockups.mjs scripts/ads/aligner-consult.json`. It
 and a feed-post mock-up to `src/assets/images/ads/`. Each hook sets its photo, crop centre (`focusX`) and caption
 (`*word*` is highlighted); text is kept inside the Reels safe zone (top 14%, bottom 35%) and the script warns if not.
 
-Social post samples: edit `scripts/social/posts.json` (a `photo` post or a `carousel` of text slides), then run
+Social post samples: edit `scripts/social/posts.json` (a `photo` post or a `carousel` of text slides, each with an `icon` from the list in the script), then run
 `node scripts/make-social-posts.mjs scripts/social/posts.json`. Images (1080×1350) go to `src/assets/images/social/`.
 
 ## Deploy

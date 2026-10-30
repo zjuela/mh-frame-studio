@@ -33,6 +33,7 @@ import toothbrushTip5 from '~/assets/images/social/toothbrush-tip-5.jpg';
 import toothbrushTip6 from '~/assets/images/social/toothbrush-tip-6.jpg';
 import transformationPoster from '~/assets/images/reels/transformation-reel-poster.jpg';
 import mythFactPoster from '~/assets/images/reels/myth-fact-poster.jpg';
+import testimonialGuidePoster from '~/assets/images/reels/testimonial-guide-poster.jpg';
 
 import type { BeforeAfterItem, LabelledItem } from '~/components/widgets/BeforeAfterGallery.astro';
 import type { Reel } from '~/components/widgets/Reels.astro';
@@ -135,7 +136,16 @@ export const social: Record<'hours' | 'tip', LabelledItem> = {
 };
 
 export const videos: Record<
-  'reel' | 'transformation' | 'testimonial' | 'ad' | 'adHook2' | 'adHook3' | 'adFeed' | 'short' | 'mythFact',
+  | 'reel'
+  | 'transformation'
+  | 'testimonial'
+  | 'testimonialGuide'
+  | 'ad'
+  | 'adHook2'
+  | 'adHook3'
+  | 'adFeed'
+  | 'short'
+  | 'mythFact',
   Reel
 > = {
   reel: {
@@ -153,6 +163,16 @@ export const videos: Record<
     caption: 'Patient testimonial · audio cleanup, captions, B-roll',
     label: 'Testimonial',
     duration: '0:58',
+  },
+  // Built by `node scripts/make-testimonial-guide-reel.mjs scripts/reels/testimonial-guide.json`.
+  testimonialGuide: {
+    poster: testimonialGuidePoster,
+    alt: 'Patient in a black sweater smiling in an armchair in a dental clinic',
+    hook: 'How to film a patient testimonial',
+    caption: 'Filming guide · camera angle, framing and the question to ask for each clip',
+    label: 'Guide',
+    duration: '1:00',
+    video: 'videos/testimonial-guide.mp4',
   },
   // Ad mock-ups built by `node scripts/make-ad-mockups.mjs scripts/ads/aligner-consult.json`.
   ad: {

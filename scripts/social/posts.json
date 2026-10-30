@@ -16,32 +16,39 @@
         {
           "kicker": "CARE TIP",
           "title": "How often should you replace your toothbrush?",
-          "text": "Swipe for the answer →"
+          "text": "Swipe for the answer →",
+          "icon": "toothbrush"
         },
         {
           "kicker": "THE ANSWER",
           "title": "Every 3–4 months",
-          "text": "That's what the American Dental Association recommends."
+          "text": "That's what the American Dental Association recommends.",
+          "icon": "calendar"
         },
         {
           "kicker": "REPLACE IT SOONER",
           "title": "If the bristles fray",
-          "text": "Worn, splayed bristles don't clean along the gumline as well."
+          "text": "Worn, splayed bristles don't clean along the gumline as well.",
+          "icon": "frayed"
         },
         {
           "kicker": "ELECTRIC BRUSH?",
           "title": "Same rule",
-          "text": "Swap the brush head every 3–4 months too."
+          "text": "Swap the brush head every 3–4 months too.",
+          "icon": "electric"
         },
         {
           "kicker": "BETWEEN CHANGES",
           "title": "Let it air-dry",
-          "text": "Store it upright and uncovered, so it dries between brushings."
+          "text": "Store it upright and uncovered, so it dries between brushings.",
+          "icon": "air"
         },
         {
           "kicker": "WHILE YOU'RE AT IT",
           "title": "Due for a check-up?",
-          "text": "Book your visit. Link in bio."
+          "text": "Book your visit. Link in bio.",
+          "icon": "calendar-check",
+          "button": "Book now"
         }
       ]
     }
