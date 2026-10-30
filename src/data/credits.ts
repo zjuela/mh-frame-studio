@@ -33,10 +33,14 @@ export const rushCredits = (service: Service) => cost[service] * 1.5;
 /** Percentage saved against pay-as-you-go, rounded. */
 export const savingPercent = (price: number, credits: number) => Math.round((1 - price / (credits * PAYG_RATE)) * 100);
 
-/** Agency plan: credits per clinic, the base per-clinic price, and volume discounts. */
+/**
+ * Agency plan: credits per clinic, the base per-clinic price, and volume
+ * discounts. Each clinic gets a Growth plan's credits (330) for less than
+ * Growth's $499.
+ */
 export const agency = {
-  creditsPerClinic: 240,
-  pricePerClinic: 349,
+  creditsPerClinic: 330,
+  pricePerClinic: 449,
   tiers: [
     { clinics: '1–4 clinics', discount: 0 },
     { clinics: '5–9 clinics', discount: 0.1 },

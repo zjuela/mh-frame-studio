@@ -21,11 +21,12 @@ const trial = `${getPermalink('/contact')}#trial`;
 const samples = getPermalink('/work');
 
 // One card per volume tier. Credits are bought per clinic and pooled across
-// all of an agency's clinics.
+// all of an agency's clinics. A typical clinic month matches the Growth plan.
 const { creditsPerClinic, pricePerClinic, tiers } = agency;
 const typicalClinic: Array<[number, keyof typeof cost, string]> = [
-  [6, 'reel', '6 Reels'],
-  [10, 'set', '10 before/after sets'],
+  [15, 'set', '15 before/after sets'],
+  [5, 'reel', '5 Reels'],
+  [1, 'testimonial', '1 patient testimonial'],
 ];
 const agencyPlans = tiers.map(({ clinics, discount }, i) => {
   const price = Math.round(pricePerClinic * (1 - discount));
@@ -41,12 +42,16 @@ const agencyPlans = tiers.map(({ clinics, discount }, i) => {
     footnote: 'Cancel anytime',
     items: [
       ...typicalClinic.map(([n, service, label]) => ({ description: `${label} · ${n * cost[service]} credits` })),
-      { description: 'Credits pooled across clinics', icon: 'tabler:plus' },
+      ...['Overnight turnaround', 'Dedicated editor', 'Credits pooled across clinics'].map((description) => ({
+        description,
+        icon: 'tabler:plus',
+      })),
     ],
     callToAction: { text: 'Book a call', href: call, ...(i === 1 ? { variant: 'primary' as const } : {}) },
     highlight: i === 1,
   };
 });
+const savings = agencyPlans.map(({ price }) => savingPercent(price, creditsPerClinic));
 ---
 
 <Layout metadata={metadata} slides>
@@ -221,8 +226,7 @@ const agencyPlans = tiers.map(({ clinics, discount }, i) => {
       },
       {
         title: 'Is there room for our markup?',
-        description:
-          'Yes. Wholesale credits cost 27–38% less than our pay-as-you-go rate, and you set your own prices for your clients. No setup fee.',
+        description: `Yes. Wholesale credits cost ${savings[0]}–${savings[savings.length - 1]}% less than our pay-as-you-go rate, and you set your own prices for your clients. No setup fee.`,
       },
       {
         title: 'What volume can you handle?',
