@@ -8,7 +8,7 @@
 // "reply" (answering a viewer's comment) and "broll" (opens on another shot).
 // Each hook names its photo (from src/assets/images/demo/), where to centre
 // the 9:16 crop (`focusX`, 0–1), an optional caption of the first spoken line
-// (*starred* words are highlighted) and optional `titleY` / `captionY`.
+// (*starred* words are highlighted) and optional `titleY` / `captionY` (the hook defaults to the top of the safe zone).
 // Text is kept inside the Reels safe zone; the script warns if it isn't.
 // Writes src/assets/images/ads/<name>-hook-<n>.jpg and <name>-feed.jpg.
 
@@ -114,10 +114,12 @@ const portraitCrop = async (file, focusX = 0.5) => {
 
 for (const [i, hook] of ad.hooks.entries()) {
   const parts = [];
-  if (hook.style === 'reply') parts.push(await replyBubble(hook.from, hook.text, hook.titleY ?? SAFE_TOP + 20));
-  else parts.push(await hookTitle(hook.text, hook.titleY ?? 800, hook.style === 'broll' ? TEAL : HOOK_RED));
+  // The hook (title or comment) sits at the top of the safe zone, the caption lower down.
+  const titleY = hook.titleY ?? SAFE_TOP + 20;
+  if (hook.style === 'reply') parts.push(await replyBubble(hook.from, hook.text, titleY));
+  else parts.push(await hookTitle(hook.text, titleY, hook.style === 'broll' ? TEAL : HOOK_RED));
   if (hook.caption) parts.push(await caption(hook.caption, hook.captionY ?? 1085));
-  const tops = [hook.titleY ?? (hook.style === 'reply' ? SAFE_TOP + 20 : 800), hook.captionY ?? 1085];
+  const tops = [titleY, hook.captionY ?? 1085];
   if (Math.min(...tops) < SAFE_TOP || Math.max(...parts.map((p) => p.bottom)) > SAFE_BOTTOM)
     console.warn(`Hook ${i + 1}: text reaches outside the Reels safe zone (${SAFE_TOP}–${SAFE_BOTTOM}px).`);
   await sharp(await portraitCrop(photo(hook.image), hook.focusX))

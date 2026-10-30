@@ -17,6 +17,7 @@ const trial = `${getPermalink('/contact')}#trial`;
 ---
 
 <Layout metadata={metadata} slides>
+  {/* Slides alternate white and off-white, so each switch shows a change of background. */}
   <HeroText
     tagline="Services"
     title="Three services that bring patients in"
@@ -40,7 +41,11 @@ const trial = `${getPermalink('/contact')}#trial`;
       { title: 'Ad-friendly versions', description: 'Single-image and video versions for ad platforms.' },
     ]}
     image={{ src: '~/assets/images/pairs/smile-after.jpg', alt: 'Corrected smile photo' }}
-  />
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-stone-100 dark:bg-white/[0.04]"></div>
+    </Fragment>
+  </ServiceSlide>
 
   <ServiceSlide
     id="reels"
@@ -55,11 +60,7 @@ const trial = `${getPermalink('/contact')}#trial`;
       { title: 'Your brand, every time', description: 'Logo, colours, fonts and call-to-action saved as presets.' },
     ]}
     image={{ src: '~/assets/images/demo/dentist-mask.jpg', alt: 'Dentist filming a Reel' }}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
-    </Fragment>
-  </ServiceSlide>
+  />
 
   <ServiceSlide
     id="testimonials"
@@ -76,7 +77,11 @@ const trial = `${getPermalink('/contact')}#trial`;
       { title: 'Captions and name titles', description: 'Burned-in captions and simple lower-thirds.' },
     ]}
     image={{ src: '~/assets/images/demo/treatment.jpg', alt: 'Patient in a dental chair' }}
-  />
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-stone-100 dark:bg-white/[0.04]"></div>
+    </Fragment>
+  </ServiceSlide>
 
   <div class="slide">
     <Features3
@@ -98,11 +103,7 @@ const trial = `${getPermalink('/contact')}#trial`;
           icon: 'tabler:map-pin',
         },
       ]}
-    >
-      <Fragment slot="bg">
-        <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
-      </Fragment>
-    </Features3>
+    />
 
     <Features3
       title="Also available"
@@ -127,7 +128,11 @@ const trial = `${getPermalink('/contact')}#trial`;
     title="Not sure where to start?"
     subtitle="Send us 3 photos or one short clip. We'll edit it free and suggest what would work best for your practice."
     actions={[{ variant: 'primary', text: 'Start free trial', href: trial, icon: 'tabler:gift' }]}
-  />
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-stone-100 dark:bg-white/[0.04]"></div>
+    </Fragment>
+  </CallToAction>
 
   <StickyCTA label="3 free edits — no strings" text="Free trial" href={trial} />
 </Layout>

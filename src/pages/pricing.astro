@@ -9,7 +9,7 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 import Button from '~/components/ui/Button.astro';
 import SectionNav from '~/components/ui/SectionNav.astro';
 import { getPermalink } from '~/utils/permalinks';
-import { PAYG_RATE, agency, cost, creditsFor, savingPercent, type Service } from '~/data/credits';
+import { PAYG_RATE, agency, cost, creditsFor, rushCredits, savingPercent, type Service } from '~/data/credits';
 
 const trial = `${getPermalink('/contact')}#trial`;
 const contact = getPermalink('/contact');
@@ -225,7 +225,11 @@ const row = (service: Service, label: string, turnaround: string, description?: 
       row('clinical', 'Clinical / intraoral photo', '24–48h'),
       row('headshot', 'Team headshot', '24–48h'),
       row('intro', 'Doctor intro / clinic tour', '3–5 days', 'Up to 3 minutes'),
-      { label: 'Same-day rush', description: 'Any item', values: ['+50%', '+50%', 'Same day'] },
+      {
+        label: 'Same-day rush',
+        description: `Any item. A before/after set goes from ${cost.set} to ${rushCredits('set')} credits.`,
+        values: ['+50%', '+50%', 'Same day'],
+      },
     ]}
   />
 
