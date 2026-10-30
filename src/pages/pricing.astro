@@ -18,11 +18,12 @@ const metadata = {
     'Credit-based monthly plans and pay-as-you-go prices for dental photo and video editing and social media content.',
 };
 
-// Every service costs a number of credits. Plans include credits each month;
-// without a plan, credits cost PAYG_RATE each. Plan cards, savings and the
-// pay-as-you-go table are all worked out from these numbers. Credits work on
-// any service, so keep the price per credit falling as plans get bigger
-// across both plan groups.
+// Every service costs a number of credits. Plans include credits each month,
+// and a practice can hold one core plan and one social plan at most, with
+// both adding to one balance that works on any service. Without a plan,
+// credits cost PAYG_RATE each. Plan cards, savings and the credit chart are
+// all worked out from these numbers. Keep the price per credit falling as
+// plans get bigger, across both plan groups.
 const PAYG_RATE = 4;
 const cost = {
   set: 3,
@@ -80,7 +81,7 @@ const corePlans = [
     299,
     [
       [10, 'set', '10 before/after sets'],
-      [6, 'reel', '6 Reels'],
+      [4, 'reel', '4 Reels'],
     ],
     ['48h turnaround'],
     startTrial
@@ -91,7 +92,7 @@ const corePlans = [
     499,
     [
       [15, 'set', '15 before/after sets'],
-      [8, 'reel', '8 Reels'],
+      [5, 'reel', '5 Reels'],
       [1, 'testimonial', '1 patient testimonial'],
     ],
     ['24h photo turnaround', 'Dedicated editor'],
@@ -104,7 +105,7 @@ const corePlans = [
     899,
     [
       [30, 'set', '30 before/after sets'],
-      [16, 'reel', '16 Reels'],
+      [10, 'reel', '10 Reels'],
       [2, 'testimonial', '2 patient testimonials'],
     ],
     ['24h photos, priority video', 'Dedicated editor'],
@@ -116,21 +117,21 @@ const socialPlans = [
   plan(
     'Social Lite',
     'For a steady presence',
-    129,
+    119,
     [
-      [6, 'post', '6 single-image posts'],
-      [2, 'carousel', '2 carousels'],
+      [5, 'post', '5 single-image posts'],
+      [1, 'carousel', '1 carousel'],
     ],
     ['Captions and hashtags'],
     getStarted
   ),
   plan(
     'Social Plus',
-    'For posting 3–4 times a week',
-    279,
+    'For posting 2–3 times a week',
+    269,
     [
-      [12, 'post', '12 single-image posts'],
-      [3, 'carousel', '3 carousels'],
+      [8, 'post', '8 single-image posts'],
+      [2, 'carousel', '2 carousels'],
       [1, 'ad', '1 Meta ad creative'],
     ],
     ['Captions and hashtags'],
@@ -139,11 +140,11 @@ const socialPlans = [
   ),
   plan(
     'Social Pro',
-    'For daily posting and ads',
+    'For posting 4–5 times a week, plus ads',
     449,
     [
-      [16, 'post', '16 single-image posts'],
-      [6, 'carousel', '6 carousels'],
+      [12, 'post', '12 single-image posts'],
+      [4, 'carousel', '4 carousels'],
       [2, 'ad', '2 Meta ad creatives'],
     ],
     ['Monthly content calendar'],
@@ -161,8 +162,8 @@ const row = (service: Service, label: string, turnaround: string, description?: 
 <Layout metadata={metadata}>
   <HeroText
     tagline="Pricing"
-    title="One credit balance. Any service."
-    subtitle="Plans give you monthly credits to spend on any mix of editing and social content. One new patient is often worth $3,000 or more to a practice; our Starter plan costs about $10 a day."
+    title="Monthly credits. Spend them your way."
+    subtitle="Pick a core plan, a social plan, or one of each. Credits go into one balance that works on any service. One new patient is often worth $3,000 or more to a practice; our Starter plan costs about $10 a day."
   />
 
   <SectionNav
@@ -177,7 +178,7 @@ const row = (service: Service, label: string, turnaround: string, description?: 
   <Prices
     id="core-plans"
     title="Core plans"
-    subtitle="Sized for our three core services: before/afters, Reels and patient testimonials. Spend the credits on anything in the price list."
+    subtitle="Sized for our three core services: before/afters, Reels and patient testimonials. Credits work on any service in the credit chart. Choose one core plan."
     prices={corePlans}
   />
 
@@ -191,7 +192,7 @@ const row = (service: Service, label: string, turnaround: string, description?: 
           From $349 per clinic / month
         </h2>
         <p class="mt-2 max-w-2xl text-muted">
-          Wholesale, white-label pricing: 150 credits per clinic (about 8 Reels and 10 before/after sets), no setup fee.
+          Wholesale, white-label pricing: 120 credits per clinic (about 6 Reels and 10 before/after sets), no setup fee.
           10% off at 5+ clinics, 15% off at 10+. Free test project.
         </p>
       </div>
@@ -202,7 +203,7 @@ const row = (service: Service, label: string, turnaround: string, description?: 
   <Prices
     id="social-plans"
     title="Social plans"
-    subtitle="Sized for custom posts in your brand, made from your photos and delivered ready to post. Add one to a core plan and get 10% off it."
+    subtitle="Sized for custom posts and Meta ads in your brand, made from your photos and delivered ready to post. Choose one social plan, on its own or with a core plan for 10% off."
     prices={socialPlans}
     bg='<div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>'
   />
@@ -210,7 +211,7 @@ const row = (service: Service, label: string, turnaround: string, description?: 
   <Comparison
     id="per-item"
     title="Pay per item"
-    subtitle={`What each service costs in credits. No plan? Pay as you go at $${PAYG_RATE} per credit. Complex jobs are quoted upfront.`}
+    subtitle={`The credit chart: what each service costs in credits. No plan? Pay as you go at $${PAYG_RATE} per credit. Complex jobs are quoted upfront.`}
     firstColumnLabel="Service"
     columns={[{ title: 'Credits' }, { title: 'Pay as you go' }, { title: 'Turnaround' }]}
     rows={[
@@ -237,15 +238,16 @@ const row = (service: Service, label: string, turnaround: string, description?: 
       {
         title: 'How do credits work?',
         description:
-          'Each plan adds credits at the start of the month, and every service costs a set number of credits (see the price list). Spend them on any mix: more Reels one month, more posts the next. Unused credits roll over for one month.',
+          'Each plan adds credits at the start of the month, and every service costs a set number of credits (see the credit chart). Spend them on any mix: more Reels one month, more posts the next. Unused credits roll over for one month.',
       },
       {
         title: 'What if I run out of credits?',
         description: 'Top up any time at the same per-credit rate as your plan, or move up a plan.',
       },
       {
-        title: 'Can I have a core plan and a social plan?',
-        description: 'Yes. Add a social plan to any core plan and get 10% off the social plan.',
+        title: 'Can I have more than one plan?',
+        description:
+          'You can have one core plan and one social plan. Their credits go into one balance, and you get 10% off the social plan. To get more within a group, move up a plan or top up.',
       },
       {
         title: 'Do you post for us?',
