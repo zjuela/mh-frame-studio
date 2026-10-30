@@ -57,7 +57,8 @@ Photos are only cropped and labelled, never colour-corrected.
 
 Meta ad mock-ups: edit the hooks, feed copy and photos in `scripts/ads/aligner-consult.json` (copy it for new ads),
 then run `node scripts/make-ad-mockups.mjs scripts/ads/aligner-consult.json`. It writes the first frame of each hook
-and a feed-post mock-up to `src/assets/images/ads/`.
+and a feed-post mock-up to `src/assets/images/ads/`. Each hook sets its photo, crop centre (`focusX`) and caption
+(`*word*` is highlighted); text is kept inside the Reels safe zone (top 14%, bottom 35%) and the script warns if not.
 
 Social post samples: edit `scripts/social/posts.json` (a `photo` post or a `carousel` of text slides), then run
 `node scripts/make-social-posts.mjs scripts/social/posts.json`. Images (1080×1350) go to `src/assets/images/social/`.

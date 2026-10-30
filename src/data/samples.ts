@@ -148,7 +148,7 @@ export const videos: Record<
   // Ad mock-ups built by `node scripts/make-ad-mockups.mjs scripts/ads/aligner-consult.json`.
   ad: {
     poster: adHook1,
-    alt: 'Dentist on camera with the hook "Straighter teeth without metal braces?"',
+    alt: 'Smiling dentist on camera with the hook "Straighter teeth without metal braces?" and a caption',
     hook: 'Straighter teeth without metal braces?',
     caption: 'Meta ad · hook 1: talking head with title and captions',
     label: 'Ad · hook 1',
@@ -157,9 +157,9 @@ export const videos: Record<
   },
   adHook2: {
     poster: adHook2,
-    alt: 'Dentist answering a viewer comment: "Do clear aligners hurt?"',
+    alt: 'Patient touching her cheek, with a viewer comment "Do clear aligners hurt?" and the dentist\'s answer as a caption',
     hook: 'Do clear aligners hurt?',
-    caption: 'Same ad · hook 2: replying to a viewer’s comment',
+    caption: 'Same ad · hook 2: replying to a viewer’s comment over a patient shot',
     label: 'Ad · hook 2',
     duration: '0:25',
     textInPoster: true,
