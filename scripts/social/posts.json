@@ -21,9 +21,28 @@
         {
           "kicker": "THE ANSWER",
           "title": "Every 3–4 months",
-          "text": "Or sooner if the bristles look frayed. A worn brush doesn't clean as well."
+          "text": "That's what the American Dental Association recommends."
         },
-        { "kicker": "WHILE YOU'RE AT IT", "title": "Due for a check-up?", "text": "Book your visit. Link in bio." }
+        {
+          "kicker": "REPLACE IT SOONER",
+          "title": "If the bristles fray",
+          "text": "Worn, splayed bristles don't clean along the gumline as well."
+        },
+        {
+          "kicker": "ELECTRIC BRUSH?",
+          "title": "Same rule",
+          "text": "Swap the brush head every 3–4 months too."
+        },
+        {
+          "kicker": "BETWEEN CHANGES",
+          "title": "Let it air-dry",
+          "text": "Store it upright and uncovered, so it dries between brushings."
+        },
+        {
+          "kicker": "WHILE YOU'RE AT IT",
+          "title": "Due for a check-up?",
+          "text": "Book your visit. Link in bio."
+        }
       ]
     }
   ]

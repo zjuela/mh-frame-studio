@@ -28,6 +28,9 @@ import saturdayHours from '~/assets/images/social/saturday-hours.jpg';
 import toothbrushTip1 from '~/assets/images/social/toothbrush-tip-1.jpg';
 import toothbrushTip2 from '~/assets/images/social/toothbrush-tip-2.jpg';
 import toothbrushTip3 from '~/assets/images/social/toothbrush-tip-3.jpg';
+import toothbrushTip4 from '~/assets/images/social/toothbrush-tip-4.jpg';
+import toothbrushTip5 from '~/assets/images/social/toothbrush-tip-5.jpg';
+import toothbrushTip6 from '~/assets/images/social/toothbrush-tip-6.jpg';
 import transformationPoster from '~/assets/images/reels/transformation-reel-poster.jpg';
 import mythFactPoster from '~/assets/images/reels/myth-fact-poster.jpg';
 
@@ -116,11 +119,17 @@ export const social: Record<'hours' | 'tip', LabelledItem> = {
     alt: 'Carousel slide 1: How often should you replace your toothbrush?',
     slides: [
       { image: toothbrushTip1, alt: 'Carousel slide 1: How often should you replace your toothbrush?' },
-      { image: toothbrushTip2, alt: 'Carousel slide 2: Every 3–4 months, or sooner if the bristles look frayed' },
-      { image: toothbrushTip3, alt: 'Carousel slide 3: Due for a check-up? Book your visit' },
+      {
+        image: toothbrushTip2,
+        alt: 'Carousel slide 2: Every 3–4 months, as the American Dental Association recommends',
+      },
+      { image: toothbrushTip3, alt: 'Carousel slide 3: Replace it sooner if the bristles fray' },
+      { image: toothbrushTip4, alt: 'Carousel slide 4: Electric brush heads follow the same rule' },
+      { image: toothbrushTip5, alt: 'Carousel slide 5: Let it air-dry between brushings' },
+      { image: toothbrushTip6, alt: 'Carousel slide 6: Due for a check-up? Book your visit' },
     ],
-    title: 'Care tip · 3-slide carousel',
-    description: 'A question, the answer and a call to book. Each slide invites a swipe to the next.',
+    title: 'Care tip · 6-slide carousel',
+    description: 'A question, the answer, three quick tips and a call to book. Each slide invites a swipe to the next.',
     fixes: ['Carousel', 'Care tip', 'Call to action'],
   },
 };
