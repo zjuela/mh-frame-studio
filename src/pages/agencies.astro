@@ -6,7 +6,9 @@ import ServiceSlide from '~/components/widgets/ServiceSlide.astro';
 import Steps2 from '~/components/widgets/Steps2.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import Prices from '~/components/widgets/Pricing.astro';
 import { getPermalink } from '~/utils/permalinks';
+import { agency, cost, savingPercent } from '~/data/credits';
 
 const metadata = {
   title: 'White-Label Editing for Dental Marketing Agencies',
@@ -17,13 +19,40 @@ const metadata = {
 const call = `${getPermalink('/contact')}#agency`;
 const trial = `${getPermalink('/contact')}#trial`;
 const samples = getPermalink('/work');
+
+// One card per volume tier. Credits are bought per clinic and pooled across
+// all of an agency's clinics.
+const { creditsPerClinic, pricePerClinic, tiers } = agency;
+const typicalClinic: Array<[number, keyof typeof cost, string]> = [
+  [6, 'reel', '6 Reels'],
+  [10, 'set', '10 before/after sets'],
+];
+const agencyPlans = tiers.map(({ clinics, discount }, i) => {
+  const price = Math.round(pricePerClinic * (1 - discount));
+  return {
+    title: clinics,
+    subtitle: discount ? `${discount * 100}% volume discount` : 'Wholesale rate',
+    price,
+    period: 'per clinic / month',
+    credits: `${creditsPerClinic} credits per clinic`,
+    saving: `Save ${savingPercent(price, creditsPerClinic)}%`,
+    note: `$${(price / creditsPerClinic).toFixed(2)} per credit`,
+    itemsTitle: 'A typical clinic month',
+    items: [
+      ...typicalClinic.map(([n, service, label]) => ({ description: `${label} · ${n * cost[service]} credits` })),
+      { description: 'Credits pooled across clinics', icon: 'tabler:plus' },
+    ],
+    callToAction: { text: 'Book a call', href: call, ...(i === 1 ? { variant: 'primary' as const } : {}) },
+    highlight: i === 1,
+  };
+});
 ---
 
 <Layout metadata={metadata} slides>
   <Hero2
     tagline="For dental marketing agencies"
     title="Add a dental editing team without hiring one"
-    subtitle="We edit Reels, testimonials, before/afters and Meta ads for all your dental clients — under your brand, with overnight turnaround. You keep the client and the margin."
+    subtitle={`We edit Reels, testimonials, before/afters and Meta ads for all your dental clients — under your brand, with overnight turnaround. Wholesale credits from $${agency.pricePerClinic} per clinic, and you keep the client and the margin.`}
     actions={[
       { variant: 'primary', text: 'Book a 15-min call', href: call, icon: 'tabler:calendar' },
       { text: 'Free test project', href: trial },
@@ -156,6 +185,14 @@ const samples = getPermalink('/work');
     ]}
   />
 
+  <Prices
+    id="pricing"
+    tagline="Agency pricing"
+    title="Wholesale credits, pooled across clients"
+    subtitle="Every clinic adds credits to one shared balance. Spend them on any service in our credit chart, for any client. No setup fee."
+    prices={agencyPlans}
+  />
+
   <FAQs
     title="Agency FAQ"
     items={[
@@ -168,9 +205,14 @@ const samples = getPermalink('/work');
         description: 'Yes. We are happy to sign your NDA and data processing agreements before any files are shared.',
       },
       {
-        title: 'How do you price agency work?',
+        title: 'How do agency credits work?',
         description:
-          'Wholesale per-clinic or per-item pricing that leaves room for your markup, with volume discounts as you add clinics. No setup fee.',
+          'Each clinic on your plan adds its credits to one balance at the start of the month. Spend them on any service for any client: a busy clinic can use more while a quiet one uses less. Unused credits roll over for one month.',
+      },
+      {
+        title: 'Is there room for our markup?',
+        description:
+          'Yes. Wholesale credits cost 27–38% less than our pay-as-you-go rate, and you set your own prices for your clients. No setup fee.',
       },
       {
         title: 'What volume can you handle?',

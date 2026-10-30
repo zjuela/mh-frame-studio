@@ -8,6 +8,7 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 import Button from '~/components/ui/Button.astro';
 import SectionNav from '~/components/ui/SectionNav.astro';
 import { getPermalink } from '~/utils/permalinks';
+import { PAYG_RATE, agency, cost, creditsFor, savingPercent, type Service } from '~/data/credits';
 
 const trial = `${getPermalink('/contact')}#trial`;
 const contact = getPermalink('/contact');
@@ -18,28 +19,10 @@ const metadata = {
     'Credit-based monthly plans and pay-as-you-go prices for dental photo and video editing and social media content.',
 };
 
-// Every service costs a number of credits. Plans include credits each month,
-// and a practice can hold one core plan and one social plan at most, with
-// both adding to one balance that works on any service. Without a plan,
-// credits cost PAYG_RATE each. Plan cards, savings and the credit chart are
-// all worked out from these numbers. Keep the price per credit falling as
-// plans get bigger, across both plan groups.
-const PAYG_RATE = 4;
-const cost = {
-  set: 3,
-  reel: 15,
-  transformation: 18,
-  testimonial: 45,
-  post: 5,
-  carousel: 10,
-  story: 5,
-  ad: 20,
-  googlePack: 15,
-  clinical: 1,
-  headshot: 3,
-  intro: 60,
-};
-type Service = keyof typeof cost;
+// Plans include credits each month, and a practice can hold one core plan and
+// one social plan at most, with both adding to one balance that works on any
+// service. The credit chart lives in src/data/credits.ts. Keep the price per
+// credit falling as plans get bigger, across both plan groups.
 
 /** A plan card: its credits are the sum of a typical month's work. */
 const plan = (
@@ -51,7 +34,7 @@ const plan = (
   callToAction: { text: string; href: string; variant?: 'primary' },
   more: { highlight?: boolean; hasRibbon?: boolean; ribbonTitle?: string } = {}
 ) => {
-  const credits = month.reduce((sum, [n, service]) => sum + n * cost[service], 0);
+  const credits = creditsFor(month);
   const value = credits * PAYG_RATE;
   return {
     title,
@@ -59,7 +42,7 @@ const plan = (
     price,
     period: 'per month',
     credits: `${credits} credits a month`,
-    saving: `Save ${Math.round((1 - price / value) * 100)}%`,
+    saving: `Save ${savingPercent(price, credits)}%`,
     note: `$${value.toLocaleString('en-US')} at pay-as-you-go rates`,
     itemsTitle: 'A typical month',
     items: [
@@ -128,7 +111,7 @@ const socialPlans = [
   plan(
     'Social Plus',
     'For posting 2–3 times a week',
-    269,
+    265,
     [
       [8, 'post', '8 single-image posts'],
       [2, 'carousel', '2 carousels'],
@@ -189,11 +172,11 @@ const row = (service: Service, label: string, turnaround: string, description?: 
       <div>
         <p class="text-sm font-semibold uppercase tracking-wide text-primary dark:text-secondary">For agencies</p>
         <h2 id="agency-pricing" class="mt-1 font-heading text-2xl font-bold text-heading md:text-3xl">
-          From $349 per clinic / month
+          From ${agency.pricePerClinic} per clinic / month
         </h2>
         <p class="mt-2 max-w-2xl text-muted">
-          Wholesale, white-label pricing: 120 credits per clinic (about 6 Reels and 10 before/after sets), no setup fee.
-          10% off at 5+ clinics, 15% off at 10+. Free test project.
+          Wholesale, white-label pricing: {agency.creditsPerClinic} credits per clinic (about 6 Reels and 10 before/after
+          sets), no setup fee. 10% off at 5+ clinics, 15% off at 10+. Free test project.
         </p>
       </div>
       <Button text="See agency plan" href={getPermalink('/agencies')} icon="tabler:arrow-right" class="shrink-0" />
