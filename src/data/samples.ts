@@ -77,10 +77,10 @@ export const pairs: Record<string, BeforeAfterItem> = {
 export const posts: Record<'veneers' | 'whitening' | 'alignment', LabelledItem> = {
   veneers: {
     image: veneersPost,
-    alt: 'Porcelain veneers before and after, side by side with labels',
-    title: 'Veneers · website gallery',
-    description: 'Side-by-side pair with matched crops, procedure name and a "results may vary" line.',
-    fixes: ['Matched crop', 'Labels', 'Disclaimer'],
+    alt: 'Porcelain veneers before and after, stacked in a 4:5 post',
+    title: 'Veneers · Instagram post (4:5)',
+    description: 'Before above after with matched crops, procedure name and a "results may vary" line.',
+    fixes: ['Matched crop', '4:5 feed size', 'Disclaimer'],
   },
   whitening: {
     image: whiteningPost,
