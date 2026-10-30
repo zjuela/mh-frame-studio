@@ -4,10 +4,16 @@
     {
       "name": "saturday-hours",
       "type": "photo",
-      "image": "clinic.jpg",
+      "image": "female-dentist.jpg",
+      "focusX": 0.5,
       "kicker": "NEW HOURS",
       "title": "Now open Saturdays",
-      "text": "9am – 2pm · Book online or call us"
+      "button": "Book online",
+      "badge": {
+        "top": "EVERY",
+        "main": "SAT",
+        "bottom": "9am – 2pm"
+      }
     },
     {
       "name": "toothbrush-tip",

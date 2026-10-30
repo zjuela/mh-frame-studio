@@ -1,5 +1,5 @@
 // Builds sample custom social posts in the practice's brand: a single-image
-// post (photo with a text panel) and carousels (text slides with an icon,
+// post (full-bleed photo with a headline, button and calendar card) and carousels (text slides with an icon,
 // background shapes and a slide counter). All are 1080×1350, the 4:5 feed size.
 //
 //   node scripts/make-social-posts.mjs scripts/social/posts.json
@@ -51,26 +51,60 @@ const save = (image, file) =>
     .toFile(`${outDir}/${file}`)
     .then(() => console.log(`Wrote ${outDir}/${file}`));
 
-/** Photo across the top, headline on a navy panel below. */
-async function photoPost({ name, image, kicker: k, title, text }) {
-  const photoH = 820;
-  const photo = await sharp(`src/assets/images/demo/${image}`)
-    .resize(W, photoH, { fit: 'cover', position: sharp.strategy.attention })
+/**
+ * Full-bleed photo with a navy fade at the bottom for the headline and a
+ * button, plus an optional calendar-style card (`badge`) for the key fact.
+ * `focusX` (0–1) picks where the 4:5 crop sits across a wide photo.
+ */
+async function photoPost({ name, image, focusX = 0.5, kicker: k, title, button, badge: card }) {
+  const src = sharp(`src/assets/images/demo/${image}`);
+  const { width, height } = await src.metadata();
+  const cropW = Math.min(width, Math.round((height * W) / H));
+  const left = Math.round(Math.min(Math.max(width * focusX - cropW / 2, 0), width - cropW));
+  const photo = await src
+    .extract({ left, top: 0, width: cropW, height: Math.round((cropW * H) / W) })
+    .resize(W, H)
     .toBuffer();
-  const y = photoH + 110;
+
+  // Laid out from the bottom up: button, headline (baselines 104px apart), kicker.
+  const titleLines = wrap(title, 12);
+  const buttonY = H - 214;
+  const titleTop = buttonY - 60 - (titleLines.length - 1) * 104;
+  const kickerY = titleTop - 76 - 36 - 56;
+  const fade = `<defs><linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="${NAVY}" stop-opacity="0"/>
+      <stop offset="0.45" stop-color="${NAVY}" stop-opacity="0.8"/>
+      <stop offset="1" stop-color="${NAVY}" stop-opacity="0.97"/>
+    </linearGradient><filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="12" stdDeviation="18" flood-color="#0f172a" flood-opacity="0.25"/>
+    </filter></defs>
+    <rect x="0" y="${kickerY - 260}" width="${W}" height="${H - kickerY + 260}" fill="url(#fade)"/>`;
+
+  // A tear-off calendar page: coloured header, big day, time underneath.
+  const cardW = 300;
+  const cx = W - PAD - cardW;
+  const calendar = card
+    ? `<g filter="url(#shadow)"><rect x="${cx}" y="90" width="${cardW}" height="330" rx="28" fill="#fff"/></g>
+       <path d="M${cx} 118a28 28 0 0 1 28-28h${cardW - 56}a28 28 0 0 1 28 28v62h-${cardW}z" fill="${CORAL}"/>
+       <text x="${cx + cardW / 2}" y="148" text-anchor="middle" font-family="${FONT}" font-size="32" font-weight="800" letter-spacing="5" fill="#fff">${esc(card.top)}</text>
+       <text x="${cx + cardW / 2}" y="320" text-anchor="middle" font-family="${FONT}" font-size="130" font-weight="800" fill="${NAVY}">${esc(card.main)}</text>
+       <text x="${cx + cardW / 2}" y="384" text-anchor="middle" font-family="${FONT}" font-size="34" font-weight="700" fill="${TEAL}">${esc(card.bottom)}</text>`
+    : '';
+
+  const kickerW = k.length * 23 + 50;
   const overlay = svg(
-    kicker(PAD, y, k) +
-      lines(wrap(title, 22), PAD, y + 88, { size: 76, weight: 800 }) +
-      lines([text], PAD, y + 168, { size: 36, weight: 400, fill: '#cbd5e1' }) +
-      brandMark()
+    fade +
+      calendar +
+      `<rect x="${PAD}" y="${kickerY}" width="${kickerW}" height="56" rx="28" fill="${MINT}"/>
+       <text x="${PAD + 28}" y="${kickerY + 38}" font-family="${FONT}" font-size="26" font-weight="800" letter-spacing="4" fill="${NAVY}">${esc(k)}</text>` +
+      lines(titleLines, PAD, titleTop, { size: 100, weight: 800, gap: 1.04 }) +
+      (button
+        ? `<rect x="${PAD}" y="${buttonY}" width="${button.length * 21 + 120}" height="84" rx="42" fill="${CORAL}"/>
+           <text x="${PAD + 44}" y="${buttonY + 55}" font-family="${FONT}" font-size="34" font-weight="800" fill="#fff">${esc(button)}  →</text>`
+        : '') +
+      `<text x="${W - PAD}" y="${H - 64}" text-anchor="end" font-family="${FONT}" font-size="30" fill="#fff" opacity="0.8">${esc(brand)}</text>`
   );
-  await save(
-    sharp({ create: { width: W, height: H, channels: 3, background: NAVY } }).composite([
-      { input: photo, left: 0, top: 0 },
-      { input: overlay, left: 0, top: 0 },
-    ]),
-    `${name}.jpg`
-  );
+  await save(sharp(photo).composite([{ input: overlay, left: 0, top: 0 }]), `${name}.jpg`);
 }
 
 // Line icons drawn on a 24-unit grid, one per slide (`icon` in the JSON).

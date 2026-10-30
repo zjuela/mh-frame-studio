@@ -110,10 +110,11 @@ export const posts: Record<'veneers' | 'whitening' | 'alignment', LabelledItem> 
 export const social: Record<'hours' | 'tip', LabelledItem> = {
   hours: {
     image: saturdayHours,
-    alt: 'Social post announcing Saturday opening hours, with a photo of the treatment room',
+    alt: 'Social post announcing Saturday opening hours: a smiling dentist, a calendar card reading Every Sat, 9am – 2pm, and a Book online button',
     title: 'Practice news · single-image post',
-    description: 'Your own photo with a short headline, in your brand colours. Caption and hashtags included.',
-    fixes: ['4:5 feed size', 'Your photo', 'Caption'],
+    description:
+      'Your own photo with a bold headline, the key detail as a graphic and a clear call to book, in your brand colours. Caption and hashtags included.',
+    fixes: ['4:5 feed size', 'Your photo', 'Call to action'],
   },
   tip: {
     image: toothbrushTip1,
