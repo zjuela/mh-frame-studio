@@ -1,0 +1,30 @@
+{
+  "brand": "@yourpractice",
+  "posts": [
+    {
+      "name": "saturday-hours",
+      "type": "photo",
+      "image": "clinic.jpg",
+      "kicker": "NEW HOURS",
+      "title": "Now open Saturdays",
+      "text": "9am – 2pm · Book online or call us"
+    },
+    {
+      "name": "toothbrush-tip",
+      "type": "carousel",
+      "slides": [
+        {
+          "kicker": "CARE TIP",
+          "title": "How often should you replace your toothbrush?",
+          "text": "Swipe for the answer →"
+        },
+        {
+          "kicker": "THE ANSWER",
+          "title": "Every 3–4 months",
+          "text": "Or sooner if the bristles look frayed. A worn brush doesn't clean as well."
+        },
+        { "kicker": "WHILE YOU'RE AT IT", "title": "Due for a check-up?", "text": "Book your visit. Link in bio." }
+      ]
+    }
+  ]
+}

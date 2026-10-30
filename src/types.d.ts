@@ -137,6 +137,8 @@ export interface Price {
   period?: string | { monthly: string; yearly: string };
   /** Small line under the price, e.g. "2 months free". */
   note?: string;
+  /** Highlighted badge under the price, e.g. "Save 40%". */
+  saving?: string;
   items?: Array<Item>;
   callToAction?: CallToAction;
   hasRibbon?: boolean;

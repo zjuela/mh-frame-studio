@@ -20,9 +20,10 @@ export interface BeforeAfterItem extends Caption {
   after: ImageMetadata;
 }
 
-/** A finished, labelled before/after image, shown as delivered. */
+/** A finished image shown as delivered; `slides` shows a carousel's slides side by side. */
 export interface LabelledItem extends Caption {
   image: ImageMetadata;
+  slides?: Array<{ image: ImageMetadata; alt: string }>;
 }
 
 export interface Props extends Widget {
@@ -56,7 +57,7 @@ const {
       items.map((item) => (
         <figure>
           {'image' in item ? (
-            <LabelledPosts posts={[item]} group={id ?? 'gallery'} />
+            <LabelledPosts posts={item.slides ?? [item]} group={id ?? 'gallery'} />
           ) : (
             <BeforeAfter before={item.before} after={item.after} alt={item.alt} />
           )}

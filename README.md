@@ -59,6 +59,9 @@ Meta ad mock-ups: edit the hooks, feed copy and photos in `scripts/ads/aligner-c
 then run `node scripts/make-ad-mockups.mjs scripts/ads/aligner-consult.json`. It writes the first frame of each hook
 and a feed-post mock-up to `src/assets/images/ads/`.
 
+Social post samples: edit `scripts/social/posts.json` (a `photo` post or a `carousel` of text slides), then run
+`node scripts/make-social-posts.mjs scripts/social/posts.json`. Images (1080×1350) go to `src/assets/images/social/`.
+
 ## Deploy
 
 Pushing to `main` deploys to GitHub Pages via `.github/workflows/deploy.yml`

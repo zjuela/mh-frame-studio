@@ -24,6 +24,10 @@ import adHook1 from '~/assets/images/ads/aligner-consult-hook-1.jpg';
 import adHook2 from '~/assets/images/ads/aligner-consult-hook-2.jpg';
 import adHook3 from '~/assets/images/ads/aligner-consult-hook-3.jpg';
 import adFeed from '~/assets/images/ads/aligner-consult-feed.jpg';
+import saturdayHours from '~/assets/images/social/saturday-hours.jpg';
+import toothbrushTip1 from '~/assets/images/social/toothbrush-tip-1.jpg';
+import toothbrushTip2 from '~/assets/images/social/toothbrush-tip-2.jpg';
+import toothbrushTip3 from '~/assets/images/social/toothbrush-tip-3.jpg';
 import transformationPoster from '~/assets/images/reels/transformation-reel-poster.jpg';
 import mythFactPoster from '~/assets/images/reels/myth-fact-poster.jpg';
 
@@ -95,6 +99,29 @@ export const posts: Record<'veneers' | 'whitening' | 'alignment', LabelledItem> 
     title: 'Alignment · Story (9:16)',
     description: 'Story-sized pair with text kept clear of the Instagram and Facebook controls.',
     fixes: ['9:16 Story', 'Safe zones', 'Labels'],
+  },
+};
+
+// Custom social posts built by `node scripts/make-social-posts.mjs`.
+export const social: Record<'hours' | 'tip', LabelledItem> = {
+  hours: {
+    image: saturdayHours,
+    alt: 'Social post announcing Saturday opening hours, with a photo of the treatment room',
+    title: 'Practice news · single-image post',
+    description: 'Your own photo with a short headline, in your brand colours. Caption and hashtags included.',
+    fixes: ['4:5 feed size', 'Your photo', 'Caption'],
+  },
+  tip: {
+    image: toothbrushTip1,
+    alt: 'Carousel slide 1: How often should you replace your toothbrush?',
+    slides: [
+      { image: toothbrushTip1, alt: 'Carousel slide 1: How often should you replace your toothbrush?' },
+      { image: toothbrushTip2, alt: 'Carousel slide 2: Every 3–4 months, or sooner if the bristles look frayed' },
+      { image: toothbrushTip3, alt: 'Carousel slide 3: Due for a check-up? Book your visit' },
+    ],
+    title: 'Care tip · 3-slide carousel',
+    description: 'A question, the answer and a call to book. Each slide invites a swipe to the next.',
+    fixes: ['Carousel', 'Care tip', 'Call to action'],
   },
 };
 

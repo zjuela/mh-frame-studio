@@ -6,13 +6,13 @@ import Reels from '~/components/widgets/Reels.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import StickyCTA from '~/components/widgets/StickyCTA.astro';
 import SectionNav from '~/components/ui/SectionNav.astro';
-import { pairs, posts, videos } from '~/data/samples';
+import { pairs, posts, social, videos } from '~/data/samples';
 import { getPermalink } from '~/utils/permalinks';
 
 const metadata = {
   title: 'Samples',
   description:
-    'Samples for each service: before/after photos, Reels, patient testimonials, Meta ad creatives and office photos for dental practices.',
+    'Samples for each service: before/after photos, Reels, patient testimonials, social posts, Meta ad creatives and office photos for dental practices.',
 };
 
 const trial = `${getPermalink('/contact')}#trial`;
@@ -32,6 +32,7 @@ const slateBg = '<div class="absolute inset-0 bg-slate-50 dark:bg-transparent"><
       { text: 'Before/afters', href: '#before-after' },
       { text: 'Reels', href: '#reels' },
       { text: 'Testimonials', href: '#testimonials' },
+      { text: 'Social posts', href: '#social' },
       { text: 'Meta ads', href: '#ad-creatives' },
       { text: 'Office & team photos', href: '#photos' },
     ]}
@@ -63,13 +64,21 @@ const slateBg = '<div class="absolute inset-0 bg-slate-50 dark:bg-transparent"><
     placeholders={['15-second clip · for Reels', 'Ad cut · with captions', 'Story · 3 short answers']}
   />
 
+  <BeforeAfterGallery
+    id="social"
+    tagline="Social packages"
+    title="Custom social posts"
+    subtitle="Branded posts and carousels made from your photos: care tips, practice news, team spotlights and offers. Delivered ready to post, with captions."
+    items={[social.hours, social.tip]}
+    bg={slateBg}
+  />
+
   <Reels
     id="ad-creatives"
-    tagline="Add-on"
+    tagline="Social packages"
     title="Meta ad creatives"
     subtitle="Mock-ups of one free-consult ad: the same edit with 3 opening hooks to test, plus the 4:5 feed version."
     items={[videos.ad, videos.adHook2, videos.adHook3, videos.adFeed]}
-    bg={slateBg}
   />
 
   <BeforeAfterGallery
@@ -78,6 +87,7 @@ const slateBg = '<div class="absolute inset-0 bg-slate-50 dark:bg-transparent"><
     title="Google profile, office & team photos"
     subtitle="Phone photos of your practice and team, corrected and sized for your Google Business Profile and website."
     items={[pairs.clinic, pairs.clinic2, pairs.consult, pairs.headshot]}
+    bg={slateBg}
   />
 
   <CallToAction

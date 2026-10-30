@@ -76,6 +76,7 @@ const periodFor = (period: Price['period'], billing: 'monthly' | 'yearly') =>
                 price,
                 period,
                 note,
+                saving,
                 items,
                 callToAction,
                 hasRibbon = false,
@@ -119,6 +120,11 @@ const periodFor = (period: Price['period'], billing: 'monthly' | 'yearly') =>
                                 </span>
                               </div>
                             )
+                          )}
+                          {saving && (
+                            <p class="mt-3 inline-block rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary dark:bg-primary/20 dark:text-secondary">
+                              {saving}
+                            </p>
                           )}
                           {note && <p class="mt-2 text-sm text-muted">{note}</p>}
                         </div>
