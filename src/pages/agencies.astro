@@ -16,7 +16,7 @@ const metadata = {
 
 const call = `${getPermalink('/contact')}#agency`;
 const trial = `${getPermalink('/contact')}#trial`;
-const galleries = getPermalink('/work');
+const samples = getPermalink('/work');
 ---
 
 <Layout metadata={metadata} slides>
@@ -40,19 +40,19 @@ const galleries = getPermalink('/work');
         title: 'Reels, TikToks & Shorts',
         description: "Educational, behind-the-scenes and transformation Reels from your clients' phone footage.",
         icon: 'tabler:device-mobile',
-        href: `${galleries}#reels`,
+        href: `${samples}#reels`,
       },
       {
         title: 'Patient testimonials',
         description: 'Full story cut plus short clips for organic posts and ads. Audio cleaned, captions added.',
         icon: 'tabler:message-circle-heart',
-        href: `${galleries}#testimonials`,
+        href: `${samples}#testimonials`,
       },
       {
         title: 'Compliance-ready before/afters',
         description: 'Matched, unaltered pairs with procedure labels — less risk for you and your clients.',
         icon: 'tabler:photo-check',
-        href: `${galleries}#before-after`,
+        href: `${samples}#before-after`,
       },
       {
         title: 'Meta ad creatives',
@@ -88,7 +88,7 @@ const galleries = getPermalink('/work');
       },
     ]}
     image={{ src: '~/assets/images/demo/headshot-2.jpg', alt: 'Dentist talking to camera' }}
-    callToAction={{ text: 'See ad samples', href: `${galleries}#ad-creatives` }}
+    callToAction={{ text: 'See ad samples', href: `${samples}#ad-creatives` }}
   >
     <Fragment slot="bg">
       <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
@@ -185,7 +185,7 @@ const galleries = getPermalink('/work');
     subtitle="Send a real batch from one of your dental clients. Judge the work, then decide."
     actions={[
       { variant: 'primary', text: 'Book a call', href: call, icon: 'tabler:calendar' },
-      { text: 'See galleries', href: galleries },
+      { text: 'See samples', href: samples },
     ]}
   />
 </Layout>

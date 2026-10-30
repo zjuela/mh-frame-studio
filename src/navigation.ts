@@ -4,7 +4,7 @@ import { BUSINESS } from './business';
 export const headerData = {
   links: [
     { text: 'Services', href: getPermalink('/services') },
-    { text: 'Galleries', href: getPermalink('/work') },
+    { text: 'Samples', href: getPermalink('/work') },
     { text: 'For Agencies', href: getPermalink('/agencies') },
     { text: 'Pricing', href: getPermalink('/pricing') },
     { text: 'Free Guide', href: getPermalink('/guide') },
@@ -35,7 +35,7 @@ export const footerData = {
     {
       title: 'Company',
       links: [
-        { text: 'Galleries', href: getPermalink('/work') },
+        { text: 'Samples', href: getPermalink('/work') },
         { text: 'Pricing', href: getPermalink('/pricing') },
         { text: 'Free filming guide', href: getPermalink('/guide') },
         { text: 'Contact', href: getPermalink('/contact') },
