@@ -17,7 +17,6 @@ import veneersPost from '~/assets/images/before-after/veneers.jpg';
 import whiteningPost from '~/assets/images/before-after/whitening.jpg';
 import alignmentPost from '~/assets/images/before-after/alignment.jpg';
 
-import dentistMask from '~/assets/images/demo/dentist-mask.jpg';
 import consult from '~/assets/images/demo/consult.jpg';
 import treatment from '~/assets/images/demo/treatment.jpg';
 import adHook1 from '~/assets/images/ads/aligner-consult-hook-1.jpg';
@@ -34,6 +33,7 @@ import toothbrushTip6 from '~/assets/images/social/toothbrush-tip-6.jpg';
 import transformationPoster from '~/assets/images/reels/transformation-reel-poster.jpg';
 import mythFactPoster from '~/assets/images/reels/myth-fact-poster.jpg';
 import testimonialGuidePoster from '~/assets/images/reels/testimonial-guide-poster.jpg';
+import grindingSignsPoster from '~/assets/images/reels/grinding-signs-poster.jpg';
 
 import type { BeforeAfterItem, LabelledItem } from '~/components/widgets/BeforeAfterGallery.astro';
 import type { Reel } from '~/components/widgets/Reels.astro';
@@ -149,13 +149,15 @@ export const videos: Record<
   | 'mythFact',
   Reel
 > = {
+  // Built by `node scripts/make-grinding-signs-reel.mjs scripts/reels/grinding-signs.json`.
   reel: {
-    poster: dentistMask,
-    alt: 'Dentist holding dental instruments',
+    poster: grindingSignsPoster,
+    alt: 'Smiling dentist in a white coat in front of a dental X-ray',
     hook: '3 signs you grind your teeth at night',
-    caption: 'Educational Reel from phone clips · hook, captions, branded outro',
+    caption: 'Educational Reel from short clips · hook, numbered signs, captions, branded outro',
     label: 'Reel',
-    duration: '0:32',
+    duration: '0:29',
+    video: 'videos/grinding-signs.mp4',
   },
   testimonial: {
     poster: treatment,

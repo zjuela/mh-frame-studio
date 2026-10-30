@@ -1,6 +1,7 @@
 // Shared building blocks for the sample Reel generators in scripts/.
-// Scenes are rendered as 1080×1920 stills with sharp, then ffmpeg adds a slow
-// push-in to each still and joins them with transitions. Needs ffmpeg.
+// Scenes are rendered as 1080×1920 stills with sharp (or are video clips with a
+// text overlay), then ffmpeg adds a slow push-in to each still and joins them
+// with transitions. Needs ffmpeg.
 
 import { execFileSync } from 'node:child_process';
 import { mkdirSync } from 'node:fs';
@@ -30,18 +31,35 @@ export const wrap = (text, max) =>
 export const overlay = (svg) =>
   Buffer.from(`<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">${svg}</svg>`);
 
-/** Rounded label like the BEFORE / AFTER tags on the site. */
-export const pill = (x, y, text, fill, size = 34) => {
+/**
+ * The width of a line of text as the SVG renders it, from the first to the last
+ * inked pixel. Pass it to `pill` / `highlightLines` so their backgrounds fit.
+ */
+export const textWidth = async (text, size, { weight = 800, spacing = 0 } = {}) => {
+  const svg = `<svg width="${Math.ceil(text.length * size * 1.2 + 40)}" height="${size * 2}" xmlns="http://www.w3.org/2000/svg">
+    <text x="20" y="${size * 1.5}" font-family="${FONT}" font-size="${size}" font-weight="${weight}" letter-spacing="${spacing}">${esc(text)}</text></svg>`;
+  const { info } = await sharp(Buffer.from(svg)).trim().toBuffer({ resolveWithObject: true });
+  return info.width;
+};
+
+/**
+ * Rounded label like the BEFORE / AFTER tags on the site. Its width is
+ * estimated from the letter count unless `textW` (from `textWidth`) is given.
+ */
+export const pill = (x, y, text, fill, size = 34, textW = text.length * (size * 0.7 + 2)) => {
   const h = size * 1.9;
-  return `<rect x="${x}" y="${y}" width="${text.length * (size * 0.7 + 2) + size * 1.6}" height="${h}" rx="${h / 2}" fill="${fill}"/>
+  return `<rect x="${x}" y="${y}" width="${textW + size * 1.6}" height="${h}" rx="${h / 2}" fill="${fill}"/>
    <text x="${x + size * 0.8}" y="${y + h * 0.69}" font-family="${FONT}" font-size="${size}" font-weight="800" letter-spacing="2" fill="#fff">${esc(text)}</text>`;
 };
 
-/** Centred lines of text, each on its own coloured highlight bar. */
-export const highlightLines = (lines, y, { size = 64, fill = CORAL, gap = 1.62 } = {}) =>
+/**
+ * Centred lines of text, each on its own coloured highlight bar. Bar widths are
+ * estimated from the letter count unless `widths` (from `textWidth`) are given.
+ */
+export const highlightLines = (lines, y, { size = 64, fill = CORAL, gap = 1.62, widths } = {}) =>
   lines
     .map((line, i) => {
-      const w = line.length * size * 0.6 + size;
+      const w = (widths?.[i] ?? line.length * size * 0.6) + size;
       const ly = y + i * size * gap;
       return `<rect x="${(W - w) / 2}" y="${ly}" width="${w}" height="${size * 1.44}" rx="${size / 4}" fill="${fill}"/>
         <text x="${W / 2}" y="${ly + size * 1.03}" text-anchor="middle" font-family="${FONT}" font-size="${size}" font-weight="800" fill="#fff">${esc(line)}</text>`;
@@ -86,34 +104,39 @@ export const fullBleed = (file, { brightness = 1, saturation = 1, position = sha
   sharp(file).resize(W, H, { fit: 'cover', position }).modulate({ brightness, saturation }).png().toBuffer();
 
 /**
- * Joins still scenes into an MP4.
- * scenes:      [{ file, duration, zoom? }]: zoom is a zoompan expression in `on`
- *              (frame number); the default is a slow 3% push-in.
+ * Joins scenes into an MP4.
+ * scenes:      [{ file, duration, zoom?, video?, overlay? }]: zoom is a zoompan
+ *              expression in `on` (frame number); the default is a slow 3% push-in.
+ *              With `video: true` the file is a clip, played from its start and
+ *              cropped to fill the frame. `overlay` is a transparent PNG laid over it.
  * transitions: one per gap, { type, duration, line? }: type is any ffmpeg xfade
  *              transition; `line` draws a slider bar across a wipe.
  */
 export const assemble = ({ scenes, transitions, out, music }) => {
-  const inputs = scenes.flatMap(({ file, duration }) => [
-    '-framerate',
-    String(FPS),
-    '-loop',
-    '1',
-    '-t',
-    String(duration),
-    '-i',
-    file,
-  ]);
-  const filters = scenes.map(
-    ({ duration, zoom }, i) =>
-      `[${i}:v]scale=${W * 2}:${H * 2},zoompan=z='${zoom ?? `1+0.03*on/${duration * FPS}`}':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s=${W}x${H}:fps=${FPS},setsar=1[v${i}]`
+  const still = (file, duration) => ['-framerate', String(FPS), '-loop', '1', '-t', String(duration), '-i', file];
+  const inputs = scenes.flatMap(({ file, duration, video }) =>
+    video ? ['-t', String(duration), '-i', file] : still(file, duration)
   );
+  // Overlays are extra inputs after the scenes.
+  const overlays = scenes.flatMap(({ overlay, duration }, i) => (overlay ? [{ i, file: overlay, duration }] : []));
+  overlays.forEach(({ file, duration }) => inputs.push(...still(file, duration)));
 
-  let label = 'v0';
+  const filters = scenes.map(({ duration, zoom, video }, i) =>
+    video
+      ? `[${i}:v]fps=${FPS},scale=${W}:${H}:force_original_aspect_ratio=increase,crop=${W}:${H},setsar=1,trim=duration=${duration},setpts=PTS-STARTPTS[v${i}]`
+      : `[${i}:v]scale=${W * 2}:${H * 2},zoompan=z='${zoom ?? `1+0.03*on/${duration * FPS}`}':x='iw/2-(iw/zoom/2)':y='ih/2-(ih/zoom/2)':d=1:s=${W}x${H}:fps=${FPS},setsar=1[v${i}]`
+  );
+  overlays.forEach(({ i }, k) => {
+    filters.push(`[v${i}][${scenes.length + k}:v]overlay=0:0[v${i}o]`);
+  });
+  const scene = (i) => (scenes[i].overlay ? `v${i}o` : `v${i}`);
+
+  let label = scene(0);
   let elapsed = scenes[0].duration;
   transitions.forEach(({ type, duration, line }, i) => {
     const offset = +(elapsed - duration).toFixed(3);
     const next = `x${i}`;
-    filters.push(`[${label}][v${i + 1}]xfade=transition=${type}:duration=${duration}:offset=${offset}[${next}]`);
+    filters.push(`[${label}][${scene(i + 1)}]xfade=transition=${type}:duration=${duration}:offset=${offset}[${next}]`);
     label = next;
     if (line) {
       filters.push(`color=white:s=8x${H}:r=${FPS}[line${i}]`);
@@ -144,7 +167,7 @@ export const assemble = ({ scenes, transitions, out, music }) => {
       '-map',
       '[out]',
       '-map',
-      `${scenes.length}:a`,
+      `${scenes.length + overlays.length}:a`,
       ...audioFilter,
       '-t',
       String(total),

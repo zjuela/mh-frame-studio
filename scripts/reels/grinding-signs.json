@@ -1,0 +1,38 @@
+{
+  "name": "grinding-signs",
+  "brand": "@yourpractice",
+  "hook": {
+    "tag": "DENTIST TIP",
+    "text": "3 signs you grind your teeth at night",
+    "clip": "scripts/reels/grinding-signs/clip-1.mp4",
+    "duration": 3.4
+  },
+  "signs": [
+    {
+      "headline": "Sore jaw or headaches in the morning",
+      "caption": "Clenching overnight tires your jaw.",
+      "clip": "scripts/reels/grinding-signs/clip-2.mp4",
+      "duration": 6.4
+    },
+    {
+      "headline": "Teeth look flat, chipped or shorter",
+      "caption": "Grinding wears down the biting edges.",
+      "clip": "scripts/reels/grinding-signs/clip-3.mp4",
+      "duration": 6.4
+    },
+    {
+      "headline": "New sensitivity to hot or cold",
+      "caption": "Worn enamel exposes the layer below.",
+      "clip": "scripts/reels/grinding-signs/clip-4.mp4",
+      "duration": 6
+    }
+  ],
+  "fix": {
+    "tag": "THE FIX",
+    "headline": "A custom night guard protects your teeth",
+    "caption": "Made from a mould of your teeth, worn while you sleep.",
+    "clip": "scripts/reels/grinding-signs/clip-5.mp4",
+    "duration": 5
+  },
+  "cta": "Sound familiar? Book a check-up"
+}

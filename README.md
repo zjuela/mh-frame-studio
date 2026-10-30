@@ -53,7 +53,12 @@ few stills each with `push-in` / `pull-out`) in `scripts/reels/testimonial-guide
 `node scripts/make-testimonial-guide-reel.mjs scripts/reels/testimonial-guide.json`. The stills share the time left
 in `length` (60s). The JSON also keeps the image prompts; photos not generated yet show a placeholder.
 
-All three generators share `scripts/lib/reel-kit.mjs`.
+Educational Reel from video clips ("3 signs you grind your teeth"): edit the hook, signs, fix, captions and the clip
+for each in `scripts/reels/grinding-signs.json`, then run
+`node scripts/make-grinding-signs-reel.mjs scripts/reels/grinding-signs.json`. Clips are 1080×1920 MP4s, at least as
+long as the seconds the JSON gives them; the text is laid over each clip.
+
+All four generators share `scripts/lib/reel-kit.mjs`.
 
 Labelled before/after images: add a post to `scripts/before-after/posts.json` (source photo, where the two shots
 meet, which one is the before, crop, and a `side` or `stack` layout), then run
