@@ -143,6 +143,8 @@ export interface Price {
   credits?: string;
   /** Small heading above the items list. */
   itemsTitle?: string;
+  /** Small line under the call-to-action button, e.g. "Cancel anytime". */
+  footnote?: string;
   items?: Array<Item>;
   callToAction?: CallToAction;
   hasRibbon?: boolean;

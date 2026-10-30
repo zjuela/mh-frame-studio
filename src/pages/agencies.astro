@@ -38,6 +38,7 @@ const agencyPlans = tiers.map(({ clinics, discount }, i) => {
     saving: `Save ${savingPercent(price, creditsPerClinic)}%`,
     note: `$${(price / creditsPerClinic).toFixed(2)} per credit`,
     itemsTitle: 'A typical clinic month',
+    footnote: 'Cancel anytime',
     items: [
       ...typicalClinic.map(([n, service, label]) => ({ description: `${label} · ${n * cost[service]} credits` })),
       { description: 'Credits pooled across clinics', icon: 'tabler:plus' },
@@ -189,7 +190,7 @@ const agencyPlans = tiers.map(({ clinics, discount }, i) => {
     id="pricing"
     tagline="Agency pricing"
     title="Wholesale credits, pooled across clients"
-    subtitle="Every clinic adds credits to one shared balance. Spend them on any service in our credit chart, for any client. No setup fee."
+    subtitle="Every clinic adds credits to one shared balance. Spend them on any service in our credit chart, for any client. No setup fee, month to month, cancel anytime."
     prices={agencyPlans}
   />
 

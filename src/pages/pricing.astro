@@ -1,4 +1,5 @@
 ---
+import { Icon } from 'astro-icon/components';
 import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
 import Prices from '~/components/widgets/Pricing.astro';
@@ -45,6 +46,7 @@ const plan = (
     saving: `Save ${savingPercent(price, credits)}%`,
     note: `$${value.toLocaleString('en-US')} at pay-as-you-go rates`,
     itemsTitle: 'A typical month',
+    footnote: 'Cancel anytime',
     items: [
       ...month.map(([n, service, label]) => ({ description: `${label} · ${n * cost[service]} credits` })),
       ...extras.map((description) => ({ description, icon: 'tabler:plus' })),
@@ -147,7 +149,20 @@ const row = (service: Service, label: string, turnaround: string, description?: 
     tagline="Pricing"
     title="Monthly credits. Spend them your way."
     subtitle="Pick a core plan, a social plan, or one of each. Credits go into one balance that works on any service. One new patient is often worth $3,000 or more to a practice; our Starter plan costs about $10 a day."
-  />
+  >
+    <Fragment slot="content">
+      <ul class="mt-6 flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm text-muted dark:text-slate-400">
+        {
+          ['Month to month', 'Cancel anytime', 'Unused credits roll over'].map((point) => (
+            <li class="flex items-center gap-1.5">
+              <Icon name="tabler:circle-check" class="h-4 w-4 text-primary" aria-hidden="true" />
+              {point}
+            </li>
+          ))
+        }
+      </ul>
+    </Fragment>
+  </HeroText>
 
   <SectionNav
     label="Pricing sections"
