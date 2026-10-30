@@ -139,6 +139,10 @@ export interface Price {
   note?: string;
   /** Highlighted badge under the price, e.g. "Save 40%". */
   saving?: string;
+  /** What the plan includes, shown under the price, e.g. "120 credits a month". */
+  credits?: string;
+  /** Small heading above the items list. */
+  itemsTitle?: string;
   items?: Array<Item>;
   callToAction?: CallToAction;
   hasRibbon?: boolean;

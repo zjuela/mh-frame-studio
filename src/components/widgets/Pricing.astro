@@ -77,6 +77,8 @@ const periodFor = (period: Price['period'], billing: 'monthly' | 'yearly') =>
                 period,
                 note,
                 saving,
+                credits,
+                itemsTitle,
                 items,
                 callToAction,
                 hasRibbon = false,
@@ -121,6 +123,7 @@ const periodFor = (period: Price['period'], billing: 'monthly' | 'yearly') =>
                               </div>
                             )
                           )}
+                          {credits && <p class="mt-3 text-lg font-semibold text-heading">{credits}</p>}
                           {saving && (
                             <p class="mt-3 inline-block rounded-full bg-primary/10 px-3 py-1 text-sm font-semibold text-primary dark:bg-primary/20 dark:text-secondary">
                               {saving}
@@ -128,8 +131,13 @@ const periodFor = (period: Price['period'], billing: 'monthly' | 'yearly') =>
                           )}
                           {note && <p class="mt-2 text-sm text-muted">{note}</p>}
                         </div>
+                        {itemsTitle && (
+                          <p class="mt-8 text-left text-sm font-semibold uppercase tracking-wide text-muted">
+                            {itemsTitle}
+                          </p>
+                        )}
                         {items && (
-                          <ul class="my-8 md:my-10 space-y-2 text-left">
+                          <ul class:list={['space-y-2 text-left', itemsTitle ? 'mt-3 mb-8 md:mb-10' : 'my-8 md:my-10']}>
                             {items.map(
                               ({ description, icon }) =>
                                 description && (

@@ -3,7 +3,7 @@ title: 'Terms of Service'
 layout: '~/layouts/MarkdownLayout.astro'
 ---
 
-_Last updated_: October 29, 2026
+_Last updated_: October 30, 2026
 
 > This is a plain-language starting point. Have it reviewed before taking on client work.
 
@@ -15,7 +15,7 @@ _Last updated_: October 29, 2026
 ## Plans and payment
 
 - Monthly plans are billed at the start of each month and can be cancelled any time before the next billing date.
-- Unused photo edits roll over for one month.
+- Plans add credits at the start of each month. Unused credits roll over for one month, then expire.
 
 ## Ownership
 

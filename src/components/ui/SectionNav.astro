@@ -1,7 +1,7 @@
 ---
-// A row of chips that jump to the sections of a long page. It sticks below
-// the header while scrolling and highlights the section in view. On phones
-// the row scrolls sideways.
+// A pill-shaped bar of links that jump to the sections of a long page. It
+// sticks below the header while scrolling and highlights the section in view.
+// On phones the links scroll sideways inside the pill.
 
 export interface Props {
   items: Array<{ text: string; href: `#${string}` }>;
@@ -11,17 +11,18 @@ export interface Props {
 const { items, label = 'On this page' } = Astro.props;
 ---
 
-<aw-section-nav
-  class="sticky top-[70px] z-30 block border-y border-gray-200 bg-white/90 backdrop-blur dark:border-slate-800 dark:bg-slate-900/90"
->
-  <nav aria-label={label} class="mx-auto max-w-7xl">
-    <ul class="flex gap-2 overflow-x-auto px-4 py-2.5 md:justify-center">
+<aw-section-nav class="pointer-events-none sticky top-[78px] z-30 block px-4">
+  <nav
+    aria-label={label}
+    class="pointer-events-auto mx-auto w-fit max-w-full rounded-full border border-gray-200 bg-white/90 shadow-md backdrop-blur dark:border-slate-700 dark:bg-slate-900/90"
+  >
+    <ul class="flex gap-1 overflow-x-auto rounded-full p-1">
       {
         items.map(({ text, href }) => (
           <li class="shrink-0">
             <a
               href={href}
-              class="inline-flex min-h-11 items-center rounded-full border border-gray-200 px-4 text-sm font-medium text-default transition-colors duration-200 hover:border-primary hover:text-primary focus-visible:outline-2 focus-visible:outline-primary aria-[current=true]:border-primary aria-[current=true]:bg-primary aria-[current=true]:text-white dark:border-slate-700"
+              class="inline-flex min-h-11 items-center rounded-full px-4 text-sm font-medium text-default transition-colors duration-200 hover:bg-primary/10 hover:text-primary focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-primary aria-[current=true]:bg-primary aria-[current=true]:text-white"
             >
               {text}
             </a>
