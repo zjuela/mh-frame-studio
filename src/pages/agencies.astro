@@ -22,17 +22,16 @@ const samples = getPermalink('/work');
 
 // One card per volume tier. Credits are bought per clinic and pooled across
 // all of an agency's clinics. A typical clinic month matches the Growth plan.
-const { creditsPerClinic, pricePerClinic, tiers } = agency;
+const { creditsPerClinic, tiers } = agency;
 const typicalClinic: Array<[number, keyof typeof cost, string]> = [
   [15, 'set', '15 before/after sets'],
   [5, 'reel', '5 Reels'],
   [1, 'testimonial', '1 patient testimonial'],
 ];
-const agencyPlans = tiers.map(({ clinics, discount }, i) => {
-  const price = Math.round(pricePerClinic * (1 - discount));
+const agencyPlans = tiers.map(({ clinics, price, discount }, i) => {
   return {
     title: clinics,
-    subtitle: discount ? `${discount * 100}% volume discount` : 'Wholesale rate',
+    subtitle: discount ? `${discount}% volume discount` : 'Wholesale rate',
     price,
     period: 'per clinic / month',
     credits: `${creditsPerClinic} credits per clinic`,

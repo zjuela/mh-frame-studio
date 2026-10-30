@@ -191,7 +191,8 @@ const row = (service: Service, label: string, turnaround: string, description?: 
         </h2>
         <p class="mt-2 max-w-2xl text-muted">
           Wholesale, white-label pricing: {agency.creditsPerClinic} credits per clinic (the same as our Growth plan, for less),
-          no setup fee. 10% off at 5+ clinics, 15% off at 10+. Free test project.
+          no setup fee. {agency.tiers[1].discount}% off at 5+ clinics, {agency.tiers[2].discount}% off at 10+. Free test
+          project.
         </p>
       </div>
       <Button text="See agency plan" href={getPermalink('/agencies')} icon="tabler:arrow-right" class="shrink-0" />
