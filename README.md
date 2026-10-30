@@ -27,7 +27,10 @@ Before/after slider: `src/components/ui/BeforeAfter.astro`. Reels grid: `src/com
 
 ## Sample images
 
-`src/assets/images/demo/` holds licensed stock photos from Unsplash (free for commercial use).
+`src/assets/images/demo/` holds licensed stock photos from Unsplash (free for commercial use), plus reference
+portraits of dentists and assistants supplied by the owner (`female-dentist-1..3`, `male-dentist-1..2`,
+`female-assistant`, `male-assistant`). Before adding a photo to a page or generator, check where it is already
+used (`grep -rn <name> src scripts`) and pick one that isn't, so the same face doesn't appear twice.
 `node scripts/make-demo-pairs.mjs` builds the demo "before" versions into `src/assets/images/pairs/`.
 Replace them with real, **consented** client work as soon as you have it: drop a matching
 `name-before.jpg` / `name-after.jpg` pair (same size, 4:3) into `pairs/` and add it to `src/data/samples.ts`.

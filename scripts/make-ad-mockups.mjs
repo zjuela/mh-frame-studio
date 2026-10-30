@@ -9,6 +9,8 @@
 // Each hook names its photo (from src/assets/images/demo/), where to centre
 // the 9:16 crop (`focusX`, 0–1), an optional caption of the first spoken line
 // (*starred* words are highlighted) and optional `titleY` / `captionY` (the hook defaults to the top of the safe zone).
+// `padTop` (px) lowers a photo with little headroom so the title clears the face;
+// the gap is filled with a blurred stretch of the photo's top edge.
 // Text is kept inside the Reels safe zone; the script warns if it isn't.
 // Writes src/assets/images/ads/<name>-hook-<n>.jpg and <name>-feed.jpg.
 
@@ -105,11 +107,35 @@ const replyBubble = async (from, text, y) => {
   return { svg, bottom: y + 170 };
 };
 
-/** A landscape photo cropped to 9:16 around a horizontal focus point (0–1). */
-const portraitCrop = async (file, focusX = 0.5) => {
-  const resized = await sharp(file).resize({ height: H }).toBuffer({ resolveWithObject: true });
+/** A landscape photo cropped to 9:16 around a horizontal focus point (0–1), optionally lowered by `padTop`. */
+const portraitCrop = async (file, focusX = 0.5, padTop = 0) => {
+  const h = H - padTop;
+  const resized = await sharp(file).resize({ height: h }).toBuffer({ resolveWithObject: true });
   const left = Math.round(Math.min(Math.max(focusX * resized.info.width - W / 2, 0), resized.info.width - W));
-  return sharp(resized.data).extract({ left, top: 0, width: W, height: H }).png().toBuffer();
+  const crop = await sharp(resized.data).extract({ left, top: 0, width: W, height: h }).png().toBuffer();
+  if (!padTop) return crop;
+  // Stretch the photo's top strip (usually wall) so the fill carries no faces.
+  const fill = await sharp(crop)
+    .extract({ left: 0, top: 0, width: W, height: 120 })
+    .resize(W, padTop + 200, { fit: 'fill' })
+    .blur(30)
+    .toBuffer();
+  // Feather the photo's top edge into the blurred fill.
+  const feather = Buffer.from(
+    `<svg width="${W}" height="${h}"><defs><linearGradient id="f" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff" stop-opacity="0"/><stop offset="${(120 / h).toFixed(3)}" stop-color="#fff"/></linearGradient></defs><rect width="${W}" height="${h}" fill="url(#f)"/></svg>`
+  );
+  const faded = await sharp(crop)
+    .ensureAlpha()
+    .composite([{ input: feather, blend: 'dest-in' }])
+    .png()
+    .toBuffer();
+  return sharp({ create: { width: W, height: H, channels: 3, background: '#fff' } })
+    .composite([
+      { input: fill, left: 0, top: 0 },
+      { input: faded, left: 0, top: padTop },
+    ])
+    .png()
+    .toBuffer();
 };
 
 for (const [i, hook] of ad.hooks.entries()) {
@@ -122,7 +148,7 @@ for (const [i, hook] of ad.hooks.entries()) {
   const tops = [titleY, hook.captionY ?? 1085];
   if (Math.min(...tops) < SAFE_TOP || Math.max(...parts.map((p) => p.bottom)) > SAFE_BOTTOM)
     console.warn(`Hook ${i + 1}: text reaches outside the Reels safe zone (${SAFE_TOP}–${SAFE_BOTTOM}px).`);
-  await sharp(await portraitCrop(photo(hook.image), hook.focusX))
+  await sharp(await portraitCrop(photo(hook.image), hook.focusX, hook.padTop))
     .composite([{ input: overlay(shade + parts.map((p) => p.svg).join('')), left: 0, top: 0 }])
     .jpeg({ quality: 84 })
     .toFile(`${outDir}/${ad.name}-hook-${i + 1}.jpg`);

@@ -1,7 +1,7 @@
 {
   "name": "myth-fact",
   "hook": "3 dental myths you probably believe",
-  "hookImage": "src/assets/images/demo/headshot.jpg",
+  "hookImage": "src/assets/images/demo/male-assistant.jpg",
   "brand": "@yourpractice",
   "cta": "Questions? Ask us at your next checkup",
   "myths": [

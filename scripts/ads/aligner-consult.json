@@ -6,8 +6,9 @@
   "hooks": [
     {
       "style": "talking",
-      "image": "male-dentist.jpg",
-      "focusX": 0.43,
+      "image": "male-dentist-1.jpg",
+      "focusX": 0.72,
+      "padTop": 300,
       "text": "Straighter teeth without metal braces?",
       "caption": "I'm Dr. Bennett, and I fit *aligners* every day."
     },
