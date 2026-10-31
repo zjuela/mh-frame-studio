@@ -71,7 +71,7 @@ for (const [name, file, label, fill, withHook] of [
       { input: await rounded(file, CARD, CARD), left: (W - CARD) / 2, top: CARD_Y },
       {
         input: overlay(
-          (withHook ? await fitHighlightLines(wrap(titleCase(args.hook), 18), 170) : '') +
+          (withHook ? await fitHighlightLines(wrap(titleCase(args.hook), 18), 170, { fill: TEAL }) : '') +
             (await fitPill(80, CARD_Y + 40, label, fill)) +
             caption(CARD_Y + CARD + 110)
         ),

@@ -30,7 +30,7 @@ import {
   titleCase,
   wrap,
   overlay,
-  pill,
+  fitPill,
   textLines,
   assemble,
 } from './lib/reel-kit.mjs';
@@ -108,7 +108,7 @@ const listY = SAFE_TOP + 200 + titleLines.length * 92 + 60;
 await scene(
   'setup',
   await crop(photo(clips[0].image), { ...clips[0], brightness: 0.4 }),
-  pill(70, SAFE_TOP, 'BEFORE YOU RECORD', CORAL, 36) +
+  (await fitPill(70, SAFE_TOP, 'BEFORE YOU RECORD', CORAL, 36)) +
     titleLines
       .map(
         (line, i) =>
@@ -137,11 +137,11 @@ for (const [i, clip] of clips.entries()) {
     await crop(photo(clip.image), clip),
     shade +
       grid +
-      pill(70, tipY - 268, `CLIP ${i + 1} / ${clips.length}`, CORAL, 34) +
+      (await fitPill(70, tipY - 268, `CLIP ${i + 1} / ${clips.length}`, CORAL, 34)) +
       `<text x="70" y="${tipY - 112}" font-family="${FONT}" font-size="66" font-weight="800" fill="#fff">${esc(clip.shot)}</text>
        <text x="70" y="${tipY - 52}" font-family="${FONT}" font-size="40" font-weight="700" fill="#fcd34d">${esc(clip.angle)}</text>
        <text x="70" y="${tipY}" font-family="${FONT}" font-size="34" fill="#ffffffdd">${esc(clip.tip)}</text>` +
-      pill(70, cardY - 86, 'ASK THE PATIENT', TEAL, 30) +
+      (await fitPill(70, cardY - 86, 'ASK THE PATIENT', TEAL, 30)) +
       `<rect x="60" y="${cardY}" width="${W - 120}" height="${cardH}" rx="30" fill="#fff" fill-opacity="0.95"/>` +
       qLines
         .map(
