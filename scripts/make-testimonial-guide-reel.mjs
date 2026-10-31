@@ -19,7 +19,21 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { parseArgs } from 'node:util';
 import sharp from 'sharp';
-import { W, H, TEAL, NAVY, CORAL, FONT, esc, wrap, overlay, pill, textLines, assemble } from './lib/reel-kit.mjs';
+import {
+  W,
+  H,
+  TEAL,
+  NAVY,
+  CORAL,
+  FONT,
+  esc,
+  titleCase,
+  wrap,
+  overlay,
+  pill,
+  textLines,
+  assemble,
+} from './lib/reel-kit.mjs';
 
 const {
   values: { music },
@@ -89,7 +103,7 @@ const scene = async (n, photo, svg) =>
     .toFile(frame(n));
 
 // Setup card: the checklist over the first clip's photo, below the title.
-const titleLines = wrap(title, 18);
+const titleLines = wrap(titleCase(title), 18);
 const listY = SAFE_TOP + 200 + titleLines.length * 92 + 60;
 await scene(
   'setup',

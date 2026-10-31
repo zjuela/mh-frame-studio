@@ -26,6 +26,7 @@ import {
   CORAL,
   FONT,
   esc,
+  titleCase,
   wrap,
   overlay,
   fitPill,
@@ -95,7 +96,7 @@ await layer(
   'hook',
   shade +
     (await fitPill(70, 300, hook.tag, CORAL, 36)) +
-    (await fitHighlightLines(wrap(hook.text, 22), 1180, { size: 66, fill: TEAL }))
+    (await fitHighlightLines(wrap(titleCase(hook.text), 22), 1180, { size: 66, fill: TEAL }))
 );
 for (const [i, sign] of signs.entries())
   await layer(`sign${i}`, await card(`SIGN ${i + 1}/${signs.length}`, CORAL, sign.headline, sign.caption));

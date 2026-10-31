@@ -18,6 +18,9 @@ export const FONT = 'Helvetica, Arial, sans-serif';
 
 export const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
+/** Capitalises the first letter of every word, for Reel titles. */
+export const titleCase = (s) => s.replace(/(^|\s)(\p{Ll})/gu, (_, space, letter) => space + letter.toUpperCase());
+
 // Greedy word wrap; SVG text has no wrapping of its own.
 export const wrap = (text, max) =>
   text.split(' ').reduce((lines, word) => {
