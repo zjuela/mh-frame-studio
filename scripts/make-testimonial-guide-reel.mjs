@@ -9,8 +9,9 @@
 // crop (`focusX` / `focusY`, 0–1, and `zoom` to crop tighter than the full
 // height). A photo that doesn't exist yet is replaced by `placeholder`.
 // `prompts` and each clip's `prompt` are the image prompts for generating the
-// photos; the script doesn't use them. Timeline: setup card → one still per
-// clip with fades between → end card, fitted to `length` seconds.
+// photos; the script doesn't use them. A "\n" in a question sets its line
+// breaks, and the question card is sized to the text. Timeline: setup card →
+// one still per clip with fades between → end card, fitted to `length` seconds.
 // Writes public/videos/<name>.mp4 and src/assets/images/reels/<name>-poster.jpg.
 // Needs ffmpeg on the PATH.
 
@@ -31,6 +32,7 @@ import {
   wrap,
   overlay,
   fitPill,
+  textWidth,
   textLines,
   assemble,
 } from './lib/reel-kit.mjs';
@@ -128,8 +130,10 @@ await scene(
 // angle and question stack up from the bottom edge instead of the Reels safe zone.
 const BOTTOM = H - 80;
 for (const [i, clip] of clips.entries()) {
-  const qLines = wrap(clip.question, 30);
+  const qLines = clip.question.includes('\n') ? clip.question.split('\n') : wrap(clip.question, 30);
   const cardH = qLines.length * 66 + 70;
+  const widths = await Promise.all(qLines.map((line) => textWidth(line, 50, { weight: 700 })));
+  const cardW = Math.min(Math.max(...widths) + 80, W - 120);
   const cardY = BOTTOM - cardH;
   const tipY = cardY - 126;
   await scene(
@@ -142,7 +146,7 @@ for (const [i, clip] of clips.entries()) {
        <text x="70" y="${tipY - 52}" font-family="${FONT}" font-size="40" font-weight="700" fill="#fcd34d">${esc(clip.angle)}</text>
        <text x="70" y="${tipY}" font-family="${FONT}" font-size="34" fill="#ffffffdd">${esc(clip.tip)}</text>` +
       (await fitPill(70, cardY - 86, 'ASK THE PATIENT', TEAL, 30)) +
-      `<rect x="60" y="${cardY}" width="${W - 120}" height="${cardH}" rx="30" fill="#fff" fill-opacity="0.95"/>` +
+      `<rect x="60" y="${cardY}" width="${cardW}" height="${cardH}" rx="30" fill="#fff" fill-opacity="0.95"/>` +
       qLines
         .map(
           (line, j) =>

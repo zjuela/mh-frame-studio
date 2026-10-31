@@ -20,7 +20,7 @@
       "shot": "Medium shot",
       "angle": "30° to the side · eye level",
       "tip": "Head in the top third, a little space above",
-      "question": "Tell us a little about yourself. What brought you in?",
+      "question": "Tell us a little about yourself.\nWhat brought you in?",
       "image": "src/assets/images/testimonial/clip-1.jpg",
       "prompt": "Medium shot from the waist up, 50mm at f/2, camera at her eye level 30 degrees to her right. Her head sits in the upper third with a little headroom. Hands resting in her lap, a warm, slightly shy smile as she starts to answer."
     },
@@ -28,7 +28,7 @@
       "shot": "Close-up",
       "angle": "45° to the other side · eye level",
       "tip": "Shoulders up for the emotional moments",
-      "question": "What was bothering you before treatment?",
+      "question": "What was bothering you\nbefore treatment?",
       "image": "src/assets/images/testimonial/clip-2.jpg",
       "prompt": "Close-up from the top of the shoulders up, 85mm at f/2, camera at eye level 45 degrees to her left. Thoughtful, slightly vulnerable expression, eyes lowered for a moment as she remembers."
     },
@@ -36,7 +36,7 @@
       "shot": "Medium-wide",
       "angle": "Straight on · slightly off the lens",
       "tip": "Show the clinic, keep the background tidy",
-      "question": "What made you decide to finally do something about it?",
+      "question": "What made you decide to\nfinally do something about it?",
       "image": "src/assets/images/testimonial/clip-3.jpg",
       "prompt": "Medium-wide shot showing her from the knees up in the armchair with the clinic clearly readable behind her, 35mm at f/2.8, camera almost straight on at eye level. Sitting upright, determined, speaking."
     },
@@ -44,7 +44,7 @@
       "shot": "Over the shoulder",
       "angle": "Behind the interviewer",
       "tip": "Frame past your shoulder for a conversation feel",
-      "question": "How did our team make you feel during treatment?",
+      "question": "How did our team make you\nfeel during treatment?",
       "image": "src/assets/images/testimonial/clip-5.jpg",
       "prompt": "Over-the-shoulder shot from behind an interviewer whose out-of-focus shoulder and back of head fill the left third of the frame, 50mm at f/2. She faces the interviewer, listening, gentle smile."
     },
@@ -52,7 +52,7 @@
       "shot": "Extreme close-up",
       "angle": "Eye level · close in",
       "tip": "Eyes and smile in frame, hold steady",
-      "question": "How do you feel when you smile now?",
+      "question": "How do you feel\nwhen you smile now?",
       "image": "src/assets/images/testimonial/clip-4.jpg",
       "prompt": "Extreme close-up from eyebrows to chin, 85mm at f/2, eye level, slightly off-axis to her right. A soft, closed-lip smile building."
     },
@@ -60,7 +60,7 @@
       "shot": "Wide shot",
       "angle": "Pull back · eye level",
       "tip": "End wide and let them finish the thought",
-      "question": "What would you tell someone who's still on the fence?",
+      "question": "What would you tell someone\nwho's still on the fence?",
       "image": "src/assets/images/testimonial/clip-6.jpg",
       "prompt": "Wide shot of the clinic room with her seated full-length in the armchair in the middle third, 24mm at f/4, eye level. Leaning forward slightly, speaking with conviction."
     }
