@@ -152,12 +152,13 @@ export const videos: Record<
   // Built by `node scripts/make-grinding-signs-reel.mjs scripts/reels/grinding-signs.json`.
   reel: {
     poster: grindingSignsPoster,
-    alt: 'Smiling dentist in a white coat in front of a dental X-ray',
+    alt: 'Smiling dentist in a white coat with the title "3 Signs You Grind Your Teeth At Night"',
     hook: '3 signs you grind your teeth at night',
     caption: 'Educational Reel from short clips · hook, numbered signs, captions, branded outro',
     label: 'Reel',
     duration: '0:29',
     video: 'videos/grinding-signs.mp4',
+    textInPoster: true,
   },
   testimonial: {
     poster: treatment,
@@ -170,12 +171,13 @@ export const videos: Record<
   // Built by `node scripts/make-testimonial-guide-reel.mjs scripts/reels/testimonial-guide.json`.
   testimonialGuide: {
     poster: testimonialGuidePoster,
-    alt: 'Patient in a black sweater smiling in an armchair in a dental clinic',
+    alt: 'Setup checklist titled "How To Film A Patient Testimonial" over a patient in an armchair',
     hook: 'How to film a patient testimonial',
     caption: 'Filming guide · camera angle, framing and the question to ask for each clip',
     label: 'Guide',
     duration: '1:00',
     video: 'videos/testimonial-guide.mp4',
+    textInPoster: true,
   },
   // Ad mock-ups built by `node scripts/make-ad-mockups.mjs scripts/ads/aligner-consult.json`.
   ad: {
@@ -224,7 +226,7 @@ export const videos: Record<
   // Built by `node scripts/make-transformation-reel.mjs` from the whitening pair in scripts/before-after/.
   transformation: {
     poster: transformationPoster,
-    alt: 'Teeth whitening before and after, stacked',
+    alt: 'Teeth whitening before and after, stacked, with the title "Teeth Whitening: Wait For The After"',
     hook: 'Teeth whitening: wait for the after',
     caption: 'Transformation Reel · slider reveal, labels, "results may vary" line',
     label: 'Reel',
@@ -235,11 +237,12 @@ export const videos: Record<
   // Built by `node scripts/make-myth-fact-reel.mjs scripts/reels/myth-fact.json`.
   mythFact: {
     poster: mythFactPoster,
-    alt: 'Smiling dentist in scrubs',
+    alt: 'Smiling dentist in scrubs with the title "3 Dental Myths You Probably Believe"',
     hook: 'Myth or fact? 3 dental myths',
     caption: 'Educational Short · myth/fact cards, counter, branded end card',
     label: 'Short',
     duration: '0:23',
     video: 'videos/myth-fact.mp4',
+    textInPoster: true,
   },
 };
