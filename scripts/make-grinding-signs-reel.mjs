@@ -7,7 +7,8 @@
 // many seconds of it to use (see scripts/reels/grinding-signs.json). Clips are
 // 1080×1920 and at least that long; they play from their start. Timeline: hook →
 // one clip per sign with a SIGN n/3 tag, headline and caption → the fix → end
-// card with a general-information note.
+// card with a general-information note. A "\n" in a headline sets its line
+// breaks; otherwise it wraps at 20 characters.
 // Writes public/videos/<name>.mp4 and src/assets/images/reels/<name>-poster.jpg.
 // Needs ffmpeg on the PATH.
 
@@ -68,7 +69,7 @@ const layer = (n, svg) =>
 const BOTTOM = 1520;
 const card = async (tag, colour, headline, caption) => {
   const capLines = wrap(caption, 40);
-  const headLines = wrap(headline, 20);
+  const headLines = headline.includes('\n') ? headline.split('\n') : wrap(headline, 20);
   const capY = BOTTOM - (capLines.length - 1) * 54;
   const headY = capY - 90 - (headLines.length - 1) * 88;
   return (
