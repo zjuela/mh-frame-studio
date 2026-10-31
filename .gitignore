@@ -26,3 +26,27 @@ pnpm-lock.yaml
 pnpm-workspace.yaml
 
 .astro
+
+
+# Only what the website uses is committed. The generators that build the
+# Reels, ad mock-ups, social posts and before/afters, and the source photos
+# and clips only they read, stay on this machine. Their output (in
+# src/assets/images/ and public/videos/) is committed.
+scripts/
+.claude/
+src/assets/images/testimonial/
+src/assets/images/demo/clinic.jpg
+src/assets/images/demo/clinic-2.jpg
+src/assets/images/demo/clinic-3.jpg
+src/assets/images/demo/female-assistant.jpg
+src/assets/images/demo/female-dentist.jpg
+src/assets/images/demo/female-dentist-1.jpg
+src/assets/images/demo/gum-inflammation.jpg
+src/assets/images/demo/headshot.jpg
+src/assets/images/demo/implant-model.jpg
+src/assets/images/demo/kids-checkup.jpg
+src/assets/images/demo/male-assistant.jpg
+src/assets/images/demo/male-dentist.jpg
+src/assets/images/demo/male-dentist-1.jpg
+src/assets/images/demo/patient-question.jpg
+src/assets/images/demo/smile.jpg

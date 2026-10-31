@@ -39,6 +39,10 @@ Reel cards play a video in place when the Reel in `samples.ts` has `video: 'vide
 `public/videos/`), or link out with `href` (YouTube Shorts, Vimeo, Instagram). Cards with neither are still previews.
 Keep committed videos short and small (1080×1920 H.264, ideally under 10 MB); host anything bigger elsewhere.
 
+The generators below (`scripts/`), and the photos and clips only they read, are kept local and listed in
+`.gitignore`. Only what the site uses is committed: their output images and videos. When a photo moves from a
+generator onto a page, remove its line from `.gitignore`.
+
 Transformation Reel from one before/after pair (needs ffmpeg):
 
 ```sh
