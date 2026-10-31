@@ -9,9 +9,10 @@
 // crop (`focusX` / `focusY`, 0–1, and `zoom` to crop tighter than the full
 // height). A photo that doesn't exist yet is replaced by `placeholder`.
 // `prompts` and each clip's `prompt` are the image prompts for generating the
-// photos; the script doesn't use them. A "\n" in a question sets its line
-// breaks, and the question card is sized to the text. Timeline: setup card →
-// one still per clip with fades between → end card, fitted to `length` seconds.
+// photos; the script doesn't use them. A "\n" in the title or a question sets
+// its line breaks; every question card is as wide as the longest one.
+// Timeline: setup card → one still per clip with fades between → end card,
+// fitted to `length` seconds.
 // Writes public/videos/<name>.mp4 and src/assets/images/reels/<name>-poster.jpg.
 // Needs ffmpeg on the PATH.
 
@@ -105,7 +106,7 @@ const scene = async (n, photo, svg) =>
     .toFile(frame(n));
 
 // Setup card: the checklist over the first clip's photo, below the title.
-const titleLines = wrap(titleCase(title), 18);
+const titleLines = title.includes('\n') ? titleCase(title).split('\n') : wrap(titleCase(title), 18);
 const listY = SAFE_TOP + 200 + titleLines.length * 92 + 60;
 await scene(
   'setup',
@@ -129,11 +130,15 @@ await scene(
 // One scene per clip. The photos put the face in the upper half, so the shot,
 // angle and question stack up from the bottom edge instead of the Reels safe zone.
 const BOTTOM = H - 80;
+const questionLines = clips.map(({ question }) =>
+  question.includes('\n') ? question.split('\n') : wrap(question, 30)
+);
+// One card width for every question: the longest line plus padding.
+const lineWidths = await Promise.all(questionLines.flat().map((line) => textWidth(line, 50, { weight: 700 })));
+const cardW = Math.min(Math.max(...lineWidths) + 80, W - 120);
 for (const [i, clip] of clips.entries()) {
-  const qLines = clip.question.includes('\n') ? clip.question.split('\n') : wrap(clip.question, 30);
+  const qLines = questionLines[i];
   const cardH = qLines.length * 66 + 70;
-  const widths = await Promise.all(qLines.map((line) => textWidth(line, 50, { weight: 700 })));
-  const cardW = Math.min(Math.max(...widths) + 80, W - 120);
   const cardY = BOTTOM - cardH;
   const tipY = cardY - 126;
   await scene(
