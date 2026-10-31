@@ -66,6 +66,17 @@ export const highlightLines = (lines, y, { size = 64, fill = CORAL, gap = 1.62, 
     })
     .join('');
 
+/** `pill` sized to the rendered text. */
+export const fitPill = async (x, y, text, fill, size = 34) =>
+  pill(x, y, text, fill, size, await textWidth(text, size, { spacing: 2 }));
+
+/** `highlightLines` with each bar sized to its rendered line. */
+export const fitHighlightLines = async (lines, y, options = {}) =>
+  highlightLines(lines, y, {
+    ...options,
+    widths: await Promise.all(lines.map((line) => textWidth(line, options.size ?? 64))),
+  });
+
 /** Centred plain text lines. */
 export const textLines = (lines, y, { size = 48, weight = 700, fill = '#fff', gap = 1.3 } = {}) =>
   lines

@@ -27,9 +27,8 @@ import {
   esc,
   wrap,
   overlay,
-  pill,
-  highlightLines,
-  textWidth,
+  fitPill,
+  fitHighlightLines,
   textLines,
   assemble,
 } from './lib/reel-kit.mjs';
@@ -67,10 +66,6 @@ const layer = (n, svg) =>
 
 // Tag, headline and caption stacked up from just above the Reels caption area.
 const BOTTOM = 1520;
-const TAG_SIZE = 36;
-const tagPill = async (x, y, tag, colour) =>
-  pill(x, y, tag, colour, TAG_SIZE, await textWidth(tag, TAG_SIZE, { spacing: 2 }));
-
 const card = async (tag, colour, headline, caption) => {
   const capLines = wrap(caption, 40);
   const headLines = wrap(headline, 20);
@@ -78,7 +73,7 @@ const card = async (tag, colour, headline, caption) => {
   const headY = capY - 90 - (headLines.length - 1) * 88;
   return (
     shade +
-    (await tagPill(70, headY - 160, tag, colour)) +
+    (await fitPill(70, headY - 160, tag, colour, 36)) +
     headLines
       .map(
         (line, i) =>
@@ -95,17 +90,11 @@ const card = async (tag, colour, headline, caption) => {
 };
 
 // Hook: a coral tag over the title on teal bars.
-const HOOK_SIZE = 66;
-const hookLines = wrap(hook.text, 22);
 await layer(
   'hook',
   shade +
-    (await tagPill(70, 300, hook.tag, CORAL)) +
-    highlightLines(hookLines, 1180, {
-      size: HOOK_SIZE,
-      fill: TEAL,
-      widths: await Promise.all(hookLines.map((line) => textWidth(line, HOOK_SIZE))),
-    })
+    (await fitPill(70, 300, hook.tag, CORAL, 36)) +
+    (await fitHighlightLines(wrap(hook.text, 22), 1180, { size: 66, fill: TEAL }))
 );
 for (const [i, sign] of signs.entries())
   await layer(`sign${i}`, await card(`SIGN ${i + 1}/${signs.length}`, CORAL, sign.headline, sign.caption));

@@ -26,8 +26,8 @@ import {
   esc,
   wrap,
   overlay,
-  pill,
-  highlightLines,
+  fitPill,
+  fitHighlightLines,
   textLines,
   rounded,
   blurredBackground,
@@ -70,8 +70,8 @@ for (const [name, file, label, fill, withHook] of [
       { input: await rounded(file, CARD, CARD), left: (W - CARD) / 2, top: CARD_Y },
       {
         input: overlay(
-          (withHook ? highlightLines(wrap(args.hook, 18), 170) : '') +
-            pill(80, CARD_Y + 40, label, fill) +
+          (withHook ? await fitHighlightLines(wrap(args.hook, 18), 170) : '') +
+            (await fitPill(80, CARD_Y + 40, label, fill)) +
             caption(CARD_Y + CARD + 110)
         ),
         left: 0,
@@ -90,7 +90,9 @@ await sharp(await blurredBackground(args.after))
     { input: await rounded(args.after, SW, SH), left: (W - SW) / 2, top: 180 + SH + 24 },
     {
       input: overlay(
-        pill(80, 220, 'BEFORE', SLATE) + pill(80, 220 + SH + 24, 'AFTER', TEAL) + caption(180 + 2 * SH + 120)
+        (await fitPill(80, 220, 'BEFORE', SLATE)) +
+          (await fitPill(80, 220 + SH + 24, 'AFTER', TEAL)) +
+          caption(180 + 2 * SH + 120)
       ),
       left: 0,
       top: 0,

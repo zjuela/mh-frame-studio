@@ -25,8 +25,8 @@ import {
   esc,
   wrap,
   overlay,
-  pill,
-  highlightLines,
+  fitPill,
+  fitHighlightLines,
   textLines,
   fullBleed,
   assemble,
@@ -66,7 +66,9 @@ const scene = async (n, photo, svg) =>
 await scene(
   'hook',
   await fullBleed(hookImage),
-  shade(0.05, 0.75) + pill(80, 120, 'MYTH OR FACT?', CORAL, 40) + highlightLines(wrap(hook, 18), 1240, { size: 72 })
+  shade(0.05, 0.75) +
+    (await fitPill(80, 120, 'MYTH OR FACT?', CORAL, 40)) +
+    (await fitHighlightLines(wrap(hook, 18), 1240, { size: 72 }))
 );
 
 // Myths and facts.
@@ -93,7 +95,7 @@ for (const [i, { myth, fact, image, crop }] of myths.entries()) {
     await fullBleed(image, position),
     shade(0.1, 0.7) +
       counter(i) +
-      pill(80, cardY - 130, 'FACT', TEAL, 56) +
+      (await fitPill(80, cardY - 130, 'FACT', TEAL, 56)) +
       `<rect x="70" y="${cardY}" width="${W - 140}" height="${cardH}" rx="36" fill="#ffffff" fill-opacity="0.95"/>` +
       factLines
         .map(
