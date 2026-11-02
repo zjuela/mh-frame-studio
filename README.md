@@ -63,7 +63,10 @@ in `length` (60s). The JSON also keeps the image prompts; photos not generated y
 Educational Reel from video clips ("3 signs you grind your teeth"): edit the hook, signs, fix, captions and the clip
 for each in `scripts/reels/grinding-signs.json`, then run
 `node scripts/make-grinding-signs-reel.mjs scripts/reels/grinding-signs.json`. Clips are 1080×1920 MP4s, at least as
-long as the seconds the JSON gives them; the text is laid over each clip.
+long as the seconds the JSON gives them; the text is laid over each clip. The same script builds the "What happens at
+your first visit?" Short from `scripts/reels/first-visit.json`. To turn landscape footage into those clips, list each
+segment (source, start, length, crop centre, colour grade) in a JSON like `scripts/reels/first-visit-clips.json` and
+run `node scripts/prep-clips.mjs scripts/reels/first-visit-clips.json`: it trims, crops to 9:16 and evens out the colour.
 
 All four generators share `scripts/lib/reel-kit.mjs`.
 

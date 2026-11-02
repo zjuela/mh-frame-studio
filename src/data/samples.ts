@@ -17,7 +17,6 @@ import veneersPost from '~/assets/images/before-after/veneers.jpg';
 import whiteningPost from '~/assets/images/before-after/whitening.jpg';
 import alignmentPost from '~/assets/images/before-after/alignment.jpg';
 
-import consult from '~/assets/images/demo/consult.jpg';
 import treatment from '~/assets/images/demo/treatment.jpg';
 import adHook1 from '~/assets/images/ads/aligner-consult-hook-1.jpg';
 import adHook2 from '~/assets/images/ads/aligner-consult-hook-2.jpg';
@@ -34,6 +33,7 @@ import transformationPoster from '~/assets/images/reels/transformation-reel-post
 import mythFactPoster from '~/assets/images/reels/myth-fact-poster.jpg';
 import testimonialGuidePoster from '~/assets/images/reels/testimonial-guide-poster.jpg';
 import grindingSignsPoster from '~/assets/images/reels/grinding-signs-poster.jpg';
+import firstVisitPoster from '~/assets/images/reels/first-visit-poster.jpg';
 
 import type { BeforeAfterItem, LabelledItem } from '~/components/widgets/BeforeAfterGallery.astro';
 import type { Reel } from '~/components/widgets/Reels.astro';
@@ -215,13 +215,17 @@ export const videos: Record<
     label: 'Feed · 4:5',
     textInPoster: true,
   },
+  // Built by `node scripts/make-grinding-signs-reel.mjs scripts/reels/first-visit.json`
+  // from clips cut by `node scripts/prep-clips.mjs scripts/reels/first-visit-clips.json`.
   short: {
-    poster: consult,
-    alt: 'Dentist showing a patient their scan',
+    poster: firstVisitPoster,
+    alt: 'Smiling receptionist at the front desk with the title "What Happens At Your First Visit?"',
     hook: 'What happens at your first visit?',
-    caption: 'Clinic walkthrough Short · cuts, music, on-screen text',
+    caption: 'Clinic walkthrough Short · vertical crops, matched colour, step-by-step text',
     label: 'Short',
-    duration: '0:45',
+    duration: '0:42',
+    video: 'videos/first-visit.mp4',
+    textInPoster: true,
   },
   // Built by `node scripts/make-transformation-reel.mjs` from the whitening pair in scripts/before-after/.
   transformation: {
