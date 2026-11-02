@@ -152,7 +152,7 @@ export const videos: Record<
   // Built by `node scripts/make-grinding-signs-reel.mjs scripts/reels/grinding-signs.json`.
   reel: {
     poster: grindingSignsPoster,
-    alt: 'Smiling dentist in a white coat with the title "3 Signs You Grind Your Teeth At Night"',
+    alt: 'Smiling dentist in a white coat with the title "3 signs you grind your teeth at night"',
     hook: '3 signs you grind your teeth at night',
     caption: 'Educational Reel from short clips · hook, numbered signs, captions, branded outro',
     label: 'Reel',
@@ -219,7 +219,7 @@ export const videos: Record<
   // from clips cut by `node scripts/prep-clips.mjs scripts/reels/first-visit-clips.json`.
   short: {
     poster: firstVisitPoster,
-    alt: 'Smiling receptionist at the front desk with the title "What Happens At Your First Visit?"',
+    alt: 'Smiling receptionist at the front desk with the title "New patient – first visit?"',
     hook: 'What happens at your first visit?',
     caption: 'Clinic walkthrough Short · vertical crops, matched colour, step-by-step text',
     label: 'Short',
@@ -241,7 +241,7 @@ export const videos: Record<
   // Built by `node scripts/make-myth-fact-reel.mjs scripts/reels/myth-fact.json`.
   mythFact: {
     poster: mythFactPoster,
-    alt: 'Smiling dentist in scrubs with the title "3 Dental Myths You Probably Believe"',
+    alt: 'Smiling dentist in scrubs with the title "3 dental myths you probably believe"',
     hook: 'Myth or fact? 3 dental myths',
     caption: 'Educational Short · myth/fact cards, counter, branded end card',
     label: 'Short',

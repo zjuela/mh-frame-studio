@@ -68,6 +68,10 @@ your first visit?" Short from `scripts/reels/first-visit.json`. To turn landscap
 segment (source, start, length, crop centre, colour grade) in a JSON like `scripts/reels/first-visit-clips.json` and
 run `node scripts/prep-clips.mjs scripts/reels/first-visit-clips.json`: it trims, crops to 9:16 and evens out the colour.
 
+The grinding, first-visit and myth-fact Reels set `"textStyle": "boxed"` (text in a cream box, captions in white below)
+with `"headlineFont": "Playfair Display"`. Install that font first (free from Google Fonts), or remove the setting to
+use Helvetica.
+
 All four generators share `scripts/lib/reel-kit.mjs`.
 
 Labelled before/after images: add a post to `scripts/before-after/posts.json` (source photo, where the two shots
