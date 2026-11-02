@@ -200,7 +200,7 @@ export const videos: Record<
   },
   adHook3: {
     poster: adHook3,
-    alt: 'Dentist showing a patient a scan, with the title "What a free aligner consult looks like"',
+    alt: 'Dentist pointing at a patient\'s X-ray on a monitor as she looks on, with the title "What a free aligner consult looks like"',
     hook: 'What a free aligner consult looks like',
     caption: 'Same ad · hook 3: opens on consult footage',
     label: 'Ad · hook 3',
