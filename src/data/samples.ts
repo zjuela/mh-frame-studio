@@ -230,8 +230,8 @@ export const videos: Record<
   // Built by `node scripts/make-transformation-reel.mjs` from the whitening pair in scripts/before-after/.
   transformation: {
     poster: transformationPoster,
-    alt: 'Teeth whitening before and after, stacked, with the title "Teeth Whitening: Wait For The After"',
-    hook: 'Teeth whitening: wait for the after',
+    alt: 'Teeth whitening before and after, stacked, with the title "Teeth whitening"',
+    hook: 'Teeth whitening',
     caption: 'Transformation Reel · slider reveal, labels, "results may vary" line',
     label: 'Reel',
     duration: '0:15',
