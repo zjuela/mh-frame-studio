@@ -32,6 +32,13 @@ import toothbrushTip6 from '~/assets/images/social/toothbrush-tip-6.jpg';
 import transformationPoster from '~/assets/images/reels/transformation-reel-poster.jpg';
 import mythFactPoster from '~/assets/images/reels/myth-fact-poster.jpg';
 import testimonialGuidePoster from '~/assets/images/reels/testimonial-guide-poster.jpg';
+import testimonialStep1 from '~/assets/images/testimonial-steps/step-1.jpg';
+import testimonialStep2 from '~/assets/images/testimonial-steps/step-2.jpg';
+import testimonialStep3 from '~/assets/images/testimonial-steps/step-3.jpg';
+import testimonialStep4 from '~/assets/images/testimonial-steps/step-4.jpg';
+import testimonialStep5 from '~/assets/images/testimonial-steps/step-5.jpg';
+import testimonialStep6 from '~/assets/images/testimonial-steps/step-6.jpg';
+import testimonialStep7 from '~/assets/images/testimonial-steps/step-7.jpg';
 import grindingSignsPoster from '~/assets/images/reels/grinding-signs-poster.jpg';
 import firstVisitPoster from '~/assets/images/reels/first-visit-poster.jpg';
 
@@ -105,6 +112,38 @@ export const posts: Record<'veneers' | 'whitening' | 'alignment', LabelledItem> 
     fixes: ['9:16 Story', 'Safe zones', 'Labels'],
   },
 };
+
+// Stills of each step from the testimonial filming guide (public/videos/testimonial-guide.mp4).
+export const testimonialSteps = [
+  {
+    image: testimonialStep1,
+    alt: 'Setup checklist "How to film a patient testimonial": phone on a tripod at eye level, window light on the face, quiet room with a clip-on mic, patient talks to you, not the lens',
+  },
+  {
+    image: testimonialStep2,
+    alt: 'Clip 1 of 6, medium shot 30° to the side at eye level. Ask the patient: Tell us a little about yourself. What brought you in?',
+  },
+  {
+    image: testimonialStep3,
+    alt: 'Clip 2 of 6, close-up 45° to the other side. Ask the patient: What was bothering you before treatment?',
+  },
+  {
+    image: testimonialStep4,
+    alt: 'Clip 3 of 6, medium-wide shot straight on, showing the clinic. Ask the patient: What made you decide to finally do something about it?',
+  },
+  {
+    image: testimonialStep5,
+    alt: 'Clip 4 of 6, over the shoulder from behind the interviewer. Ask the patient: How did our team make you feel during treatment?',
+  },
+  {
+    image: testimonialStep6,
+    alt: 'Clip 5 of 6, extreme close-up at eye level. Ask the patient: How do you feel when you smile now?',
+  },
+  {
+    image: testimonialStep7,
+    alt: "Clip 6 of 6, wide shot pulled back. Ask the patient: What would you tell someone who's still on the fence?",
+  },
+];
 
 // Custom social posts built by `node scripts/make-social-posts.mjs`.
 export const social: Record<'hours' | 'tip', LabelledItem> = {

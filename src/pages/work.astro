@@ -3,11 +3,12 @@ import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
 import BeforeAfterGallery from '~/components/widgets/BeforeAfterGallery.astro';
 import Reels from '~/components/widgets/Reels.astro';
+import StillStrip from '~/components/widgets/StillStrip.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import StickyCTA from '~/components/widgets/StickyCTA.astro';
 import SectionNav from '~/components/ui/SectionNav.astro';
-import { pairs, posts, social, videos } from '~/data/samples';
-import { getPermalink } from '~/utils/permalinks';
+import { pairs, posts, social, testimonialSteps, videos } from '~/data/samples';
+import { getAsset, getPermalink } from '~/utils/permalinks';
 
 const metadata = {
   title: 'Samples',
@@ -55,13 +56,13 @@ const slateBg = '<div class="absolute inset-0 bg-slate-50 dark:bg-transparent"><
     bg={slateBg}
   />
 
-  <Reels
+  <StillStrip
     id="testimonials"
     tagline="Core service 3"
     title="Patient testimonials"
-    subtitle="One phone-filmed interview, cut into a full story plus short clips for social and ads."
-    items={[videos.testimonialGuide, videos.testimonial]}
-    placeholders={['15-second clip · for Reels', 'Ad cut · with captions']}
+    subtitle="Our filming guide shows your team how to shoot each clip: the setup, then six shots with the framing and the question to ask. We cut them into a full story plus short clips for social and ads."
+    items={testimonialSteps}
+    link={{ text: 'Watch the full guide video', href: getAsset('videos/testimonial-guide.mp4') }}
   />
 
   <BeforeAfterGallery

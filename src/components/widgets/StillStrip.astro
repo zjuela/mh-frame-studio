@@ -1,0 +1,111 @@
+---
+import type { ImageMetadata } from 'astro';
+import Image from '~/components/common/Image.astro';
+import Headline from '~/components/ui/Headline.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import type { Widget } from '~/types';
+
+// A row of 9:16 stills that scrolls sideways: 4 in view on a laptop, fewer on
+// smaller screens, with arrow buttons for mouse users. `link` adds a line
+// under the row (e.g. to the full video).
+
+export interface Props extends Widget {
+  title?: string;
+  subtitle?: string;
+  tagline?: string;
+  items: Array<{ image: ImageMetadata; alt: string }>;
+  link?: { text: string; href: string };
+}
+
+const { title, subtitle, tagline, items = [], link, id, isDark = false, classes = {}, bg } = Astro.props;
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={classes?.container as string} bg={bg}>
+  <Headline title={title} subtitle={subtitle} tagline={tagline} />
+  <aw-still-strip class="relative block">
+    <ul
+      data-track
+      class="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-4 md:gap-6 [scrollbar-width:thin]"
+      tabindex="0"
+      aria-label={title}
+    >
+      {
+        items.map((item) => (
+          <li class="w-[44%] shrink-0 snap-start sm:w-[30%] lg:w-[calc((100%-4.5rem)/4)]">
+            <Image
+              src={item.image}
+              alt={item.alt}
+              widths={[360, 720]}
+              sizes="(max-width: 639px) 44vw, (max-width: 1023px) 30vw, 300px"
+              layout="none"
+              format="webp"
+              loading="lazy"
+              class="aspect-[9/16] w-full rounded-xl object-cover shadow-lg ring-1 ring-black/5"
+            />
+          </li>
+        ))
+      }
+    </ul>
+    {
+      [
+        ['prev', '-left-5', 'Previous', 'M15 6l-6 6 6 6'],
+        ['next', '-right-5', 'Next', 'M9 6l6 6-6 6'],
+      ].map(([dir, side, label, path]) => (
+        <button
+          type="button"
+          data-dir={dir}
+          aria-label={label}
+          class={`absolute top-[calc(50%-1rem)] ${side} hidden h-11 w-11 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-white text-slate-700 shadow-lg ring-1 ring-black/10 transition-opacity duration-200 hover:text-primary disabled:pointer-events-none disabled:opacity-0 md:flex`}
+        >
+          <svg
+            viewBox="0 0 24 24"
+            class="h-6 w-6"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            aria-hidden="true"
+          >
+            <path d={path} />
+          </svg>
+        </button>
+      ))
+    }
+  </aw-still-strip>
+  {
+    link && (
+      <p class="mt-6 text-center">
+        <a href={link.href} class="font-semibold text-primary hover:underline dark:text-secondary">
+          {link.text} →
+        </a>
+      </p>
+    )
+  }
+</WidgetWrapper>
+
+<script>
+  // Arrows scroll the row by one view and hide at either end.
+  class AwStillStrip extends HTMLElement {
+    connectedCallback() {
+      const track = this.querySelector<HTMLElement>('[data-track]');
+      const buttons = this.querySelectorAll<HTMLButtonElement>('button[data-dir]');
+      if (!track) return;
+      const update = () => {
+        buttons.forEach((button) => {
+          button.disabled =
+            button.dataset.dir === 'prev'
+              ? track.scrollLeft <= 4
+              : track.scrollLeft + track.clientWidth >= track.scrollWidth - 4;
+        });
+      };
+      buttons.forEach((button) =>
+        button.addEventListener('click', () =>
+          track.scrollBy({ left: (button.dataset.dir === 'prev' ? -1 : 1) * track.clientWidth, behavior: 'smooth' })
+        )
+      );
+      track.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+    }
+  }
+  if (!customElements.get('aw-still-strip')) customElements.define('aw-still-strip', AwStillStrip);
+</script>
