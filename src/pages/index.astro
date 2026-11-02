@@ -17,7 +17,7 @@ import SocialProof from '~/components/widgets/SocialProof.astro';
 import Testimonials from '~/components/widgets/Testimonials.astro';
 import StructuredData from '~/components/common/StructuredData.astro';
 
-import { pairs, posts, videos } from '~/data/samples';
+import { pairs, posts, testimonialSteps, videos } from '~/data/samples';
 import { figures, testimonials } from '~/data/proof';
 import { getPermalink } from '~/utils/permalinks';
 import { SITE, I18N } from 'astrowind:config';
@@ -185,8 +185,13 @@ const structuredData = [
     id="video"
     tagline="Video samples"
     title="Reels, testimonials and ads"
-    subtitle="Vertical edits with scroll-stopping hooks and burned-in captions. Press play on the first two."
-    items={[videos.transformation, videos.mythFact, videos.ad, videos.testimonial]}
+    subtitle="Vertical edits with scroll-stopping hooks and burned-in captions. Press play to watch the Reels and the testimonial guide."
+    items={[
+      videos.transformation,
+      videos.mythFact,
+      videos.ad,
+      { ...videos.testimonialGuide, poster: testimonialSteps[0].image },
+    ]}
   />
 
   <Steps
