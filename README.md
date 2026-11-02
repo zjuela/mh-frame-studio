@@ -86,6 +86,7 @@ and a feed-post mock-up to `src/assets/images/ads/`. Each hook sets its photo, c
 
 Social post samples: edit `scripts/social/posts.json` (a `photo` post or a `carousel` of text slides, each with an `icon` from the list in the script), then run
 `node scripts/make-social-posts.mjs scripts/social/posts.json`. Images (1080×1350) go to `src/assets/images/social/`.
+It uses the same boxed text style (`textStyle` and `headlineFont` in the JSON).
 
 ## Deploy
 
