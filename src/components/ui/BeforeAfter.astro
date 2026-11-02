@@ -12,10 +12,12 @@ export interface Props {
   alt: string;
   start?: number;
   eager?: boolean;
+  /** `boxed`: lowercase labels in a soft beige box, as in the Reels and social posts. */
+  labelStyle?: 'pill' | 'boxed';
   class?: string;
 }
 
-const { before, after, alt, start = 50, eager = false, class: className = '' } = Astro.props;
+const { before, after, alt, start = 50, eager = false, labelStyle = 'pill', class: className = '' } = Astro.props;
 
 const imageProps = {
   widths: [480, 800, 1200, 1600],
@@ -40,14 +42,27 @@ const imageProps = {
     <Image src={before} alt={`${alt} — before editing`} {...imageProps} />
   </div>
 
-  <span
-    class="pointer-events-none absolute left-3 top-3 rounded-full bg-black/60 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white"
-    >Before</span
-  >
-  <span
-    class="pointer-events-none absolute right-3 top-3 rounded-full bg-primary/90 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white"
-    >After</span
-  >
+  {
+    labelStyle === 'boxed' ? (
+      <>
+        <span class="pointer-events-none absolute left-3 top-3 rounded bg-[#E6DCCB] px-3 py-1 text-sm text-[#8A847B] shadow-sm">
+          before
+        </span>
+        <span class="pointer-events-none absolute right-3 top-3 rounded bg-[#E6DCCB] px-3 py-1 text-sm text-[#1F1F1F]/85 shadow-sm">
+          after
+        </span>
+      </>
+    ) : (
+      <>
+        <span class="pointer-events-none absolute left-3 top-3 rounded-full bg-black/60 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white">
+          Before
+        </span>
+        <span class="pointer-events-none absolute right-3 top-3 rounded-full bg-primary/90 px-3 py-1 text-xs font-semibold uppercase tracking-wide text-white">
+          After
+        </span>
+      </>
+    )
+  }
 
   <div class="pointer-events-none absolute inset-y-0 w-0.5 -translate-x-1/2 bg-white shadow" style="left: var(--pos)">
     <div
