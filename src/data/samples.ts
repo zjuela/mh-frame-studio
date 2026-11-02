@@ -171,7 +171,7 @@ export const videos: Record<
   // Built by `node scripts/make-testimonial-guide-reel.mjs scripts/reels/testimonial-guide.json`.
   testimonialGuide: {
     poster: testimonialGuidePoster,
-    alt: 'Setup checklist titled "How To Film A Patient Testimonial" over a patient in an armchair',
+    alt: 'Setup checklist titled "How to film a patient testimonial" over a patient in an armchair',
     hook: 'How to film a patient testimonial',
     caption: 'Filming guide · camera angle, framing and the question to ask for each clip',
     label: 'Guide',
