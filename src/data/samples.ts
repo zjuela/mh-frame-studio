@@ -186,10 +186,19 @@ export const social: Record<'hours' | 'tip' | 'nutcracker', LabelledItem> = {
         image: nutcracker1,
         alt: 'Carousel slide 1: Cracked one too many nuts? A nutcracker before and after veneers, above a real before and after',
       },
-      { image: nutcracker2, alt: 'Carousel slide 2: The nutcracker before: mismatched shades, one dark tooth, uneven edges' },
-      { image: nutcracker3, alt: 'Carousel slide 3: The nutcracker after porcelain veneers, with the walnut cracked open' },
+      {
+        image: nutcracker2,
+        alt: 'Carousel slide 2: The nutcracker before: mismatched shades, one dark tooth, uneven edges',
+      },
+      {
+        image: nutcracker3,
+        alt: 'Carousel slide 3: The nutcracker after porcelain veneers, with the walnut cracked open',
+      },
       { image: nutcracker4, alt: 'Carousel slide 4: And on real teeth? The left half of a real smile after veneers' },
-      { image: nutcracker5, alt: 'Carousel slide 5: The right half of the smile. Even, natural, bright. Book a consultation' },
+      {
+        image: nutcracker5,
+        alt: 'Carousel slide 5: The right half of the smile. Even, natural, bright. Book a consultation',
+      },
     ],
     title: 'Creative before/after · 5-slide carousel',
     description:
