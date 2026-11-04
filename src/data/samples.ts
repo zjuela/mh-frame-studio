@@ -29,6 +29,11 @@ import toothbrushTip3 from '~/assets/images/social/toothbrush-tip-3.jpg';
 import toothbrushTip4 from '~/assets/images/social/toothbrush-tip-4.jpg';
 import toothbrushTip5 from '~/assets/images/social/toothbrush-tip-5.jpg';
 import toothbrushTip6 from '~/assets/images/social/toothbrush-tip-6.jpg';
+import nutcracker1 from '~/assets/images/social/nutcracker-veneers-1.jpg';
+import nutcracker2 from '~/assets/images/social/nutcracker-veneers-2.jpg';
+import nutcracker3 from '~/assets/images/social/nutcracker-veneers-3.jpg';
+import nutcracker4 from '~/assets/images/social/nutcracker-veneers-4.jpg';
+import nutcracker5 from '~/assets/images/social/nutcracker-veneers-5.jpg';
 import transformationPoster from '~/assets/images/reels/transformation-reel-poster.jpg';
 import mythFactPoster from '~/assets/images/reels/myth-fact-poster.jpg';
 import testimonialGuidePoster from '~/assets/images/reels/testimonial-guide-poster.jpg';
@@ -146,7 +151,7 @@ export const testimonialSteps = [
 ];
 
 // Custom social posts built by `node scripts/make-social-posts.mjs`.
-export const social: Record<'hours' | 'tip', LabelledItem> = {
+export const social: Record<'hours' | 'tip' | 'nutcracker', LabelledItem> = {
   hours: {
     image: saturdayHours,
     alt: 'Social post announcing Saturday opening hours: a smiling dentist, a calendar card reading Every Sat, 9am – 2pm, and a Book online button',
@@ -172,6 +177,24 @@ export const social: Record<'hours' | 'tip', LabelledItem> = {
     title: 'Care tip · 6-slide carousel',
     description: 'A question, the answer, three quick tips and a call to book. Each slide invites a swipe to the next.',
     fixes: ['Carousel', 'Care tip', 'Call to action'],
+  },
+  nutcracker: {
+    image: nutcracker1,
+    alt: 'Carousel slide 1: Cracked one too many nuts? A nutcracker before and after veneers, above a real before and after',
+    slides: [
+      {
+        image: nutcracker1,
+        alt: 'Carousel slide 1: Cracked one too many nuts? A nutcracker before and after veneers, above a real before and after',
+      },
+      { image: nutcracker2, alt: 'Carousel slide 2: The nutcracker before: mismatched shades, one dark tooth, uneven edges' },
+      { image: nutcracker3, alt: 'Carousel slide 3: The nutcracker after porcelain veneers, with the walnut cracked open' },
+      { image: nutcracker4, alt: 'Carousel slide 4: And on real teeth? The left half of a real smile after veneers' },
+      { image: nutcracker5, alt: 'Carousel slide 5: The right half of the smile. Even, natural, bright. Book a consultation' },
+    ],
+    title: 'Seasonal before/after · 5-slide carousel',
+    description:
+      'A playful holiday idea: a nutcracker before and after veneers, then a real smile split across two slides so it joins up as you swipe.',
+    fixes: ['Carousel', 'Seasonal', 'Before/after'],
   },
 };
 
