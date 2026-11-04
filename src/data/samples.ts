@@ -191,7 +191,7 @@ export const social: Record<'hours' | 'tip' | 'nutcracker', LabelledItem> = {
       { image: nutcracker4, alt: 'Carousel slide 4: And on real teeth? The left half of a real smile after veneers' },
       { image: nutcracker5, alt: 'Carousel slide 5: The right half of the smile. Even, natural, bright. Book a consultation' },
     ],
-    title: 'Seasonal before/after · 5-slide carousel',
+    title: 'Creative before/after · 5-slide carousel',
     description:
       'A playful holiday idea: a nutcracker before and after veneers, then a real smile split across two slides so it joins up as you swipe.',
     fixes: ['Carousel', 'Seasonal', 'Before/after'],
